@@ -1,7 +1,8 @@
 import ToggleBox from '../ToggleBox';
 import SearchOptions from './SearchOptions';
 import SearchResults from './SearchResults';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 export default function Search()
 {
     const [input, setInput] = useState('');

@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 import Search from '../components/search/Search'
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function Browser() {
         const showSearch = true;

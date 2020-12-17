@@ -1,0 +1,179 @@
+{
+    "4f4p": {
+        "sequence": "LDRKLLTLEDKELGSGNFGTVKKGYYQMKKVVKTVAVKILKNEANDPALKDELLAEANVMQQLDNPYIVRMIGICEAESWMLVMEMAELGPLNKYLQQNRHVKDKNIIELVHQVSMGMKYLEESNFVHRDLAARNVLLVTQHYAKISDFGLSKALRADENYYKAQTHGKWPVKWYAPECINYYKFSSKSDVWSFGVLMWEAFSYGQKPYRGMKGSEVTAMLEKGERMGCPAGCPREMYDLMNLCWTYDVENRPGFAAVELRLRNYYYDVVNEG",
+        "length": 273,
+        "tracks": [
+            {
+                "labelType": "text",
+                "label": "Secondary structure",
+                "data": [
+                    {
+                        "color": "rgb(255,99,163)",
+                        "type": "Helix",
+                        "labelType": "text",
+                        "tooltipContent": "Helix",
+                        "accession": "Helix",
+                        "label": "Helix",
+                        "labelTooltip": "Residues forming Helix",
+                        "bestChainId": "A",
+                        "entityId": 1,
+                        "locations": [
+                            {
+                                "fragments": [
+                                    {
+                                        "start": 2,
+                                        "end": 6,
+                                        "tooltipContent": "Type: Helix<br>Range: ASP2 - LEU6 (Chain A)"
+                                    },
+                                    {
+                                        "start": 48,
+                                        "end": 62,
+                                        "tooltipContent": "Type: Helix<br>Range: ALA48 - GLN62 (Chain A)"
+                                    },
+                                    {
+                                        "start": 92,
+                                        "end": 99,
+                                        "tooltipContent": "Type: Helix<br>Range: LEU92 - ASN99 (Chain A)"
+                                    },
+                                    {
+                                        "start": 103,
+                                        "end": 124,
+                                        "tooltipContent": "Type: Helix<br>Range: LYS103 - SER124 (Chain A)"
+                                    },
+                                    {
+                                        "start": 132,
+                                        "end": 134,
+                                        "tooltipContent": "Type: Helix<br>Range: ALA132 - ARG134 (Chain A)"
+                                    },
+                                    {
+                                        "start": 171,
+                                        "end": 175,
+                                        "tooltipContent": "Type: Helix<br>Range: PRO171 - TYR175 (Chain A)"
+                                    },
+                                    {
+                                        "start": 176,
+                                        "end": 183,
+                                        "tooltipContent": "Type: Helix<br>Range: ALA176 - TYR183 (Chain A)"
+                                    },
+                                    {
+                                        "start": 186,
+                                        "end": 203,
+                                        "tooltipContent": "Type: Helix<br>Range: SER186 - SER203 (Chain A)"
+                                    },
+                                    {
+                                        "start": 213,
+                                        "end": 224,
+                                        "tooltipContent": "Type: Helix<br>Range: LYS213 - GLY224 (Chain A)"
+                                    },
+                                    {
+                                        "start": 234,
+                                        "end": 245,
+                                        "tooltipContent": "Type: Helix<br>Range: PRO234 - TRP245 (Chain A)"
+                                    },
+                                    {
+                                        "start": 254,
+                                        "end": 273,
+                                        "tooltipContent": "Type: Helix<br>Range: GLY254 - GLY273 (Chain A)"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "color": "rgb(255,204,0)",
+                        "type": "Strand",
+                        "labelType": "text",
+                        "tooltipContent": "Strand",
+                        "accession": "Strand",
+                        "label": "Strand",
+                        "labelTooltip": "Residues forming Strand",
+                        "bestChainId": "A",
+                        "entityId": 1,
+                        "locations": [
+                            {
+                                "fragments": [
+                                    {
+                                        "start": 14,
+                                        "end": 15,
+                                        "tooltipContent": "Type: Strand<br>Range: GLY14 - SER15 (Chain A)"
+                                    },
+                                    {
+                                        "start": 19,
+                                        "end": 24,
+                                        "tooltipContent": "Type: Strand<br>Range: GLY19 - GLY24 (Chain A)"
+                                    },
+                                    {
+                                        "start": 35,
+                                        "end": 40,
+                                        "tooltipContent": "Type: Strand<br>Range: VAL35 - LEU40 (Chain A)"
+                                    },
+                                    {
+                                        "start": 71,
+                                        "end": 76,
+                                        "tooltipContent": "Type: Strand<br>Range: MET71 - GLU76 (Chain A)"
+                                    },
+                                    {
+                                        "start": 80,
+                                        "end": 85,
+                                        "tooltipContent": "Type: Strand<br>Range: TRP80 - GLU85 (Chain A)"
+                                    },
+                                    {
+                                        "start": 90,
+                                        "end": 91,
+                                        "tooltipContent": "Type: Strand<br>Range: GLY90 - PRO91 (Chain A)"
+                                    },
+                                    {
+                                        "start": 126,
+                                        "end": 127,
+                                        "tooltipContent": "Type: Strand<br>Range: PHE126 - VAL127 (Chain A)"
+                                    },
+                                    {
+                                        "start": 136,
+                                        "end": 140,
+                                        "tooltipContent": "Type: Strand<br>Range: VAL136 - THR140 (Chain A)"
+                                    },
+                                    {
+                                        "start": 143,
+                                        "end": 146,
+                                        "tooltipContent": "Type: Strand<br>Range: TYR143 - ILE146 (Chain A)"
+                                    },
+                                    {
+                                        "start": 153,
+                                        "end": 154,
+                                        "tooltipContent": "Type: Strand<br>Range: LYS153 - ALA154 (Chain A)"
+                                    },
+                                    {
+                                        "start": 162,
+                                        "end": 163,
+                                        "tooltipContent": "Type: Strand<br>Range: TYR162 - LYS163 (Chain A)"
+                                    },
+                                    {
+                                        "start": 184,
+                                        "end": 185,
+                                        "tooltipContent": "Type: Strand<br>Range: LYS184 - PHE185 (Chain A)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "overlapping": "true"
+            }
+        ],
+        "legends": {
+            "alignment": "right",
+            "data": {
+                "Secondary structure": [
+                    {
+                        "color": "rgb(255,99,163)",
+                        "text": "Helix"
+                    },
+                    {
+                        "color": "rgb(255,204,0)",
+                        "text": "Strand"
+                    }
+                ]
+            }
+        }
+    }
+}

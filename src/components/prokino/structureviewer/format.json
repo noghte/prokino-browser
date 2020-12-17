@@ -1,0 +1,1106 @@
+{
+    "4f4p": {
+        "Pfam": {
+            "PF07714": {
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 626,
+                            "author_insertion_code": "",
+                            "residue_number": 262
+                        },
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 371,
+                            "author_insertion_code": "",
+                            "residue_number": 7
+                        },
+                        "coverage": 1,
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "identifier": "Protein tyrosine and serine/threonine kinase",
+                "description": "Protein tyrosine and serine/threonine kinase",
+                "name": "PK_Tyr_Ser-Thr"
+            }
+        },
+        "InterPro": {
+            "IPR001245": {
+                "identifier": "Serine-threonine/tyrosine-protein kinase, catalytic domain",
+                "name": "Serine-threonine/tyrosine-protein kinase, catalytic domain",
+                "mappings": [
+                    {
+                        "start": {
+                            "author_residue_number": 374,
+                            "author_insertion_code": "",
+                            "residue_number": 10
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 623,
+                            "author_insertion_code": "",
+                            "residue_number": 259
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "start": {
+                            "author_residue_number": 448,
+                            "author_insertion_code": "",
+                            "residue_number": 84
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 461,
+                            "author_insertion_code": "",
+                            "residue_number": 97
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "start": {
+                            "author_residue_number": 484,
+                            "author_insertion_code": "",
+                            "residue_number": 120
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 502,
+                            "author_insertion_code": "",
+                            "residue_number": 138
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "start": {
+                            "author_residue_number": 534,
+                            "author_insertion_code": "",
+                            "residue_number": 170
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 544,
+                            "author_insertion_code": "",
+                            "residue_number": 180
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "start": {
+                            "author_residue_number": 553,
+                            "author_insertion_code": "",
+                            "residue_number": 189
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 575,
+                            "author_insertion_code": "",
+                            "residue_number": 211
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "start": {
+                            "author_residue_number": 597,
+                            "author_insertion_code": "",
+                            "residue_number": 233
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 619,
+                            "author_insertion_code": "",
+                            "residue_number": 255
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            },
+            "IPR011009": {
+                "identifier": "Protein kinase-like domain superfamily",
+                "name": "Protein kinase-like domain superfamily",
+                "mappings": [
+                    {
+                        "start": {
+                            "author_residue_number": 375,
+                            "author_insertion_code": "",
+                            "residue_number": 11
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 628,
+                            "author_insertion_code": "",
+                            "residue_number": 264
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            },
+            "IPR020635": {
+                "identifier": "Tyrosine-protein kinase, catalytic domain",
+                "name": "Tyrosine-protein kinase, catalytic domain",
+                "mappings": [
+                    {
+                        "start": {
+                            "author_residue_number": 371,
+                            "author_insertion_code": "",
+                            "residue_number": 7
+                        },
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 626,
+                            "author_insertion_code": "",
+                            "residue_number": 262
+                        },
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            }
+        },
+        "CATH": {
+            "1.10.510.10": {
+                "homology": "Transferase(Phosphotransferase) domain 1",
+                "mappings": [
+                    {
+                        "domain": "4f4pA02",
+                        "end": {
+                            "author_residue_number": 637,
+                            "author_insertion_code": "",
+                            "residue_number": 273
+                        },
+                        "segment_id": 1,
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 451,
+                            "author_insertion_code": "",
+                            "residue_number": 87
+                        },
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "topology": "Transferase(Phosphotransferase); domain 1",
+                "architecture": "Orthogonal Bundle",
+                "identifier": "Transferase(Phosphotransferase); domain 1",
+                "class": "Mainly Alpha",
+                "name": "Tyrosine-protein kinase syk. Chain: a. Synonym: spleen tyrosine kinase, p72-syk. Engineered: yes"
+            },
+            "3.30.200.20": {
+                "homology": "Phosphorylase Kinase; domain 1",
+                "mappings": [
+                    {
+                        "domain": "4f4pA01",
+                        "end": {
+                            "author_residue_number": 450,
+                            "author_insertion_code": "",
+                            "residue_number": 86
+                        },
+                        "segment_id": 1,
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "topology": "Phosphorylase Kinase; domain 1",
+                "architecture": "2-Layer Sandwich",
+                "identifier": "Phosphorylase Kinase; domain 1",
+                "class": "Alpha Beta",
+                "name": "Tyrosine-protein kinase syk. Chain: a. Synonym: spleen tyrosine kinase, p72-syk. Engineered: yes"
+            }
+        },
+        "Ensembl": {
+            "ENSG00000165025": {
+                "identifier": "ENSG00000165025",
+                "mappings": [
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90874762,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "unp_end": 371,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001176477",
+                        "coverage": 0.5,
+                        "unp_start": 342,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90874849,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90874762,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "unp_end": 371,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001176477",
+                        "coverage": 0.5,
+                        "unp_start": 342,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90874849,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90874762,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "unp_end": 394,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001176477",
+                        "coverage": 0.5,
+                        "unp_start": 365,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90874849,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90874762,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "unp_end": 394,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001176477",
+                        "coverage": 0.5,
+                        "unp_start": 365,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90874849,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90877571,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "unp_end": 441,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001176467",
+                        "coverage": 1,
+                        "unp_start": 371,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90877781,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90877571,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "unp_end": 441,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001176467",
+                        "coverage": 1,
+                        "unp_start": 371,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90877781,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90877571,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "unp_end": 464,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001176467",
+                        "coverage": 1,
+                        "unp_start": 394,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90877781,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90877571,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": null,
+                            "author_insertion_code": "",
+                            "residue_number": 30
+                        },
+                        "unp_end": 464,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001176467",
+                        "coverage": 1,
+                        "unp_start": 394,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90877781,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 527,
+                            "author_insertion_code": "",
+                            "residue_number": 163
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90878764,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "unp_end": 504,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001176458",
+                        "coverage": 1,
+                        "unp_start": 441,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90878953,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 527,
+                            "author_insertion_code": "",
+                            "residue_number": 163
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90878764,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "unp_end": 504,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001176458",
+                        "coverage": 1,
+                        "unp_start": 441,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90878953,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 527,
+                            "author_insertion_code": "",
+                            "residue_number": 163
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90878764,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "unp_end": 527,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001176458",
+                        "coverage": 1,
+                        "unp_start": 464,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90878953,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 527,
+                            "author_insertion_code": "",
+                            "residue_number": 163
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90878764,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 464,
+                            "author_insertion_code": "",
+                            "residue_number": 100
+                        },
+                        "unp_end": 527,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001176458",
+                        "coverage": 1,
+                        "unp_start": 464,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90878953,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 574,
+                            "author_insertion_code": "",
+                            "residue_number": 210
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90887749,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 528,
+                            "author_insertion_code": "",
+                            "residue_number": 164
+                        },
+                        "unp_end": 551,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001176447",
+                        "coverage": 1,
+                        "unp_start": 505,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90887887,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 574,
+                            "author_insertion_code": "",
+                            "residue_number": 210
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90887749,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 528,
+                            "author_insertion_code": "",
+                            "residue_number": 164
+                        },
+                        "unp_end": 551,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001176447",
+                        "coverage": 1,
+                        "unp_start": 505,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90887887,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 574,
+                            "author_insertion_code": "",
+                            "residue_number": 210
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90887749,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 528,
+                            "author_insertion_code": "",
+                            "residue_number": 164
+                        },
+                        "unp_end": 574,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001176447",
+                        "coverage": 1,
+                        "unp_start": 528,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90887887,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 574,
+                            "author_insertion_code": "",
+                            "residue_number": 210
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90887749,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 528,
+                            "author_insertion_code": "",
+                            "residue_number": 164
+                        },
+                        "unp_end": 574,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001176447",
+                        "coverage": 1,
+                        "unp_start": 528,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90887887,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90888515,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 575,
+                            "author_insertion_code": "",
+                            "residue_number": 211
+                        },
+                        "unp_end": 589,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001176435",
+                        "coverage": 1,
+                        "unp_start": 552,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90888626,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90888515,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 575,
+                            "author_insertion_code": "",
+                            "residue_number": 211
+                        },
+                        "unp_end": 589,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001176435",
+                        "coverage": 1,
+                        "unp_start": 552,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90888626,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90888515,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 575,
+                            "author_insertion_code": "",
+                            "residue_number": 211
+                        },
+                        "unp_end": 612,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001176435",
+                        "coverage": 1,
+                        "unp_start": 575,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90888626,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90888515,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 575,
+                            "author_insertion_code": "",
+                            "residue_number": 211
+                        },
+                        "unp_end": 612,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001176435",
+                        "coverage": 1,
+                        "unp_start": 575,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90888626,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 635,
+                            "author_insertion_code": "",
+                            "residue_number": 271
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90895528,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "unp_end": 612,
+                        "transcript_id": "ENST00000375747",
+                        "exon_id": "ENSE00001468273",
+                        "coverage": 1,
+                        "unp_start": 589,
+                        "translation_id": "ENSP00000364899",
+                        "genome_end": 90895597,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 635,
+                            "author_insertion_code": "",
+                            "residue_number": 271
+                        },
+                        "accession": "P43405-2",
+                        "genome_start": 90895528,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "unp_end": 612,
+                        "transcript_id": "ENST00000375751",
+                        "exon_id": "ENSE00001468273",
+                        "coverage": 1,
+                        "unp_start": 589,
+                        "translation_id": "ENSP00000364904",
+                        "genome_end": 90895597,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 635,
+                            "author_insertion_code": "",
+                            "residue_number": 271
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90895528,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "unp_end": 635,
+                        "transcript_id": "ENST00000375746",
+                        "exon_id": "ENSE00001468273",
+                        "coverage": 1,
+                        "unp_start": 612,
+                        "translation_id": "ENSP00000364898",
+                        "genome_end": 90895597,
+                        "struct_asym_id": "A"
+                    },
+                    {
+                        "ordinal": 1,
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 635,
+                            "author_insertion_code": "",
+                            "residue_number": 271
+                        },
+                        "accession": "P43405",
+                        "genome_start": 90895528,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 612,
+                            "author_insertion_code": "",
+                            "residue_number": 248
+                        },
+                        "unp_end": 635,
+                        "transcript_id": "ENST00000375754",
+                        "exon_id": "ENSE00001468273",
+                        "coverage": 1,
+                        "unp_start": 612,
+                        "translation_id": "ENSP00000364907",
+                        "genome_end": 90895597,
+                        "struct_asym_id": "A"
+                    }
+                ]
+            }
+        },
+        "HMMER": {
+            "PF07714": {
+                "description": "Protein tyrosine and serine/threonine kinase",
+                "identifier": "Protein tyrosine and serine/threonine kinase",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 623,
+                            "author_insertion_code": "",
+                            "residue_number": 259
+                        },
+                        "hmm_start": 4,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 374,
+                            "author_insertion_code": "",
+                            "residue_number": 10
+                        },
+                        "coverage": 0.977,
+                        "hmm_length": 259,
+                        "struct_asym_id": "A",
+                        "hmm_end": 256
+                    }
+                ],
+                "name": "PK_Tyr_Ser-Thr"
+            }
+        },
+        "EC": {
+            "2.7.10.2": {
+                "reaction": "ATP + a [protein]-L-tyrosine = ADP + a [protein]-L-tyrosine phosphate",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "systematic_name": "ATP:[protein]-L-tyrosine O-phosphotransferase (non-specific)",
+                "synonyms": [
+                    "ABL",
+                    "ABL1",
+                    "ABL2",
+                    "ABLL",
+                    "ACK1",
+                    "ACK2",
+                    "AGMX1",
+                    "ARG",
+                    "ATK",
+                    "ATP:protein-tyrosine O-phosphotransferase",
+                    "BLK",
+                    "BMX",
+                    "BRK",
+                    "BTK",
+                    "BTKL",
+                    "Bmk",
+                    "Bruton's tyrosine kinase",
+                    "Bsk",
+                    "CAKb",
+                    "CHK",
+                    "CSK",
+                    "CTK",
+                    "CYL",
+                    "Cdgip",
+                    "Cytoplasmic protein tyrosine kinase",
+                    "EMT",
+                    "ETK",
+                    "FAK",
+                    "FAK2",
+                    "FER",
+                    "FES",
+                    "FGR",
+                    "FPS",
+                    "FRK",
+                    "FYN",
+                    "Fadk",
+                    "Fert1/2",
+                    "Focal adhesion kinase",
+                    "HCK",
+                    "HCTK",
+                    "HYL",
+                    "IMD1",
+                    "ITK",
+                    "IYK",
+                    "JAK1",
+                    "JAK2",
+                    "JAK3",
+                    "JTK1",
+                    "JTK9",
+                    "Janus kinase 1",
+                    "Janus kinase 2",
+                    "Janus kinase 3",
+                    "L-JAK",
+                    "LCK",
+                    "LSK",
+                    "LYN",
+                    "MATK",
+                    "Ntk",
+                    "P60c-src protein tyrosine kinase",
+                    "PKB",
+                    "PSCTK",
+                    "PSCTK1",
+                    "PSCTK2",
+                    "PSCTK4",
+                    "PSCTK5",
+                    "PTK2",
+                    "PTK2B",
+                    "PTK6",
+                    "PYK2",
+                    "Protein-tyrosine kinase",
+                    "RAFTK",
+                    "RAK",
+                    "Rlk",
+                    "SLK",
+                    "SRC",
+                    "SRC2",
+                    "SRK",
+                    "SRM",
+                    "SRMS",
+                    "STD",
+                    "SYK",
+                    "SYN",
+                    "Sik",
+                    "TEC",
+                    "TNK1",
+                    "TXK",
+                    "TYK2",
+                    "TYK3",
+                    "Tck",
+                    "Tsk",
+                    "YES1",
+                    "YK2",
+                    "ZAP70"
+                ],
+                "identifier": "Non-specific protein-tyrosine kinase",
+                "accepted_name": "Non-specific protein-tyrosine kinase"
+            }
+        },
+        "UniProt": {
+            "P43405": {
+                "identifier": "KSYK_HUMAN",
+                "name": "KSYK_HUMAN",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "end": {
+                            "author_residue_number": 635,
+                            "author_insertion_code": "",
+                            "residue_number": 271
+                        },
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "unp_end": 635,
+                        "unp_start": 365,
+                        "struct_asym_id": "A"
+                    }
+                ]
+            }
+        },
+        "SCOP": {},
+        "GO": {
+            "GO:0006468": {
+                "category": "Biological_process",
+                "definition": "The process of introducing a phosphate group on to a protein.",
+                "identifier": "protein phosphorylation",
+                "name": "protein phosphorylation",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            },
+            "GO:0004713": {
+                "category": "Molecular_function",
+                "definition": "Catalysis of the reaction: ATP + a protein tyrosine = ADP + protein tyrosine phosphate.",
+                "identifier": "protein tyrosine kinase activity",
+                "name": "protein tyrosine kinase activity",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            },
+            "GO:0005524": {
+                "category": "Molecular_function",
+                "definition": "Interacting selectively and non-covalently with ATP, adenosine 5'-triphosphate, a universally important coenzyme and enzyme regulator.",
+                "identifier": "ATP binding",
+                "name": "ATP binding",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            },
+            "GO:0004672": {
+                "category": "Molecular_function",
+                "definition": "Catalysis of the phosphorylation of an amino acid residue in a protein, usually according to the reaction: a protein + ATP = a phosphoprotein + ADP.",
+                "identifier": "protein kinase activity",
+                "name": "protein kinase activity",
+                "mappings": [
+                    {
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "struct_asym_id": "A"
+                    }
+                ]
+            }
+        },
+        "CATH-B": {
+            "1.10.510.10": {
+                "homology": "Transferase(Phosphotransferase) domain 1",
+                "mappings": [
+                    {
+                        "domain": "4f4pA02",
+                        "end": {
+                            "author_residue_number": 637,
+                            "author_insertion_code": "",
+                            "residue_number": 273
+                        },
+                        "segment_id": 1,
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 451,
+                            "author_insertion_code": "",
+                            "residue_number": 87
+                        },
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "topology": "Transferase(Phosphotransferase); domain 1",
+                "architecture": "Orthogonal Bundle",
+                "identifier": "Transferase(Phosphotransferase); domain 1",
+                "class": "Mainly Alpha",
+                "name": "Tyrosine-protein kinase syk. Chain: a. Synonym: spleen tyrosine kinase, p72-syk. Engineered: yes"
+            },
+            "3.30.200.20": {
+                "homology": "Phosphorylase Kinase; domain 1",
+                "mappings": [
+                    {
+                        "domain": "4f4pA01",
+                        "end": {
+                            "author_residue_number": 450,
+                            "author_insertion_code": "",
+                            "residue_number": 86
+                        },
+                        "segment_id": 1,
+                        "entity_id": 1,
+                        "chain_id": "A",
+                        "start": {
+                            "author_residue_number": 365,
+                            "author_insertion_code": "",
+                            "residue_number": 1
+                        },
+                        "struct_asym_id": "A"
+                    }
+                ],
+                "topology": "Phosphorylase Kinase; domain 1",
+                "architecture": "2-Layer Sandwich",
+                "identifier": "Phosphorylase Kinase; domain 1",
+                "class": "Alpha Beta",
+                "name": "Tyrosine-protein kinase syk. Chain: a. Synonym: spleen tyrosine kinase, p72-syk. Engineered: yes"
+            }
+        }
+    }
+}

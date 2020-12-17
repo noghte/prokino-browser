@@ -1,3 +1,4 @@
+import React from "react";
 import Link from 'gatsby';
 
 export default function LinkList({values, entityClass, seperator = ", ", key="c",value="v"})

@@ -1,4 +1,5 @@
 import {splitString} from '../StringHelper';
+import React from 'react';
 
 export default function SequenceViewer({sequence}){
     // const [showMe, setShowMe] = useState(false);
@@ -19,7 +20,7 @@ export default function SequenceViewer({sequence}){
         if (!sequence)
             return [];
 
-        length = sequence.toString().length;
+        let length = sequence.toString().length;
         let numbers = []
         for (let i=1; i<length;i+=size)
             numbers.push(i);

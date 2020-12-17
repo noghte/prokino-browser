@@ -2,7 +2,8 @@ import Layout from '../Layout';
 import PairLinks from '../PairwiseLinkList';
 import GenericList from './GenericList';
 import {showList} from '../StringHelper';
-import FeatureViewer from './FeatureViewer';
+import React from "react";
+// import FeatureViewer from './FeatureViewer';
 
 export default function ProteinItem({localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {

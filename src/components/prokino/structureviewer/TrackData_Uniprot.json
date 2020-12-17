@@ -1,0 +1,38 @@
+{
+    "4f4p": {
+        "sequence": "LDRKLLTLEDKELGSGNFGTVKKGYYQMKKVVKTVAVKILKNEANDPALKDELLAEANVMQQLDNPYIVRMIGICEAESWMLVMEMAELGPLNKYLQQNRHVKDKNIIELVHQVSMGMKYLEESNFVHRDLAARNVLLVTQHYAKISDFGLSKALRADENYYKAQTHGKWPVKWYAPECINYYKFSSKSDVWSFGVLMWEAFSYGQKPYRGMKGSEVTAMLEKGERMGCPAGCPREMYDLMNLCWTYDVENRPGFAAVELRLRNYYYDVVNEG",
+        "length": 273,
+        "tracks": [
+            {
+                "labelType": "text",
+                "label": "UniProt",
+                "data": [
+                    {
+                        "color": "rgb(65,105,225)",
+                        "type": "UniProt",
+                        "labelType": "text",
+                        "tooltipContent": "UniProt P43405",
+                        "accession": "P43405",
+                        "label": "P43405",
+                        "labelTooltip": "Mapping to UniProt KSYK_HUMAN",
+                        "bestChainId": "A",
+                        "entityId": 1,
+                        "locations": [
+                            {
+                                "fragments": [
+                                    {
+                                        "start": 1,
+                                        "end": 271,
+                                        "unp_start": 365,
+                                        "unp_end": 635,
+                                        "tooltipContent": "Type: Mapping to UniProt<br>Range: LEU1 - ASN271 (Chain A)<br>Source: <a href='https://www.uniprot.org/uniprot/P43405'>UniProt P43405</a>"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

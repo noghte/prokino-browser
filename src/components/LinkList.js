@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import React from "react";
+import Link from 'gatsby';
 
 export default function LinkList({values, entityClass, seperator, key="entity",value: label="entityDisplay"})
 {

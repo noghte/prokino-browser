@@ -1,11 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import fetch from 'isomorphic-unfetch';
-import useSWR, {SWRConfig} from 'swr';
-import Link from 'next/link';
+import Link from 'gatsby';
+import axios from 'axios';
 
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
 function splitText(text)
 {
     //The parenthesis in the regex creates a captured group within the quotes
@@ -68,14 +66,71 @@ export default function SearchResults(props) {
     let query = buildSearchTerm(props.input);
     const pageSize = 10;
     let url = `http://gumbo.cs.uga.edu:8080/prokinosrv/rest/entity?contains=${query}&pagesize=${pageSize}&pageoffset=${offset}${searchOption}`;
-    const { data, error } = useSWR(url, fetcher);
-    if (error) {
-        return <span>Failed to load</span>
-    }
-    if (!data) {
-        return <span>Loading...</span>
-    }   
-    console.table(data);
+    // const { data, error } = useSWR(url, fetcher);
+    // if (error) {
+    //     return <span>Failed to load</span>
+    // }
+    // if (!data) {
+    //     return <span>Loading...</span>
+    // }   
+    // console.table(data);
+    axios.get(url)
+    .then(function (data) {
+      // handle success
+      return (
+        <div className="container position-relative" id="content">
+        {!data.hits? <b>No Results</b>:
+          <>
+            <p>Showing <b>{data.totalHits>data.pageSize ?data.pageSize:data.totalHits}</b> of <b>{data.totalHits}</b> results.</p>
+  {              data.hits.map((item, index) => (
+           <div key={"row-"+index} className="list-group-item clearfix">
+           <div className="profile-teaser-left">
+               <div className="profile-img">
+                  {/* <img src="https://static.pexels.com/photos/21011/pexels-photo-large.jpg"/> */}
+                 </div>
+           </div>
+           <div className="search-results profile-teaser-main">
+           <Link key={index} href={`browse?c=${item.entityClass}&v=${item.entity}`}>
+              <a className="nav-link">{item.entity}</a>
+            </Link>
+               <div className="profile-info">
+               <div className="info"
+                    dangerouslySetInnerHTML={{
+                      __html: item.snippet
+                    }}></div>
+               </div>
+           </div>
+       </div>
+            ))}
+            <nav aria-label="Page navigation example">
+    <ul className="pagination justify-content-center">
+        
+      <li className={`page-item${getStatus(data.pageOffset - 1)}`}>
+        <a className="page-link" onClick={goToPage} name="-1" tabIndex="-1">Previous</a>
+      </li>
+      
+      <li className={`page-item${getStatus(data.pageOffset)}`}><a onClick={goToPage} name="0" className="page-link" >{data.pageOffset+1}</a></li>
+      <li className={`page-item${getStatus(data.pageOffset+1)}`}><a onClick={goToPage} name="1" className="page-link" >{data.pageOffset + 2}</a></li>
+      <li className={`page-item${getStatus(data.pageOffset+1)}`}><a onClick={goToPage} name="2" className="page-link" >{data.pageOffset + 3}</a></li>
+  
+      <li className={`page-item${getStatus(data.pageOffset+1)}`}>
+        <a className="page-link" onClick={goToPage} name="1">Next</a>
+      </li>
+    </ul>
+  </nav>
+            </>
+            }
+      </div>
+      );
+    })
+    .catch(function (error) {
+      // handle error
+      return <span>Failed to load</span>
+    })
+    .then(function () {
+      // always executed
+      return <span>Loading...</span>
+    });
     
     const goToPage = (e) => {
         e.preventDefault();
@@ -87,51 +142,9 @@ export default function SearchResults(props) {
 
  
     // setResults(data);
-    return (
+    // return (
       
-      <div className="container position-relative" id="content">
-      {!data.hits? <b>No Results</b>:
-        <>
-          <p>Showing <b>{data.totalHits>data.pageSize ?data.pageSize:data.totalHits}</b> of <b>{data.totalHits}</b> results.</p>
-{              data.hits.map((item, index) => (
-         <div key={"row-"+index} className="list-group-item clearfix">
-         <div className="profile-teaser-left">
-             <div className="profile-img">
-                {/* <img src="https://static.pexels.com/photos/21011/pexels-photo-large.jpg"/> */}
-               </div>
-         </div>
-         <div className="search-results profile-teaser-main">
-         <Link key={index} href={`browse?c=${item.entityClass}&v=${item.entity}`}>
-            <a className="nav-link">{item.entity}</a>
-          </Link>
-             <div className="profile-info">
-             <div className="info"
-                  dangerouslySetInnerHTML={{
-                    __html: item.snippet
-                  }}></div>
-             </div>
-         </div>
-     </div>
-          ))}
-          <nav aria-label="Page navigation example">
-  <ul className="pagination justify-content-center">
-      
-    <li className={`page-item${getStatus(data.pageOffset - 1)}`}>
-      <a className="page-link" onClick={goToPage} name="-1" tabIndex="-1">Previous</a>
-    </li>
-    
-    <li className={`page-item${getStatus(data.pageOffset)}`}><a onClick={goToPage} name="0" className="page-link" >{data.pageOffset+1}</a></li>
-    <li className={`page-item${getStatus(data.pageOffset+1)}`}><a onClick={goToPage} name="1" className="page-link" >{data.pageOffset + 2}</a></li>
-    <li className={`page-item${getStatus(data.pageOffset+1)}`}><a onClick={goToPage} name="2" className="page-link" >{data.pageOffset + 3}</a></li>
-
-    <li className={`page-item${getStatus(data.pageOffset+1)}`}>
-      <a className="page-link" onClick={goToPage} name="1">Next</a>
-    </li>
-  </ul>
-</nav>
-          </>
-          }
-    </div>
-    );
+     
+    // );
     
   }

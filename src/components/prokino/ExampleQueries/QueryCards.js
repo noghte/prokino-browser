@@ -1,6 +1,4 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
-import useSWR from 'swr';
 
 import {
     Card, Button, CardTitle, CardText, CardColumns,
@@ -8,8 +6,9 @@ import {
   } from 'reactstrap';
 
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
+export default function QueryCards({categories,index}) {
+}
+/*
 export default function QueryCards({categories,index}) {
  
     let url = `example_queries.json`;
@@ -140,3 +139,4 @@ export default function QueryCards({categories,index}) {
     //     }
     //   ]
     // }
+    */

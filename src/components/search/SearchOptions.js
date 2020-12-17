@@ -6,7 +6,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
-import OneClass from './OneClass'
+import OneClass from './OneClass';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',

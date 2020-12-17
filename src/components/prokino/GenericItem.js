@@ -1,5 +1,6 @@
 import Layout from '../Layout';
 import {display,showList} from '../StringHelper';
+import React from "react";
 export default function GenericItem({entityClass, localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {
     return (<Layout>

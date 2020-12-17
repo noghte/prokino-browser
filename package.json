@@ -5,6 +5,9 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "gatsby": "^2.25.3",
     "gatsby-image": "^2.4.21",
@@ -17,6 +20,7 @@
     "gatsby-source-filesystem": "^2.4.2",
     "gatsby-transformer-sharp": "^2.5.21",
     "litemol": "^2.4.2",
+    "pdbe-molstar": "^1.1.0-dev.4",
     "postcss": "^8.1.7",
     "prop-types": "^15.7.2",
     "protvista-uniprot": "^2.6.0",

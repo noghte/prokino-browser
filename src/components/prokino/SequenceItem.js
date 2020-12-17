@@ -1,7 +1,7 @@
 import Layout from '../Layout';
 import SequenceViewer from './SequenceViewer'
-import { useState, useEffect } from 'react';
-import FeatureViewer from './FeatureViewer';
+import React, { useState, useEffect } from 'react';
+// import FeatureViewer from './FeatureViewer';
 import {showList,getValues} from '../StringHelper';
 
 export default function SequenceItem({data,localName})
@@ -241,8 +241,8 @@ export default function SequenceItem({data,localName})
                                         <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Annotations</span></div>
                                         <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight:'500px'}}>
                                             <div key="featureViewer">
-                                                {/* <FeatureViewer sequence={datatypeProperties["prokino:hasFASTAFormat"].toString()} /> */}
-                                                <FeatureViewer sequence={sequence} featurelist={features} />
+                                            
+                                                {/* <FeatureViewer sequence={sequence} featurelist={features} /> */}
                                             </div>
                                             
                                         </div>
