@@ -1,10 +1,9 @@
+
+import OneClassSearchResult from './OneClassSearchResult';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import OneClassSearchResult from './OneClassSearchResult';
-
-const url = "http://gumbo.cs.uga.edu:8080/prokinosrv/rest/classification/kinase";
-
-
+import {CLASSIFICATION_ENDPOINT} from '../prokino/Endpoints'
+const url = `${CLASSIFICATION_ENDPOINT}/kinase`;
 
 export default function OneClass() {
   const [kinase, setKinase] = useState(null);
@@ -26,10 +25,8 @@ export default function OneClass() {
       });
   }
 
-
   return (
-
     kinase? <OneClassSearchResult data={kinase} />: <span>Loading...</span>
+   
   );
-
 }
