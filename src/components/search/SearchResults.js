@@ -43,8 +43,7 @@ function buildSearchTerm(text, mode = "match_all") {
 
   }
   //newtokens.push(tokens[tokens.length-1]); //add the last item skipped in the for loop
-  let query = newtokens.join('+');
-  return query;
+  return newtokens.join('+');
 }
 function getStatus(pageNumber) {
   if (pageNumber < 0)
@@ -53,29 +52,32 @@ function getStatus(pageNumber) {
 }
 
 
-export default function SearchResults(props) {
+export default function SearchResults({searchText,searchOption}) {
   const [offset, setOffset] = useState(0);
   const [results, setResults] = useState([]);
   const [totalHits, setTotalHits] = useState(null);
   const [pageOffset, setPageOffset] = useState(null);
 
-  let searchOption = props.option ? "&" + props.option : "";
-  let search_query = buildSearchTerm(props.input);
+  if (searchOption)
+      searchOption = "&" + searchOption;
+  else
+      searchOption = ""
   const pageSize = 10;
-  let url = `${ENTITY_ENDPOINT}?contains=${search_query}&pagesize=${pageSize}&pageoffset=${offset}${searchOption}`;
 
   useEffect(() => {
     const res = async () => {
+      let search_query = buildSearchTerm(searchText);
+      let url = `${ENTITY_ENDPOINT}?contains=${search_query}&pagesize=${pageSize}&pageoffset=${offset}${searchOption}`;
+
       const result = await axios.get(url);
       const data = result.data;
       console.log(data);
       setTotalHits(data.totalHits);
       setPageOffset(data.pageOffset);
-      setResults(results => [...results, result.data.hits]);
-      debugger;
+      setResults(result.data.hits);
     };
     res();
-  }, []);
+  }, [searchText]);
 
   const goToPage = (e) => {
     e.preventDefault();
@@ -87,10 +89,10 @@ export default function SearchResults(props) {
 
   return (
     <div className="container position-relative" id="content">
-      {!results ? "Loading..." :
+      {!results ? "No Results" :
         <>
           <p>Showing <b>{totalHits > pageSize ? pageSize : totalHits}</b> of <b>{totalHits}</b> results.</p>
-          {  Object.entries(results).map(([item, index]) => (
+          {  Object.entries(results).map(([index, item]) => (
 
             <div key={"row-" + index} className="list-group-item clearfix">
               <div className="profile-teaser-left">
@@ -99,7 +101,7 @@ export default function SearchResults(props) {
                 </div>
               </div>
               <div className="search-results profile-teaser-main">
-                <Link activeClassName="nav-link" key={index} to={`browse?c=${item.entityClass}&v=${item.entity}`}>
+                <Link activeClassName="nav-link" key={index} to={`/browse?c=${item.entityClass}&v=${item.entity}`}>
                   <div>{item.entity}</div>
                 </Link>
                 <div className="profile-info">

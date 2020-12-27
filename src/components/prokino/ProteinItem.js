@@ -3,10 +3,16 @@ import PairLinks from '../PairwiseLinkList';
 import GenericList from './GenericList';
 import {showList} from '../StringHelper';
 import React from "react";
+import '../../styles/favth-bootstrap.css'
+
 // import FeatureViewer from './FeatureViewer';
 
 export default function ProteinItem({localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {
+    console.log("datatypeProperties",datatypeProperties);
+    console.log("objectProperties",objectProperties);
+    console.log("incomingObjectProperties", incomingObjectProperties);
+
     return (<Layout>
         <div id="fav-container" className="fav-container">
         {/* remove if do not need margins  */}
@@ -169,6 +175,16 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
                                         <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
                                             <div>
                                                 <PairLinks values={objectProperties["prokino:hasSequence"]} entityClass={"prokino:Sequence"} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="fieldset-pair-container">
+                                    <div className="favth-clearfix">
+                                        <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Structure</div>
+                                        <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight:"unset"}}>
+                                            <div>
+                                                {/* <StructureViewer uniprotId={objectProperties["prokino:hasSequence"] } /> */}
                                             </div>
                                         </div>
                                     </div>

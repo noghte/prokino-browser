@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 //import fetch from 'isomorphic-unfetch';
 import axios from 'axios';
 import LinkList from '../LinkList';
+import {PROTEIN_ENDPOINT} from '../prokino/Endpoints';
+
 
 //const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function GenericList({protein,entityClass,apiClassName,seperator=<br />}) {
- 
-    let url = `http://gumbo.cs.uga.edu:8080/prokinosrv/rest/protein/${protein}/${apiClassName}`;
-    axios.get(url)
-  .then(function (data) {
-    // handle success
-    return (
-        <LinkList values={data.hits} entityClass={entityClass} seperator={seperator} />
-    );
-  })
-  .catch(function (error) {
-    // handle error
-    return <span>Failed to load</span>
-  })
-  .then(function () {
-    // always executed
-    return <span>Loading...</span>
-  });
+ const [prokinoData, setProkinoData] = useState(null);
 
-    // const { data, error } = useSWR(url, fetcher);
-    // if (error) {
-        
-    // }
-    // if (!data) {
-        
-    // }   
+  useEffect(()=>
+  {
+    const res = async () => {
+      let url = `${PROTEIN_ENDPOINT}/${protein}/${apiClassName}`;
+      const result = await axios.get(url);
+      setProkinoData(result.data);
+
+        }
+    res();
+  }
+  ,[]);
+   
+    if (!prokinoData)
+      return <p>Loading ...</p>
     
-    // setResults(data);
-    
+    return <LinkList values={prokinoData.hits} entityClass={entityClass} seperator={seperator} />;
     
   }
+
+
+    

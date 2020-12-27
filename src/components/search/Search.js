@@ -17,7 +17,7 @@ export default function Search()
       setShouldShowResults(true);
     }
     function selectedOptionChanged(event) {
-        setSelectedOption( event.target.value);
+        setSelectedOption(event.target.value);
       }
     return(
 <div className="row justify-content-center">
@@ -59,7 +59,7 @@ export default function Search()
                   </div>
                   <div className="row">
                     <div className="col">
-                    {shouldShowResults && <SearchResults input={input} option={selectedOption} />}
+                    {shouldShowResults && <SearchResults searchText={input} searchOption={selectedOption} />}
                     </div>
                   </div>
                   

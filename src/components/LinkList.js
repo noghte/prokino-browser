@@ -12,10 +12,9 @@ export default function LinkList({values, entityClass, seperator, key="entity",v
                 const element = values[i];
                 links.push(
                     <>
-                    <Link key={element[key]} href={`browse?c=${entityClass}&v=${element[key]}`}>
-                        <a>{element[label]}</a>
+                    <Link to={`browse?c=${entityClass}&v=${element[key]}`}>
+                        {element[label]}
                     </Link>
-                   
                     {i<values.length-1 && seperator }  {/* add seperator if it's not the last item */}
                     </>
                 );

@@ -21,8 +21,8 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <Link key={i} href={`browse?c=${entityClass}&v=${link}`}>
-                                <a>{label}</a>
+                            <Link to={`browse?c=${entityClass}&v=${link}`}>
+                                {label}
                             </Link>
                         );
                         if (i<length-1) //if it is not the last item (don't add separator to the last item)
