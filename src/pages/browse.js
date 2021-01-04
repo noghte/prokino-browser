@@ -40,49 +40,49 @@ export default function Browse() { //{protein}
         res();
     }, []);
 
-        if (!prokinoData)
-            return <Layout>Loading ...</Layout>;
+    if (!prokinoData)
+        return <Layout>Loading ...</Layout>;
 
-        // handle success
-        let dataProps = {};
-        if (prokinoData.datatypeProperties)
-            prokinoData.datatypeProperties.forEach(prop =>
-                dataProps[prop["p"]] = prop["v"]
-            );
+    // handle success
+    let dataProps = {};
+    if (prokinoData.datatypeProperties)
+        prokinoData.datatypeProperties.forEach(prop =>
+            dataProps[prop["p"]] = prop["v"]
+        );
 
-        let objProps = {};
-        if (prokinoData.objectProperties)
-            prokinoData.objectProperties.forEach(prop =>
-                objProps[prop["p"]] = prop["v"]
-            );
+    let objProps = {};
+    if (prokinoData.objectProperties)
+        prokinoData.objectProperties.forEach(prop =>
+            objProps[prop["p"]] = prop["v"]
+        );
 
-        let incomingProps = {}
-        if (prokinoData.incomingObjectProperties)
-            prokinoData.incomingObjectProperties.forEach(prop =>
-                incomingProps[prop["p"]] = prop["v"]
-            );
+    let incomingProps = {}
+    if (prokinoData.incomingObjectProperties)
+        prokinoData.incomingObjectProperties.forEach(prop =>
+            incomingProps[prop["p"]] = prop["v"]
+        );
 
-        switch (entityClass) {
-            case "prokino:Protein":
-                return <ProteinItem
-                    localName={prokinoData.localName}
-                    datatypeProperties={dataProps}
-                    objectProperties={objProps}
-                    incomingObjectProperties={incomingProps}
-                />;
+    switch (entityClass) {
+        case "prokino:Protein":
+            return <ProteinItem
+                localName={prokinoData.localName}
+                datatypeProperties={dataProps}
+                objectProperties={objProps}
+                incomingObjectProperties={incomingProps}
+            />;
 
-            case "prokino:Sequence":
-                return <SequenceItem data={prokinoData} localName={value} />;
+        case "prokino:Sequence":
+            return <SequenceItem data={prokinoData} localName={value} />;
 
-            default:
-                return <GenericItem
-                    entityClass={prokinoData.entityClass}
-                    localName={prokinoData.localName}
-                    datatypeProperties={dataProps}
-                    objectProperties={objProps}
-                    incomingObjectProperties={incomingProps}
-                />;
-        }
+        default:
+            return <GenericItem
+                entityClass={prokinoData.entityClass}
+                localName={prokinoData.localName}
+                datatypeProperties={dataProps}
+                objectProperties={objProps}
+                incomingObjectProperties={incomingProps}
+            />;
+    }
 
 
 

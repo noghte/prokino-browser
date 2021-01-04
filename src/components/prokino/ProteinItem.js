@@ -12,10 +12,15 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
     console.log("datatypeProperties",datatypeProperties);
     console.log("objectProperties",objectProperties);
     console.log("incomingObjectProperties", incomingObjectProperties);
+    
+    return <Layout>
+      
+      <PairLinks values={objectProperties["prokino:presentIn"]} entityClass="prokino:Organism" />
 
-    return (<Layout>
-        <div id="fav-container" className="fav-container">
-        {/* remove if do not need margins  */}
+    </Layout>
+   return (<Layout>
+            <div id="fav-container" className="fav-container">
+            {/* remove if do not need margins  */}
             <div className="favth-container"> 
                 <div className="favth-row">
                     <div className="favth-col-xs-12">
@@ -469,7 +474,7 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
                                 </div>
                                 </div>
                             </div>
-                </div>
+            </div>
     
             </Layout>
             );

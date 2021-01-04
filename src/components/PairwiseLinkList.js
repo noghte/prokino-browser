@@ -9,7 +9,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
         {
             //we should have a target value to get filtered values, if not, consider the first element as the main element
             let entity = entityClass ? values.find(el => el[key] === entityClass) : values[0];
-            
+            debugger;
             if (entity) 
             {
                 const length = entity[value].length;
