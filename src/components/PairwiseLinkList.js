@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'gatsby';
+import {Link} from 'gatsby';
 
 export default function LinkList({values, entityClass, seperator = ", ", key="c",value="v"})
 {
@@ -9,7 +9,6 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
         {
             //we should have a target value to get filtered values, if not, consider the first element as the main element
             let entity = entityClass ? values.find(el => el[key] === entityClass) : values[0];
-            debugger;
             if (entity) 
             {
                 const length = entity[value].length;
@@ -21,7 +20,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <Link to={`browse?c=${entityClass}&v=${link}`}>
+                            <Link to={`browse?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
                                 {label}
                             </Link>
                         );
@@ -31,5 +30,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                 }
             }
         }
+    if (links.length === 0)
+        return "N/A";
     return links;
 }

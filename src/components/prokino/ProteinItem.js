@@ -4,21 +4,35 @@ import GenericList from './GenericList';
 import {showList} from '../StringHelper';
 import React from "react";
 import '../../styles/favth-bootstrap.css'
+import '../../styles/proteinitems.css'
+import { Helmet } from "react-helmet";
+import MolstarViewer from './pdbe/MolstarViewer'
+import AnnotationViewer from './pdbe/AnnotationViewer';
+
+
+// import '../../styles/icon-lib.css'
+// import '../../styles/sprite.css'
+// import '../../styles/rtheme.css'
+// import '../../styles/rmain.css'
 
 // import FeatureViewer from './FeatureViewer';
 
 export default function ProteinItem({localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {
-    console.log("datatypeProperties",datatypeProperties);
-    console.log("objectProperties",objectProperties);
-    console.log("incomingObjectProperties", incomingObjectProperties);
+    // console.log("datatypeProperties",datatypeProperties);
+    // console.log("objectProperties",objectProperties);
+    // console.log("incomingObjectProperties", incomingObjectProperties);
     
-    return <Layout>
-      
-      <PairLinks values={objectProperties["prokino:presentIn"]} entityClass="prokino:Organism" />
 
-    </Layout>
    return (<Layout>
+            <Helmet>
+            <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
+            <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
+            <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
+            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.0.js"></script>
+    </Helmet>
             <div id="fav-container" className="fav-container">
             {/* remove if do not need margins  */}
             <div className="favth-container"> 
@@ -190,6 +204,8 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
                                         <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight:"unset"}}>
                                             <div>
                                                 {/* <StructureViewer uniprotId={objectProperties["prokino:hasSequence"] } /> */}
+                                                <MolstarViewer viewerWidth={900} viewerHeight={300} pdbMoleculeId="4f4p" />
+                                                <AnnotationViewer uniprotId="P00533" />
                                             </div>
                                         </div>
                                     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { Helmet } from "react-helmet";
 
-export default function AnnotationViewer() {
+export default function AnnotationViewerDemo() {
     return (
         <Layout>
             <Helmet>

@@ -8,6 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import ugaLogo from '../images/GEORGIA-FS-CW-1024x335.png'
 
 //import { useStaticQuery, graphql } from "gatsby"
 
@@ -28,7 +29,7 @@ const Layout = ({ children }) => {
     <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
           <div className="container">
-            <img src="https://brand.uga.edu/wp-content/uploads/GEORGIA-FS-CW-1024x335.png" alt="UGA Logo" id="ugalogo" />
+            <img src={ugaLogo} alt="UGA Logo" id="ugalogo" />
             <Link className="navbar-brand container d-flex justify-content-center" to="/">ProKinO</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
