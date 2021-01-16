@@ -92,130 +92,128 @@ useEffect(()=>
                 ]
 
             },
-            // {
-            //     label: "Annotations",
-            //     labelType: "text",
-            //     labelColor: "rgb(128,128,128)", // Set labelColor to change label background colour
-            //     data: [
-            //         {
-            //             accession: "a1",
-            //             type: "UniProt range",
-            //             label: "Annotations 1",
-            //             labelType: "text",
-            //             labelTooltip: "Residues mapped to annotations 1",
-            //             labelColor: "rgb(211,211,211)",
-            //             color: "rgb(255,99,163)",
-            //             locations: [
-            //             {
-            //                 fragments : [
-            //                 {
-            //                     start: 1,
-            //                     end: 56,
-            //                     tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
-            //                 },
-            //                 {
-            //                     start: 70,
-            //                     end: 130,
-            //                     tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
-            //                 }
-            //                 ]
-            //             }
-            //             ]
-            //         }
-            //     ]
+            {
+                label: "Annotations",
+                labelType: "text",
+                labelColor: "rgb(128,128,128)", // Set labelColor to change label background colour
+                data: [
+                    {
+                        accession: "a1",
+                        type: "UniProt range",
+                        label: "Annotations 1",
+                        labelType: "text",
+                        labelTooltip: "Residues mapped to annotations 1",
+                        labelColor: "rgb(211,211,211)",
+                        color: "rgb(255,99,163)",
+                        locations: [
+                        {
+                            fragments : [
+                            {
+                                start: 1,
+                                end: 56,
+                                tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
+                            },
+                            {
+                                start: 70,
+                                end: 130,
+                                tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                            }
+                            ]
+                        }
+                        ]
+                    }
+                ]
 
-            // },
-            // {
-            //     label: "Annotation shapes",
-            //     data: [
-            //         {
-            //             accession: "s1",
-            //             type: "UniProt range",
-            //             label: "Circle",
-            //             color: "rgb(249,166,2)",
-            //             shape: 'circle', // supported shapes rectangle|bridge|diamond|chevron|catFace|triangle|wave|hexagon|pentagon|circle|arrow|doubleBar,
-            //             locations: [
-            //                 {
-            //                     fragments : [
-            //                         {
-            //                             start: 5,
-            //                             end: 5,
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56",
-            //                         },
-            //                         {
-            //                             start: 9,
-            //                             end: 9,
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
-            //                         }
-            //                     ]
-            //                 }
-            //             ]
-            //         },
-            //         {
-            //             accession: "s2",
-            //             type: "UniProt range",
-            //             label: "Diamond",
-            //             shape: 'diamond',
-            //             color: "rgb(255,99,163)", // Default colour value for all fragments in this track
-            //             locations: [
-            //                 {
-            //                     fragments : [
-            //                         {
-            //                             start: 5,
-            //                             end: 5,
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
-            //                         },
-            //                         {
-            //                             start: 9,
-            //                             end: 9,
-            //                             color: "rgb(0,128,129)", // Set colour here for individual shape fragment. This will override the track default colour.
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
-            //                         },
-            //                         {
-            //                             start: 20,
-            //                             end: 20,
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
-            //                         },
-            //                         {
-            //                             start: 22,
-            //                             end: 22,
-            //                             tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
-            //                         }
-            //                     ]
-            //                 }
-            //             ]
-            //         }
-            //     ]
+            },
+            {
+                label: "Annotation shapes",
+                data: [
+                    {
+                        accession: "s1",
+                        type: "UniProt range",
+                        label: "Circle",
+                        color: "rgb(249,166,2)",
+                        shape: 'circle', // supported shapes rectangle|bridge|diamond|chevron|catFace|triangle|wave|hexagon|pentagon|circle|arrow|doubleBar,
+                        locations: [
+                            {
+                                fragments : [
+                                    {
+                                        start: 5,
+                                        end: 5,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56",
+                                    },
+                                    {
+                                        start: 9,
+                                        end: 9,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        accession: "s2",
+                        type: "UniProt range",
+                        label: "Diamond",
+                        shape: 'diamond',
+                        color: "rgb(255,99,163)", // Default colour value for all fragments in this track
+                        locations: [
+                            {
+                                fragments : [
+                                    {
+                                        start: 5,
+                                        end: 5,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
+                                    },
+                                    {
+                                        start: 9,
+                                        end: 9,
+                                        color: "rgb(0,128,129)", // Set colour here for individual shape fragment. This will override the track default colour.
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                    },
+                                    {
+                                        start: 20,
+                                        end: 20,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                    },
+                                    {
+                                        start: 22,
+                                        end: 22,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
 
-            // }
+            }
         ],
-        //sequenceConservation: seqConservationData, // Set this property to display your own sequence conservation data. Refer comments at the top for data structure.
-        //variants: variationData, // Set this property to display your own variation data. Refer comments at the top for data structure.
-        // legends: {
-        //     alignment: 'right', // expected values 'left', 'right' or 'center'
-        //     data: { // Legend Row, key is used as the row label
-        //         "Domains": [ // legends for Domains row
-        //             {
-        //                 color: ["rgb(135,158,247)", "rgb(160,174,232)"], // legend color, supported rgb and hex code value
-        //                 text: "Domains 1" // legend text
-        //             },
-        //             {
-        //                 color: ["rgb(107,119,39)", "rgb(90,102,23)"],
-        //                 text: "Domains 2"
-        //             }
-        //         ],
-        //         "Annotations": [ // legends for Annotation row row
-        //             {
-        //                 color: ["rgb(255,99,163)"],
-        //                 text: "Custom Annotations"
-        //             }
-        //         ]
-        //     }
-        // }
+        // sequenceConservation: seqConservationData, // Set this property to display your own sequence conservation data. Refer comments at the top for data structure.
+        // variants: variationData, // Set this property to display your own variation data. Refer comments at the top for data structure.
+        legends: {
+            alignment: 'right', // expected values 'left', 'right' or 'center'
+            data: { // Legend Row, key is used as the row label
+                "Domains": [ // legends for Domains row
+                    {
+                        color: ["rgb(135,158,247)", "rgb(160,174,232)"], // legend color, supported rgb and hex code value
+                        text: "Domains 1" // legend text
+                    },
+                    {
+                        color: ["rgb(107,119,39)", "rgb(90,102,23)"],
+                        text: "Domains 2"
+                    }
+                ],
+                "Annotations": [ // legends for Annotation row row
+                    {
+                        color: ["rgb(255,99,163)"],
+                        text: "Custom Annotations"
+                    }
+                ]
+            }
+        }
     };
     setProkinoData(customData);
-
-   
       }
   res();
 }
@@ -230,10 +228,12 @@ useEffect(()=>
     //console.log(uniprotId);
   
     
-    return <protvista-pdb accession={uniprotId} id="pv1" ></protvista-pdb>
+    // return <protvista-pdb accession={uniprotId} id="pv1" ></protvista-pdb>
     // if (!seqConservationData || !variationData || !prokinoData)
     //     return <p>Loading..</p>; 
-    // return <protvista-pdb custom-data="true" accession={uniprotId} viewerData={prokinoData} id="pv1" ></protvista-pdb>
+    if (!prokinoData)
+    return <p>Loading 122..</p>
+    return <protvista-pdb custom-data="true" accession={uniprotId} id="pv1"></protvista-pdb>;
 
     
 }
