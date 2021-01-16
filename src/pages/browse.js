@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import ProteinItem from '../components/prokino/ProteinItem';
 import GenericItem from '../components/prokino/GenericItem';
@@ -7,38 +7,37 @@ import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 
 export default function Browse() { //{protein}
-
-    const urlParams = new URLSearchParams(document.location.search.substring(1));
+const urlParams = new URLSearchParams(document.location.search.substring(1));
     
-    const [entityClass,setEntityClass] = useState(urlParams.get("c"));
-    const [value,setValue] = useState(urlParams.get("v"));
+const [entityClass,setEntityClass] = useState(urlParams.get("c"));
+const [value,setValue] = useState(urlParams.get("v"));
 
-    const [prokinoData,setProkinoData] = useState(null);
-    //For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
+const [prokinoData,setProkinoData] = useState(null);
+//For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
 
 
-    // const { data, error } = useSWR(url, fetcher);
-    // if (error) 
-    //     return <Layout>Failed to load</Layout>
+// const { data, error } = useSWR(url, fetcher);
+// if (error) 
+//     return <Layout>Failed to load</Layout>
 
-    // if (!data) 
-    //     return <Layout>Loading...</Layout>
+// if (!data) 
+//     return <Layout>Loading...</Layout>
 
-    useEffect(() => {
-        const res = async () => {
-            // if (!value)
-            //     return <></>
+useEffect(() => {
+    const res = async () => {
+        // if (!value)
+        //     return <></>
 
-            const resourceType = entityClass === 'prokino:Sequence' ? 'sequence' : 'entity';
-            let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
+        const resourceType = entityClass === 'prokino:Sequence' ? 'sequence' : 'entity';
+        let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
 
-            const result = await axios.get(url);
-            const data = result.data;
-            console.log(data)
-            setProkinoData(data);
-        };
-        res();
-    }, []);
+        const result = await axios.get(url);
+        const data = result.data;
+        console.log(data)
+        setProkinoData(data);
+    };
+    res();
+}, []);
 
     if (!prokinoData)
         return <Layout>Loading ...</Layout>;
@@ -62,6 +61,9 @@ export default function Browse() { //{protein}
             incomingProps[prop["p"]] = prop["v"]
         );
 
+    // if (!entityClass)
+    //     return <p>Loading..</p>
+
     switch (entityClass) {
         case "prokino:Protein":
             return <ProteinItem
@@ -72,7 +74,7 @@ export default function Browse() { //{protein}
             />;
 
         case "prokino:Sequence":
-            return <SequenceItem data={prokinoData} localName={value} />;
+            return <p>test</p>;//  <SequenceItem data={prokinoData} localName={value} />;
 
         default:
             return <GenericItem

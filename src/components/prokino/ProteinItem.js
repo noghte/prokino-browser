@@ -205,7 +205,9 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
                                             <div>
                                                 {/* <StructureViewer uniprotId={objectProperties["prokino:hasSequence"] } /> */}
                                                 <MolstarViewer viewerWidth={900} viewerHeight={300} pdbMoleculeId="4f4p" />
-                                                <AnnotationViewer uniprotId="P00533" />
+                                                <AnnotationViewer 
+                                                    prokinoSequence={objectProperties["prokino:hasSequence"]} 
+                                                    uniprotId={objectProperties["prokino:hasDbXref"]} />
                                             </div>
                                         </div>
                                     </div>
