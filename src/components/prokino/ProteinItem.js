@@ -17,13 +17,13 @@ import AnnotationViewer from './pdbe/AnnotationViewer';
 
 // import FeatureViewer from './FeatureViewer';
 
-export default function ProteinItem({localName, datatypeProperties,objectProperties,incomingObjectProperties})
+export default function ProteinItem({uniprotId,localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {
     // console.log("datatypeProperties",datatypeProperties);
     // console.log("objectProperties",objectProperties);
     // console.log("incomingObjectProperties", incomingObjectProperties);
+    console.log("uniprot from proteinitem",uniprotId);
     
-
    return (<Layout>
             <Helmet>
             <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
@@ -204,10 +204,10 @@ export default function ProteinItem({localName, datatypeProperties,objectPropert
                                         <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight:"unset"}}>
                                             <div>
                                                 {/* <StructureViewer uniprotId={objectProperties["prokino:hasSequence"] } /> */}
-                                                <MolstarViewer viewerWidth={900} viewerHeight={300} pdbMoleculeId="4f4p" />
+                                                <MolstarViewer viewerWidth={900} viewerHeight={300} uniprotId={uniprotId} />
                                                 <AnnotationViewer 
                                                     prokinoSequence={objectProperties["prokino:hasSequence"]} 
-                                                    uniprotId={objectProperties["prokino:hasDbXref"]} />
+                                                    uniprotId={uniprotId} />
                                             </div>
                                         </div>
                                     </div>

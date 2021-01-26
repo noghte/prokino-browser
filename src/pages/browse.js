@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProteinItem from '../components/prokino/ProteinItem';
 import GenericItem from '../components/prokino/GenericItem';
@@ -12,7 +12,11 @@ const urlParams = new URLSearchParams(document.location.search.substring(1));
 const [entityClass,setEntityClass] = useState(urlParams.get("c"));
 const [value,setValue] = useState(urlParams.get("v"));
 
+const [uniprotId,setUniprotId] = useState(null);
+const [uniprotIdRequired,setUniprotIdRequired] = useState(false);
+
 const [prokinoData,setProkinoData] = useState(null);
+
 //For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
 
 
@@ -24,7 +28,7 @@ const [prokinoData,setProkinoData] = useState(null);
 //     return <Layout>Loading...</Layout>
 
 useEffect(() => {
-    const res = async () => {
+    const getProkinoData = async () => {
         // if (!value)
         //     return <></>
 
@@ -32,13 +36,27 @@ useEffect(() => {
         let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
 
         const result = await axios.get(url);
-        const data = result.data;
-        console.log(data)
-        setProkinoData(data);
+        console.log("prokino",result.data)
+        setProkinoData(result.data);
+        
+        if (result.data.entityClass === "prokino:Protein")
+            setUniprotIdRequired(true);
     };
-    res();
+    getProkinoData();
 }, []);
 
+useEffect(() => {
+    const getUniprotId = async () => {
+
+        let url = `${BASE_ENDPOINT}/protein/${value}/identifier`;
+        const result = await axios.get(url);
+        setUniprotId(result.data.identifier);
+        console.log("uniprot from browse.js",uniprotId);
+    };
+    if (uniprotIdRequired)
+        getUniprotId();
+}, [uniprotIdRequired]);
+    
     if (!prokinoData)
         return <Layout>Loading ...</Layout>;
 
@@ -67,6 +85,7 @@ useEffect(() => {
     switch (entityClass) {
         case "prokino:Protein":
             return <ProteinItem
+                uniprotId={uniprotId}
                 localName={prokinoData.localName}
                 datatypeProperties={dataProps}
                 objectProperties={objProps}
