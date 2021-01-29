@@ -6,8 +6,8 @@ import {showList,getValues} from '../StringHelper';
 
 export default function SequenceItem({data,localName})
 {
+    console.log(data);
     const sequence= data.residues;
-    const residue = data.residues;
     
     //domain sample
     // {
@@ -92,9 +92,9 @@ export default function SequenceItem({data,localName})
         return locations;
     }
 
-    let motifLocations = extractLocations(data.motifs,"prokino:SequenceMotif");
-    let functionalFeatureLocations = extractLocations(data.functionalfeatures);
-    let domainLocations = extractLocations(data.domains);
+    let motifLocations =data.motifs? extractLocations(data.motifs,"prokino:SequenceMotif"):[];
+    let functionalFeatureLocations = data.functionalfeatures ? extractLocations(data.functionalfeatures):[];
+    let domainLocations =data.domains? extractLocations(data.domains):[];
     
     
     

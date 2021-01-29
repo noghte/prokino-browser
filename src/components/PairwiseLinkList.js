@@ -20,7 +20,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <Link to={`browse?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
+                            <Link to={`/browse/#?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
                                 {label}
                             </Link>
                         );

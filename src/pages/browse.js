@@ -6,12 +6,12 @@ import SequenceItem from '../components/prokino/SequenceItem';
 import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 
-export default function Browse() { //{protein}
-const urlParams = new URLSearchParams(document.location.search.substring(1));
-    
+export default function Browse({location}) { //{protein}
+const urlParams = new URLSearchParams(location.hash.substring(1));
+
 const [entityClass,setEntityClass] = useState(urlParams.get("c"));
 const [value,setValue] = useState(urlParams.get("v"));
-
+console.log(entityClass);    
 const [uniprotId,setUniprotId] = useState(null);
 const [uniprotIdRequired,setUniprotIdRequired] = useState(false);
 
@@ -43,7 +43,7 @@ useEffect(() => {
             setUniprotIdRequired(true);
     };
     getProkinoData();
-}, []);
+}, [entityClass]);
 
 useEffect(() => {
     const getUniprotId = async () => {
@@ -93,7 +93,7 @@ useEffect(() => {
             />;
 
         case "prokino:Sequence":
-            return <p>test</p>;//  <SequenceItem data={prokinoData} localName={value} />;
+            return <SequenceItem data={prokinoData} localName={value} />;
 
         default:
             return <GenericItem

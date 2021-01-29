@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export default function MolstarViewer({ viewerWidth = 900, viewerHeight = 300, uniprotId, pdbMoleculeId }) { //{protein}
 
-console.log("uniprot from molstarviewer",uniprotId);
 const [pdbBest,setPdbBest]= useState(null);
 useEffect(() => {
     const getPdbBestStructure = async () => {
@@ -15,7 +14,8 @@ useEffect(() => {
         // console.log("pdb data",result.data);
         setPdbBest(result.data);
     };
-    getPdbBestStructure();
+    if (uniprotId)
+        getPdbBestStructure();
 }, [uniprotId]);
 
 if (uniprotId)

@@ -101,7 +101,7 @@ export default function SearchResults({searchText,searchOption}) {
                 </div>
               </div>
               <div className="search-results profile-teaser-main">
-                <Link activeClassName="nav-link" key={index} to={`/browse?c=${item.entityClass}&v=${item.entity}`}>
+                <Link activeClassName="nav-link" key={index} to={`/browse/#?c=${item.entityClass}&v=${item.entity}`}>
                   <div>{item.entity}</div>
                 </Link>
                 <div className="profile-info">

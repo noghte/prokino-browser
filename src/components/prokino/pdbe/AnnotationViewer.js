@@ -1,34 +1,46 @@
 
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import axios from 'axios';
 
-export default function AnnotationViewer({prokinoSequence,uniprotId}) { //{protein}
-uniprotId = "P29373";
-prokinoSequence  = 'MPNFSGNWKIIRSENFEELLKVLGVNVMLRKIAVAAASKPAVEIKQEGDTFYIKTSTTVRTTEINFKVGEEFEEQTVDGRPCKSLVKWESENKMVCEQKLLKGEGPKTSWTRELTNDGELILTMTADDVVCTRVYVRE';
-// seqConservationData contains an array of start and end position, in each cell of the array, there is another array of amino acids
-const [seqConservationData, setSeqConservationData] = useState('');
-const [variationData, setVariationData] = useState('');
-const [prokinoData, setProkinoData] = useState('');
+export default function AnnotationViewer({ prokinoSequence, uniprotId }) { //{protein}
 
+    
+    const [seqConservationData, setSeqConservationData] = useState(null);//an array of start and end position, in each cell of the array, there is another array of amino acids
+    const [variationData, setVariationData] = useState('');
+    const pv1 = useRef(null);
 
-useEffect(()=>
-{
-  const res = async () => {
-    let url = `https://www.ebi.ac.uk/pdbe/graph-api/uniprot/sequence_conservation/${uniprotId}`;
-    const result = await axios.get(url);
-    setSeqConservationData(result.data[`${uniprotId}`]);
-      }
-  res();
-}
-,[]);
+    useEffect(() => {
+        const callSequenceConservationAPI = async () => {
+            let url = `https://www.ebi.ac.uk/pdbe/graph-api/uniprot/sequence_conservation/${uniprotId}`;
+            const result = await axios.get(url);
+            setSeqConservationData(result.data[`${uniprotId}`]);
+        }
+        if (uniprotId && !seqConservationData)
+        callSequenceConservationAPI();
+    }
+        , [uniprotId]);
 
-useEffect(()=>
-{
-  const res = async () => {
-    let url = `https://www.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/variation/${uniprotId}`;
-    const result = await axios.get(url);
-    setVariationData(result.data);
+    useEffect(() => {
+        const callVariationAPI = async () => {
+            let url = `https://www.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/variation/${uniprotId}`;
+            const result = await axios.get(url);
+            setVariationData(result.data);
+        }
+        if (uniprotId && !variationData)
+            callVariationAPI();
+
+    }
+        , [uniprotId]);
+
+    //When everythin is ready (API calls done, and web-component instance is recognized)
+    useEffect(() => {
+        if (pv1.current && !pv1.current.viewerdata && seqConservationData && variationData) {
+            pv1.current.viewerdata = customData;
+            console.log(pv1.current);
+
+        }
+    }, [pv1, seqConservationData, variationData]);
 
     const customData = {
         displayNavigation: true, // Set to false to hide navigation scale
@@ -47,22 +59,22 @@ useEffect(()=>
                         label: "Domain 1", // Expected values 'text' and 'html'
                         labelTooltip: "Residues mapped to domain 1", // Label tooltip content. Support text and HTML mark-up 
                         locations: [ // Array of sub-tracks
-                        {
-                            fragments : [ // Array of sub-track fragments
                             {
-                                start: 1, // Track start value
-                                end: 56, // Track end value
-                                tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56",  // track tooltip content. Support text and HTML mark-up 
-                                color: "rgb(135,158,247)" // track (fragment) colour, supported rgb and hex code value
-                            },
-                            {
-                                start: 70,
-                                end: 130,
-                                tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130",
-                                color: "rgb(160,174,232)"
+                                fragments: [ // Array of sub-track fragments
+                                    {
+                                        start: 1, // Track start value
+                                        end: 56, // Track end value
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56",  // track tooltip content. Support text and HTML mark-up 
+                                        color: "rgb(135,158,247)" // track (fragment) colour, supported rgb and hex code value
+                                    },
+                                    {
+                                        start: 70,
+                                        end: 130,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130",
+                                        color: "rgb(160,174,232)"
+                                    }
+                                ]
                             }
-                            ]
-                        }
                         ]
                     },
                     {
@@ -71,22 +83,22 @@ useEffect(()=>
                         label: "<div><i class='icon icon-generic' data-icon=';' style='color: #000;'></i> <a href='resource.xyz'>Domain 2</a></div>", //HTML strcutured label with font-icons. You can add any HTML markup.
                         labelTooltip: "<strong>Domain Compound</strong><br><img src='https://www.ebi.ac.uk/pdbe/static/files/pdbechem_v2/REA_200.svg'>", // labelTooltip HTML mark-up example displaying compound image in the tooltip.
                         locations: [
-                        {
-                            fragments : [
                             {
-                                start: 1,
-                                end: 20,
-                                tooltipContent: "<strong>Type: domain 2</strong><br>Range: XY1 - XYZ20<br><a href='resource.xyz' style='color:blue'>view details</a>", // tooltipContent HTML mark-up example
-                                color: "rgb(107,119,39)"
-                            },
-                            {
-                                start: 22,
-                                end: 137,
-                                tooltipContent: "Type: domain 2<br>Range: XYZ22 - XYZ137",
-                                color: "rgb(90,102,23)"
+                                fragments: [
+                                    {
+                                        start: 1,
+                                        end: 20,
+                                        tooltipContent: "<strong>Type: domain 2</strong><br>Range: XY1 - XYZ20<br><a href='resource.xyz' style='color:blue'>view details</a>", // tooltipContent HTML mark-up example
+                                        color: "rgb(107,119,39)"
+                                    },
+                                    {
+                                        start: 22,
+                                        end: 137,
+                                        tooltipContent: "Type: domain 2<br>Range: XYZ22 - XYZ137",
+                                        color: "rgb(90,102,23)"
+                                    }
+                                ]
                             }
-                            ]
-                        }
                         ]
                     }
                 ]
@@ -106,20 +118,20 @@ useEffect(()=>
                         labelColor: "rgb(211,211,211)",
                         color: "rgb(255,99,163)",
                         locations: [
-                        {
-                            fragments : [
                             {
-                                start: 1,
-                                end: 56,
-                                tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
-                            },
-                            {
-                                start: 70,
-                                end: 130,
-                                tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                fragments: [
+                                    {
+                                        start: 1,
+                                        end: 56,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ1 - XYZ56"
+                                    },
+                                    {
+                                        start: 70,
+                                        end: 130,
+                                        tooltipContent: "Type: domain 1<br>Range: XYZ70 - XYZ130"
+                                    }
+                                ]
                             }
-                            ]
-                        }
                         ]
                     }
                 ]
@@ -136,7 +148,7 @@ useEffect(()=>
                         shape: 'circle', // supported shapes rectangle|bridge|diamond|chevron|catFace|triangle|wave|hexagon|pentagon|circle|arrow|doubleBar,
                         locations: [
                             {
-                                fragments : [
+                                fragments: [
                                     {
                                         start: 5,
                                         end: 5,
@@ -159,7 +171,7 @@ useEffect(()=>
                         color: "rgb(255,99,163)", // Default colour value for all fragments in this track
                         locations: [
                             {
-                                fragments : [
+                                fragments: [
                                     {
                                         start: 5,
                                         end: 5,
@@ -189,8 +201,8 @@ useEffect(()=>
 
             }
         ],
-        // sequenceConservation: seqConservationData, // Set this property to display your own sequence conservation data. Refer comments at the top for data structure.
-        // variants: variationData, // Set this property to display your own variation data. Refer comments at the top for data structure.
+        sequenceConservation: seqConservationData, // Set this property to display your own sequence conservation data. Refer comments at the top for data structure.
+        variants: variationData, // Set this property to display your own variation data. Refer comments at the top for data structure.
         legends: {
             alignment: 'right', // expected values 'left', 'right' or 'center'
             data: { // Legend Row, key is used as the row label
@@ -213,27 +225,20 @@ useEffect(()=>
             }
         }
     };
-    setProkinoData(customData);
-      }
-  res();
-}
-,[]);
 
-
-
-//uniprotId = P00533
+    //uniprotId = P00533
     //TODO: for now, we ge a list of ids and select the first one, instead, we should select a specific one marked by the API
     //let uniprotId = uniprotIds[0]["v"].filter(x => x.toLowerCase().includes("prokino:uniprot"))[0];
     //uniprotId = uniprotId.split("-")[1];
     //console.log(uniprotId);
-  
-    
+
+
     // return <protvista-pdb accession={uniprotId} id="pv1" ></protvista-pdb>
     // if (!seqConservationData || !variationData || !prokinoData)
     //     return <p>Loading..</p>; 
-    if (!prokinoData)
-    return <p>Loading 122..</p>
-    return <protvista-pdb custom-data="true" accession={uniprotId} id="pv1"></protvista-pdb>;
+    if (!seqConservationData || !variationData)
+        return <p>Fetching data from APIs ...</p>
+    return <protvista-pdb ref={pv1} custom-data="true" accession={uniprotId} id="pv1"></protvista-pdb>;
 
-    
+
 }
