@@ -16,6 +16,7 @@ const [uniprotId,setUniprotId] = useState(null);
 const [uniprotIdRequired,setUniprotIdRequired] = useState(false);
 
 const [prokinoData,setProkinoData] = useState(null);
+const [sequenceData,setSequenceData] = useState(null);
 
 //For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
 
@@ -45,6 +46,8 @@ useEffect(() => {
     getProkinoData();
 }, [entityClass]);
 
+
+
 useEffect(() => {
     const getUniprotId = async () => {
 
@@ -56,6 +59,21 @@ useEffect(() => {
     if (uniprotIdRequired)
         getUniprotId();
 }, [uniprotIdRequired]);
+
+
+useEffect(() => {
+    const getSequenceData = async () => {
+        // if (!value)
+        //     return <></>
+        let seqName = 'prokino:Human_EGFR-UniProt_Seq'
+        let url = `${BASE_ENDPOINT}/sequence/${seqName}`;
+        const result = await axios.get(url);
+        console.log("sequence API data",result.data)
+        setSequenceData(result.data);
+    };
+    if (!sequenceData)
+        getSequenceData();
+}, [entityClass]);
     
     if (!prokinoData)
         return <Layout>Loading ...</Layout>;
@@ -84,8 +102,11 @@ useEffect(() => {
 
     switch (entityClass) {
         case "prokino:Protein":
+            if (!sequenceData)
+                return "Loading..."
             return <ProteinItem
                 uniprotId={uniprotId}
+                sequenceData={sequenceData}
                 localName={prokinoData.localName}
                 datatypeProperties={dataProps}
                 objectProperties={objProps}

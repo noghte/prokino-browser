@@ -8,6 +8,8 @@ import '../../styles/proteinitems.css'
 import { Helmet } from "react-helmet";
 import MolstarViewer from './pdbe/MolstarViewer'
 import AnnotationViewer from './pdbe/AnnotationViewer';
+import SequenceViewer from './SequenceViewer'
+
 
 
 // import '../../styles/icon-lib.css'
@@ -17,12 +19,13 @@ import AnnotationViewer from './pdbe/AnnotationViewer';
 
 // import FeatureViewer from './FeatureViewer';
 
-export default function ProteinItem({uniprotId,localName, datatypeProperties,objectProperties,incomingObjectProperties})
+export default function ProteinItem({uniprotId,sequenceData, localName, datatypeProperties,objectProperties,incomingObjectProperties})
 {
     // console.log("datatypeProperties",datatypeProperties);
     // console.log("objectProperties",objectProperties);
     // console.log("incomingObjectProperties", incomingObjectProperties);
     console.log("uniprot from proteinitem",uniprotId);
+    console.log("sequence",sequenceData);
     
    return (<Layout>
             <Helmet>
@@ -195,9 +198,15 @@ export default function ProteinItem({uniprotId,localName, datatypeProperties,obj
                                             <div>
                                                 <PairLinks values={objectProperties["prokino:hasSequence"]} entityClass={"prokino:Sequence"} />
                                             </div>
+                                            <div>
+                                                <SequenceViewer sequence={sequenceData?sequenceData.residues:""} />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                
+
+
                                 <div className="fieldset-pair-container">
                                     <div className="favth-clearfix">
                                         <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Structure</div>
@@ -205,13 +214,26 @@ export default function ProteinItem({uniprotId,localName, datatypeProperties,obj
                                             <div>
                                                 {/* <StructureViewer uniprotId={objectProperties["prokino:hasSequence"] } /> */}
                                                 <MolstarViewer viewerWidth={900} viewerHeight={300} uniprotId={uniprotId} />
-                                                <AnnotationViewer 
+                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="fieldset-pair-container">
+                                    <div className="favth-clearfix">
+                                        <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Annotations</div>
+                                        <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                            <div>
+                                            <AnnotationViewer 
                                                     prokinoSequence={objectProperties["prokino:hasSequence"]} 
+                                                    sequenceData={sequenceData?sequenceData:""} 
                                                     uniprotId={uniprotId} />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 
                                 {/* <div className="fieldset-pair-container">
                                     <div className="favth-clearfix">

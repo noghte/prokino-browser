@@ -68,7 +68,7 @@ export default function SequenceViewer({sequence}){
                         {sequence ? sequence.toString().length:0}
                     </span>
                     </div>
-                    <input className="inputSearchSeq form-control pull-right" type="text" style={{width:'30%', marginLeft:'2rem'}} placeholder="Search in sequence.." />
+                    {/* <input className="inputSearchSeq form-control pull-right" type="text" style={{width:'30%', marginLeft:'2rem'}} placeholder="Search in sequence.." /> */}
             </div>
             
             <div className="scroller" style={{overflow:'auto',whiteSpace: 'nowrap',paddingRight:'20px',marginRight:'10px'}}>
