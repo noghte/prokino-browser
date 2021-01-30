@@ -23,9 +23,15 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
     useEffect(() => { //when uniprotId is ready, call APIs to get data for the annotation viewer tracks
 
         const getPdbBestStructure = async () => {
-            let url = `${PDB_BESTSTRUCTURE_ENDPOINT}/${uniprotId}`;
-            const result = await axios.get(url);
-            setPdbBest(result.data);
+
+            if (uniprotId === "O94768") 
+                setPdbBest("6zjf");
+            else
+            {
+                let url = `${PDB_BESTSTRUCTURE_ENDPOINT}/${uniprotId}`;
+                const result = await axios.get(url);
+                setPdbBest(result.data);
+            }
         };
 
         const callVariationAPI = async () => {
