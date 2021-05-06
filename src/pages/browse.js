@@ -5,10 +5,12 @@ import GenericItem from '../components/prokino/GenericItem';
 import SequenceItem from '../components/prokino/SequenceItem';
 import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
+import { graphql } from 'gatsby';
 
-export default function Browse({location}) { //{protein}
+export default function Browse({location, data}) { //{protein}
 const urlParams = new URLSearchParams(location.hash.substring(1));
 
+const [cifFileNames,setCifFileNames] = useState(null);
 const [entityClass,setEntityClass] = useState(urlParams.get("c"));
 const [value,setValue] = useState(urlParams.get("v"));
 console.log(entityClass);    
@@ -27,6 +29,17 @@ const [sequenceData,setSequenceData] = useState(null);
 
 // if (!data) 
 //     return <Layout>Loading...</Layout>
+useEffect(()=>{
+    if (data.allFile && data.allFile.nodes.length > 0)
+    {
+        let cifFileArr = data["allFile"]["nodes"].filter(f=> f.name.split("_")[2] === uniprotId);
+        if (cifFileArr.length > 0) //filename found successfully
+        {
+            cifFileArr.push({name:"clear",relativeDirectory:"clear"})
+            setCifFileNames(cifFileArr)
+        }
+    }
+},[uniprotId])
 
 useEffect(() => {
     const getProkinoData = async () => {
@@ -102,7 +115,7 @@ useEffect(() => {
 
     switch (entityClass) {
         case "prokino:Protein":
-            if (!sequenceData)
+            if (!sequenceData || !cifFileNames)
                 return "Loading..."
             return <ProteinItem
                 uniprotId={uniprotId}
@@ -111,7 +124,7 @@ useEffect(() => {
                 datatypeProperties={dataProps}
                 objectProperties={objProps}
                 incomingObjectProperties={incomingProps}
-            />;
+                cifFileNames={cifFileNames} />;
 
         case "prokino:Sequence":
             return <SequenceItem data={prokinoData} localName={value} />;
@@ -129,3 +142,23 @@ useEffect(() => {
 
 
 }
+// export const query = graphql`
+// query cifFileNameByGlob($prot: String = "*Q9UBF8*") {
+//     allFile(filter: {name: {glob: $prot}}) {
+//       nodes {
+//         name
+//       }
+//     }
+//   }
+// `
+ 
+export const query = graphql`
+query cifFileNames {
+    allFile(sort: {fields: name}) {
+      nodes {
+        name
+        relativeDirectory
+      }
+    }
+  }
+  `

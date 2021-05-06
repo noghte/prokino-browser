@@ -21,6 +21,7 @@
     "gatsby-source-filesystem": "^2.9.0",
     "gatsby-transformer-sharp": "^2.10.1",
     "litemol": "^2.4.2",
+    "ncats-protvista-viewer": "git+https://github.com/prokino/protvista-viewer.git",
     "pdbe-molstar": "^1.1.0-dev.4",
     "postcss": "^8.2.4",
     "prop-types": "^15.7.2",

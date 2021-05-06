@@ -1,0 +1,17 @@
+{
+    "O75385": [
+        {
+            "pdb_id": "6mnh",
+            "is_prediction": false
+        },
+        {
+            "pdb_id": "4wno",
+            "is_prediction": true
+        },
+        {
+            "pdb_id": "5ci7",
+            "is_prediction": false
+        }
+
+    ]
+}

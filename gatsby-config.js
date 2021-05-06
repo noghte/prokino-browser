@@ -15,6 +15,10 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
+      options: {
+        name: `cif`,
+        path: `${__dirname}/static/cif`,
+      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

@@ -77,11 +77,16 @@ export default function SearchResults({searchText,searchOption}) {
       setResults(result.data.hits);
     };
     res();
-  }, [searchText]);
+  }, [offset]);
+  
+  useEffect(()=>{
+    setOffset(0);
+  },[searchText]);
 
   const goToPage = (e) => {
     e.preventDefault();
     let val = offset + Number(e.target.name);
+    // console.log(val);
     if (val < 0) val = 0;
     setOffset(val);
     //props.onChange(Number(offset));
@@ -121,9 +126,9 @@ export default function SearchResults({searchText,searchOption}) {
                 <a className="page-link" onClick={goToPage} name="-1" tabIndex="-1">Previous</a>
               </li>
 
-              <li className={`page-item${getStatus(pageOffset)}`}><a onClick={goToPage} name="0" className="page-link" >{pageOffset + 1}</a></li>
+              {/* <li className={`page-item${getStatus(pageOffset)}`}><a onClick={goToPage} name="0" className="page-link" >{pageOffset + 1}</a></li>
               <li className={`page-item${getStatus(pageOffset + 1)}`}><a onClick={goToPage} name="1" className="page-link" >{pageOffset + 2}</a></li>
-              <li className={`page-item${getStatus(pageOffset + 1)}`}><a onClick={goToPage} name="2" className="page-link" >{pageOffset + 3}</a></li>
+              <li className={`page-item${getStatus(pageOffset + 2)}`}><a onClick={goToPage} name="2" className="page-link" >{pageOffset + 3}</a></li> */}
 
               <li className={`page-item${getStatus(pageOffset + 1)}`}>
                 <a className="page-link" onClick={goToPage} name="1">Next</a>

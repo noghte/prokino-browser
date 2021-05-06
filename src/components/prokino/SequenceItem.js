@@ -6,7 +6,7 @@ import {showList,getValues} from '../StringHelper';
 
 export default function SequenceItem({data,localName})
 {
-    console.log(data);
+    // console.log(data);
     const sequence= data.residues;
     
     //domain sample
