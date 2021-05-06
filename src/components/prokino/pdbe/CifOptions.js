@@ -35,8 +35,9 @@ export default function CifOptions(props) {
 
   let cifList = props.options && props.options.length > 0
   && props.options.map((item, i) => {
+    const nameParts = item.name.split("_");
   return (
-    <option key={i} value={`/cif/${item["relativeDirectory"]}/${item["name"]}.cif`}>{item.name}</option>
+    <option key={i} value={`/cif/${item["relativeDirectory"]}/${item["name"]}.cif`}>Uniprot Id: {nameParts[2]}, Pdb Id: {nameParts[5]}</option>
   )
 }, this);
 
