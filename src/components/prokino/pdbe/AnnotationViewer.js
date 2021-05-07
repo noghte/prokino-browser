@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default function AnnotationViewer({ prokinoSequence, sequenceData, uniprotId }) { //{protein}
 
+    console.log(sequenceData)
     const [seqConservationData, setSeqConservationData] = useState(null);//an array of start and end position, in each cell of the array, there is another array of amino acids
     const [variationData, setVariationData] = useState(null);
     const [ligandBindingSites, setLigandBindingSites] = useState(null);
