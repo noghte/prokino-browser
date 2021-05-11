@@ -45,8 +45,8 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
             <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
             <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
             <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
-            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding"></script>
-            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js"></script>
+            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
 
         </Helmet>
         <div id="fav-container" className="fav-container">
@@ -57,6 +57,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
 
                         <Card>
                             <Card.Header onClick={() => setIsOpenProtein(!isOpenProtein)}
+                                style={{cursor:'pointer'}}
                                 aria-controls="featured_substitutions"
                                 aria-expanded={isOpenProtein}>
                                 <h3 className="details-title">
@@ -259,7 +260,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                         <div className="favth-clearfix">
                                             <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Associated w/ Diseases</div>
                                             <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
-                                                <div>
+                                                <div  style={{maxHeight: '200px', overflow: 'auto'}}>
                                                     <PairLinks values={objectProperties["prokino:associatedWith"]} />
                                                 </div>
                                             </div>
@@ -271,6 +272,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                         </Card>
                         <Card>
                             <Card.Header onClick={() => setIsOpenFeaturedSubstitutions(!isOpenFeaturedSubstitutions)}
+                                style={{cursor:'pointer'}}
                                 aria-controls="featured_substitutions"
                                 aria-expanded={isOpenFeaturedSubstitutions}>
                                 <h5 className="details-title">
@@ -286,7 +288,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Missense</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass={"prokino:Missense"} />
                                                         </div>
@@ -294,9 +296,10 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                                 </div>
                                             </div>
                                             <div className="fieldset-pair-container">
+                                                <br />
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Coding Silent</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass={"prokino:CodingSilent"} />
                                                         </div>
@@ -304,9 +307,10 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                                 </div>
                                             </div>
                                             <div className="fieldset-pair-container">
+                                                <br />
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Nonsense</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:Nonsense" />
                                                         </div>
@@ -318,9 +322,10 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                                 Insertions
                                 </h5>
                                             <div className="fieldset-pair-container">
+                                                <br />
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Insertion in Frame</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:InsertionInframe" />
                                                         </div>
@@ -330,7 +335,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Insertion Frameshift</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:InsertionFrameshift" />
                                                         </div>
@@ -344,7 +349,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Deletion in Frame</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:DeletionInframe" />
                                                         </div>
@@ -354,7 +359,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Deletion Frameshift</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:DeletionFrameshift" />
                                                         </div>
@@ -369,7 +374,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Complex Insertion in Frame</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:ComplexInsertionInframe" />
                                                         </div>
@@ -379,7 +384,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Complex Deletion in Frame</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:ComplexDeletionInframe" />
                                                         </div>
@@ -389,7 +394,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Complex Frameshift</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:ComplexFrameshift" />
                                                         </div>
@@ -399,7 +404,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Compound Substitution</div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:CompoundSubstitution" />
 
@@ -415,7 +420,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Other Mutation</span></div>
-                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
+                                                    <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{maxHeight: '200px', overflow: 'auto'}}>
                                                         <div>
                                                             <PairLinks values={objectProperties["prokino:hasMutation"]} entityClass="prokino:OtherMutation" />
                                                         </div>
@@ -431,7 +436,9 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                         </Card>
                         <Card>
                             <Card.Header onClick={() => setIsOpenPathways(!isOpenPathways)}
+                                style={{cursor:'pointer'}}
                                 aria-controls="pathways"
+                                style={{cursor:'pointer'}}
                                 aria-expanded={isOpenPathways}>
                                 <h5 className="details-title">
                                     Pathways
@@ -481,6 +488,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
                         </Card>
                         <Card>
                             <Card.Header onClick={() => setIsOpenReferences(!isOpenReferences)}
+                                style={{cursor:'pointer'}}
                                 aria-controls="references"
                                 aria-expanded={isOpenReferences}>
                                 <h3 className="details-title">

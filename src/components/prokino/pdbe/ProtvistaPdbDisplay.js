@@ -9,7 +9,7 @@ export default function ProtvistaPdbDisplay({ data, uniprotId }) { //{protein}
     },[])
     if (data)
         {
-            return <protvista-pdb ref={pv1} custom-data="true" accession={uniprotId} id="pv1"></protvista-pdb>;
+            return <protvista-pdb ref={pv1} custom-data="true" accession={uniprotId} id="pv1" ></protvista-pdb>;
         }
    else return <p>Component loading...</p>
     

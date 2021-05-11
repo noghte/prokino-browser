@@ -5,12 +5,12 @@ import axios from 'axios';
 
 export default function AnnotationViewer({ prokinoSequence, sequenceData, uniprotId }) { //{protein}
 
-    console.log(sequenceData)
     const [seqConservationData, setSeqConservationData] = useState(null);//an array of start and end position, in each cell of the array, there is another array of amino acids
     const [variationData, setVariationData] = useState(null);
     const [ligandBindingSites, setLigandBindingSites] = useState(null);
     const [interactionInterfaces, setInteractionInterfaces] = useState(null);
     const [annotations, setAnnotations] = useState(null);
+    const [functionalFeatures, setFunctionalFeatures] = useState(null);
     const [structuralMotifs, setStructuralMotifs] = useState(null);
     const [sequenceMotifs, setSequenceMotifs] = useState(null);
     const [subdomains, setSubdomains] = useState(null);
@@ -110,12 +110,6 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
                     fragment.start = parseInt(motifData.startLocation)
                     fragment.end = parseInt(motifData.endLocation)
                     fragment.tooltipContent = motifData.name;
-                    // fragment.pdbs = [
-                    //       "2m20",
-                    //       "3gop",
-                    //       "1z9i",
-                    //       "2n5s"
-                    //     ]
                     fragments.push(fragment)
                 });
                 dataItem.locations.push({ "fragments": fragments })
@@ -155,36 +149,23 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
                 return r;
             }, {});
             const values = Object.values(results);
-            // let mainTracks = []
-            // let subdomainsTracks = []
 
             let mainTrack = { labelType: "text", label: "Sequence Motifs", data: [] };
-            let subdomainsTrack = { labelType: "text", label: "Subdomains", data: [] };
+            let subdomainsTrack = { labelType: "text", label: "Subdomains", data: [] }; //subdomains are part of sequence motifs
 
             //creating tracks
             values.forEach(value => {
-                //let track = {labelType:"text", label:smf.name,data:[]};
-                let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(165, 85, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [] }
-
-                //setting fragments for each track (smf)
                 let fragments = []
-                let fragment = {start: parseInt(value.startLocation), end:parseInt(value.endLocation),tooltipContent:value.name}
+                let fragment = { start: parseInt(value.startLocation), end: parseInt(value.endLocation), tooltipContent: value.name }
                 fragments.push(fragment);
-                dataItem.locations.push({ "fragments": fragments })
+                let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(165, 85, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [{ "fragments": fragments }] }
+
                 if (value.name.toLowerCase().includes("subdomain"))
                     subdomainsTrack.data.push(dataItem);
                 else
                     mainTrack.data.push(dataItem);
-
-                //tracks.push(track)
             })
-            // if (mainTrack.length>0)
-            //     mainTracks.push(mainTrack)
-            
-            // if (subdomainsTrack.length>0)
-            //     subdomainsTracks.push(subdomainsTrack)
 
-            //structuralMotifTrack.data.push(dataItem)
             const mainTrackLegends = {
                 "alignment": "right",
                 "data": {
@@ -202,10 +183,10 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
             const subdomainsTrackLegends = {
                 "alignment": "right",
                 "data": {
-                    "SequenceMotifs": [
+                    "Subdomains": [
                         {
-                            "color": "rgb(84,100,128)",
-                            "text": "SequenceMotifs"
+                            "color": "rgb(14,120,28)",
+                            "text": "Subdomains"
                         }
                     ]
                 }
@@ -215,10 +196,55 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
 
         }
 
+        const handleFunctionalFeatures = () => {
+            const functionalFeaturesData = sequenceData.functionalfeatures;
+            //returning an array grouped by localName
+            const results = functionalFeaturesData.reduce(function (r, a) {
+                const key = a.localName || 'unknown';
+                r[key] = r[key] || [];
+                r[key] = a;
+
+                // a['motifData'] = a['motifData'] || [];
+                // a.motifs.forEach(sm => {
+                //     a['motifData'].push(sequenceData.motifs.filter(item => item.localName === sm)[0]);
+                // });
+                return r;
+            }, {});
+            const values = Object.values(results);
+
+
+            /////
+            let track = { labelType: "text", label: "Functional Features", data: [] };
+
+            values.forEach(value => {
+                let fragments = []
+                let fragment = { start: parseInt(value.startLocation), end: parseInt(value.endLocation), tooltipContent: value.name }
+                let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [{ "fragments": fragments }] }
+                fragments.push(fragment);
+                track.data.push(dataItem);
+            })
+
+            const legends = {
+                "alignment": "right",
+                "data": {
+                    "FunctionalFeatures": [
+                        {
+                            "color": "rgb(180,98,98)",
+                            "text": "FunctionalFeatures"
+                        }
+                    ]
+                }
+            }
+            let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: [track] }
+            setFunctionalFeatures(superTrack);
+
+
+        }
         //:uniprotId
         if (uniprotId) {
             //if (!pdbBest) getPdbBestStructure();
             //from prokino
+            if (!functionalFeatures) handleFunctionalFeatures();
             if (!structuralMotifs) handleStructuralMotifs();
             if (!sequenceMotifs) handleSequenceMotifs();
 
@@ -294,12 +320,17 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
         return <p>Fetching annotations ...</p>
     if (!customData)
         return <p>Loading...</p>;
-    if (sequenceMotifs)
-        customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+
     if (subdomains)
         customData.tracks = customData.tracks.concat(subdomains.tracks);
     if (structuralMotifs)
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
+    if (sequenceMotifs)
+        customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+    if (functionalFeatures)
+        customData.tracks = customData.tracks.concat(functionalFeatures.tracks);
+    
+
     if (ligandBindingSites !== "NA")
         customData.tracks = customData.tracks.concat(ligandBindingSites.tracks);
     if (interactionInterfaces !== "NA")
