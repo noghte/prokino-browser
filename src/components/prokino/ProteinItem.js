@@ -45,7 +45,7 @@ export default function ProteinItem({ uniprotId, sequenceData, localName, dataty
             <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
             <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
             <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
-            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding"></script>
             <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js"></script>
 
         </Helmet>

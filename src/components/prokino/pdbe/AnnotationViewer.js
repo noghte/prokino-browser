@@ -13,10 +13,11 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
     const [annotations, setAnnotations] = useState(null);
     const [structuralMotifs, setStructuralMotifs] = useState(null);
     const [sequenceMotifs, setSequenceMotifs] = useState(null);
+    const [subdomains, setSubdomains] = useState(null);
 
     const [customData, setCustomData] = useState(null);
     const [pdbBest, setPdbBest] = useState(null);
-    
+
     useEffect(() => { //when uniprotId is ready, call APIs to get data for the annotation viewer tracks
 
         const getPdbBestStructure = async () => {
@@ -26,11 +27,11 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
             else {
                 let url = `${PDB_BESTSTRUCTURE_ENDPOINT}/${uniprotId}`;
                 try {
-                const result = await axios.get(url);
-                setPdbBest(result.data);
+                    const result = await axios.get(url);
+                    setPdbBest(result.data);
                 }
-                catch (error){
-                  setPdbBest("NA");
+                catch (error) {
+                    setPdbBest("NA");
                 }
             }
         };
@@ -95,51 +96,51 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
             }, {});
             const smfValues = Object.values(results);
             let tracks = []
-            
-            let track = {labelType:"text", label:"Structural Motifs",data:[]};
+
+            let track = { labelType: "text", label: "Structural Motifs", data: [] };
             //creating tracks
-            smfValues.forEach(smf=>{
-              //let track = {labelType:"text", label:smf.name,data:[]};
-              let dataItem = {accession:smf.name, labelType:"text", label:smf.name, color: "rgb(65, 105, 225)", type:"UniProt range", tooltipContent: smf.localName, labelTooltip: smf.name, locations:[]}
-              
-              //setting fragments for each track (smf)
-              let fragments = []
-              smf.motifData.forEach(motifData=>{
-                let fragment = {}
-                fragment.start = parseInt(motifData.startLocation)
-                fragment.end = parseInt(motifData.endLocation)
-                fragment.tooltipContent = motifData.name;
-                // fragment.pdbs = [
-                //       "2m20",
-                //       "3gop",
-                //       "1z9i",
-                //       "2n5s"
-                //     ]
-                fragments.push(fragment)
-              });
-              dataItem.locations.push({"fragments":fragments})
-              track.data.push(dataItem);
-              //tracks.push(track)
+            smfValues.forEach(smf => {
+                //let track = {labelType:"text", label:smf.name,data:[]};
+                let dataItem = { accession: smf.name, labelType: "text", label: smf.name, color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: smf.localName, labelTooltip: smf.name, locations: [] }
+
+                //setting fragments for each track (smf)
+                let fragments = []
+                smf.motifData.forEach(motifData => {
+                    let fragment = {}
+                    fragment.start = parseInt(motifData.startLocation)
+                    fragment.end = parseInt(motifData.endLocation)
+                    fragment.tooltipContent = motifData.name;
+                    // fragment.pdbs = [
+                    //       "2m20",
+                    //       "3gop",
+                    //       "1z9i",
+                    //       "2n5s"
+                    //     ]
+                    fragments.push(fragment)
+                });
+                dataItem.locations.push({ "fragments": fragments })
+                track.data.push(dataItem);
+                //tracks.push(track)
             })
             tracks.push(track)
             //structuralMotifTrack.data.push(dataItem)
             const legends = {
                 "alignment": "right",
                 "data": {
-                  "StructuralMotifs": [
-                    {
-                      "color": "rgb(128,128,128)",
-                      "text": "StructuralMotifs"
-                    }
-                  ]
+                    "StructuralMotifs": [
+                        {
+                            "color": "rgb(160,28,128)",
+                            "text": "StructuralMotifs"
+                        }
+                    ]
                 }
-              }
-            let superTrack = { largeLabels: true, sequence:sequenceData.residues,length:sequenceData.residues.length, legends:legends, tracks:tracks} 
+            }
+            let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: tracks }
             setStructuralMotifs(superTrack);
-        
+
         }
 
-          const handleSequenceMotifs = () => {
+        const handleSequenceMotifs = () => {
             const sequenceMotifsData = sequenceData.motifs.filter(m => m.entityClass == "prokino:SequenceMotif");
             //returning an array grouped by localName
             const results = sequenceMotifsData.reduce(function (r, a) {
@@ -148,49 +149,70 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
                 r[key] = a;
 
                 a['motifData'] = a['motifData'] || [];
-                a.motifs.forEach(sm => {
+                a.motifs && a.motifs.forEach(sm => {
                     a['motifData'].push(sequenceData.motifs.filter(item => item.localName === sm)[0]);
                 });
                 return r;
             }, {});
             const values = Object.values(results);
-            let tracks = []
-            
-            let track = {labelType:"text", label:"Structural Motifs",data:[]};
+            // let mainTracks = []
+            // let subdomainsTracks = []
+
+            let mainTrack = { labelType: "text", label: "Sequence Motifs", data: [] };
+            let subdomainsTrack = { labelType: "text", label: "Subdomains", data: [] };
+
             //creating tracks
-            values.forEach(value=>{
-              //let track = {labelType:"text", label:smf.name,data:[]};
-              let dataItem = {accession:value.name, labelType:"text", label:value.name, color: "rgb(65, 105, 225)", type:"UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations:[]}
-              
-              //setting fragments for each track (smf)
-              let fragments = []
-              value.motifData.forEach(residue=>{
-                let fragment = {}
-                fragment.start = parseInt(residue.startLocation)
-                fragment.end = parseInt(residue.endLocation)
-                fragment.tooltipContent = residue.name;
-                fragments.push(fragment)
-              });
-              dataItem.locations.push({"fragments":fragments})
-              track.data.push(dataItem);
-              //tracks.push(track)
+            values.forEach(value => {
+                //let track = {labelType:"text", label:smf.name,data:[]};
+                let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(165, 85, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [] }
+
+                //setting fragments for each track (smf)
+                let fragments = []
+                let fragment = {start: parseInt(value.startLocation), end:parseInt(value.endLocation),tooltipContent:value.name}
+                fragments.push(fragment);
+                dataItem.locations.push({ "fragments": fragments })
+                if (value.name.toLowerCase().includes("subdomain"))
+                    subdomainsTrack.data.push(dataItem);
+                else
+                    mainTrack.data.push(dataItem);
+
+                //tracks.push(track)
             })
-            tracks.push(track)
+            // if (mainTrack.length>0)
+            //     mainTracks.push(mainTrack)
+            
+            // if (subdomainsTrack.length>0)
+            //     subdomainsTracks.push(subdomainsTrack)
+
             //structuralMotifTrack.data.push(dataItem)
-            const legends = {
+            const mainTrackLegends = {
                 "alignment": "right",
                 "data": {
-                  "SequenceMotifs": [
-                    {
-                      "color": "rgb(84,100,128)",
-                      "text": "StructuralMotifs"
-                    }
-                  ]
+                    "SequenceMotifs": [
+                        {
+                            "color": "rgb(84,100,128)",
+                            "text": "SequenceMotifs"
+                        }
+                    ]
                 }
-              }
-            let superTrack = { largeLabels: true, sequence:sequenceData.residues,length:sequenceData.residues.length, legends:legends, tracks:tracks} 
-            setSequenceMotifs(superTrack);
-        
+            }
+            let superTrackSequenceMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
+            setSequenceMotifs(superTrackSequenceMotifs);
+
+            const subdomainsTrackLegends = {
+                "alignment": "right",
+                "data": {
+                    "SequenceMotifs": [
+                        {
+                            "color": "rgb(84,100,128)",
+                            "text": "SequenceMotifs"
+                        }
+                    ]
+                }
+            }
+            let superTrackSubdomains = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: subdomainsTrackLegends, tracks: [subdomainsTrack] }
+            setSubdomains(superTrackSubdomains);
+
         }
 
         //:uniprotId
@@ -198,7 +220,7 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
             //if (!pdbBest) getPdbBestStructure();
             //from prokino
             if (!structuralMotifs) handleStructuralMotifs();
-            //if (!sequenceMotifs) handleSequenceMotifs();
+            if (!sequenceMotifs) handleSequenceMotifs();
 
             //api calls
             if (!seqConservationData) callSequenceConservationAPI();
@@ -271,11 +293,13 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
     if (!annotations)
         return <p>Fetching annotations ...</p>
     if (!customData)
-      return <p>Loading...</p>;
+        return <p>Loading...</p>;
     if (sequenceMotifs)
-      customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+        customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+    if (subdomains)
+        customData.tracks = customData.tracks.concat(subdomains.tracks);
     if (structuralMotifs)
-      customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
+        customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
     if (ligandBindingSites !== "NA")
         customData.tracks = customData.tracks.concat(ligandBindingSites.tracks);
     if (interactionInterfaces !== "NA")
@@ -283,7 +307,7 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
     if (annotations !== "NA")
         customData.tracks = customData.tracks.concat(annotations.tracks);
 
-      
+
     return <ProtvistaPdbDisplay data={customData} uniprotId={uniprotId} />
 
 }
