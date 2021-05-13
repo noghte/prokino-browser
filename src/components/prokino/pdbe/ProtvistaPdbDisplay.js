@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import * as d3 from 'd3';
 
 export default function ProtvistaPdbDisplay({ data, uniprotId }) { //{protein}
     let pv1 = useRef(null)
