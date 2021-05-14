@@ -58,12 +58,66 @@ export default function SearchResults({searchText,searchOption}) {
   const [totalHits, setTotalHits] = useState(null);
   const [pageOffset, setPageOffset] = useState(null);
 
+  
   if (searchOption)
       searchOption = "&" + searchOption;
   else
       searchOption = ""
-  const pageSize = 10;
+  const pageSize = 40;
 
+  function immutableMove(arr, from, to) {
+    return arr.reduce((prev, current, idx, self) => {
+      if (from === to) {
+        prev.push(current);
+      }
+      if (idx === from) {
+        return prev;
+      }
+      if (from < to) {
+        prev.push(current);
+      }
+      if (idx === to) {
+        prev.push(self[from]);
+      }
+      if (from > to) {
+        prev.push(current);
+      }
+      return prev;
+    }, []);
+  }
+  function sortByName(field) {
+    return function(a, b) {
+      return (a[field] > b[field]) - (a[field] < b[field])
+    };
+  }
+  function sortByHuman(field) {
+    return function(a, b) {
+      if (a[field].toLowerCase().includes("human")) {
+        return -1;
+      } else 
+        return 1;
+    };
+  }
+  function sortBySearchTermIn(field,searchText) {
+    return function(a, b) {
+      if (a[field].toLowerCase().includes("human") && a[field].toLowerCase().includes(searchText.toLowerCase())) {
+        return -1;
+      } else if (a[field].toLowerCase().includes("human"))
+        return 0;
+      return 1;
+    };
+  }
+  function sortResults(items,searchText)
+  {
+    
+    let sorted = [...items] 
+    sorted.sort(sortByName('entity'));
+    sorted.sort(sortByHuman('entity'));
+    sorted.sort(sortBySearchTermIn('entity',searchText));
+
+    return sorted;
+
+  }
   useEffect(() => {
     const res = async () => {
       let search_query = buildSearchTerm(searchText);
@@ -71,10 +125,11 @@ export default function SearchResults({searchText,searchOption}) {
 
       const result = await axios.get(url);
       const data = result.data;
-      console.log(data);
+      console.log("search results",data);
       setTotalHits(data.totalHits);
       setPageOffset(data.pageOffset);
-      setResults(result.data.hits);
+      const sortedResults = sortResults(result.data.hits,searchText)
+      setResults(sortedResults);
     };
     res();
   }, [offset]);

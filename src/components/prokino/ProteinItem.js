@@ -17,7 +17,6 @@ import Collapse from 'react-bootstrap/Collapse';
 import { Link, withPrefix } from "gatsby"
 import CifOptions from './pdbe/CifOptions';
 
-
 // import '../../styles/icon-lib.css'
 // import '../../styles/sprite.css'
 // import '../../styles/rtheme.css'
@@ -32,6 +31,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     // console.log("uniprot from proteinitem", uniprotId);
     // console.log("sequence", sequenceData);
     const [sequenceData,setSequenceData] = useState(null);
+
     const [isOpenProtein, setIsOpenProtein] = React.useState(true);
     const [isOpenFeaturedSubstitutions, setIsOpenFeaturedSubstitutions] = React.useState(false);
     const [isOpenPathways, setIsOpenPathways] = React.useState(false);
@@ -45,34 +45,28 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
         const getSequenceData = async () => {
             // if (!value)
             //     return <></>
-            let seqName = 'prokino:Human_EGFR-UniProt_Seq'
+            let seqNames = objectProperties["prokino:hasSequence"][0]["v"].filter(s=>s.toLowerCase().includes("uniprot") && s.toLowerCase().includes("prokino"));
+            if (!seqNames)
+                console.log("no sequence found in " + seqNames[0]["v"])
+            let seqName = seqNames[0] //'prokino:Human_EGFR-UniProt_Seq'
             let url = `${BASE_ENDPOINT}/sequence/${seqName}`;
             const result = await axios.get(url);
-            console.log("sequence API data",result.data)
+            // console.log("sequence API data",result.data)
             setSequenceData(result.data);
         };
         if (!sequenceData)
             getSequenceData();
     }, []);
-    function handleScriptInject({ scriptTags }) {
-        if (scriptTags) {
-            const scriptTag = scriptTags[0];
-            scriptTag.onload = this.handleOnLoad;
-        }
-    }
-
+    
     if (!sequenceData)
         return <Layout>Loading sequence data...</Layout>
     return (<Layout>
-        <Helmet  script={[{ src: 'https://d3js.org/d3.v4.min.js' }]}
-    // Helmet doesn't support `onload` in script objects so we have to hack in our own
-    onChangeClientState={(newState, addedTags) => handleScriptInject(addedTags)}>
+        <Helmet>
             {/* <script src={withPrefix('../../js/ncats-protvista-viewer-bundle.js')} type="text/javascript" /> */}
             <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
-            <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
-            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
+
             <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
-            {/* <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script> */}
+            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
             <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
 
         </Helmet>

@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { withPrefix } from "gatsby";
+import { Helmet } from "react-helmet";
+
 //import { PDB_BESTSTRUCTURE_ENDPOINT } from '../../../components/prokino/Endpoints'
 // import axios from 'axios';
 // import SelectInput from '@material-ui/core/Select/SelectInput';
@@ -26,6 +28,10 @@ if (cifPath)
     if (cifPath == "/cif/clear/clear.cif")
         return <p>Cleared</p>
     return <div style={{ width: viewerWidth, height: viewerHeight, position: 'relative' }}>
+        <Helmet>
+            <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
+        </Helmet>
     <pdbe-molstar id="pdbeMolstarComponent"
         custom-data-url={withPrefix(cifPath)}
         custom-data-format="cif"

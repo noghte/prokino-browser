@@ -197,6 +197,8 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
         }
 
         const handleFunctionalFeatures = () => {
+            if (!sequenceData.functionalfeatures)
+                return
             const functionalFeaturesData = sequenceData.functionalfeatures;
             //returning an array grouped by localName
             const results = functionalFeaturesData.reduce(function (r, a) {
@@ -250,7 +252,7 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
 
             //api calls
             if (!seqConservationData) callSequenceConservationAPI();
-            if (!variationData) callVariationAPI();
+            //if (!variationData) callVariationAPI();
             if (!ligandBindingSites) callLigandBindingSitesAPI();
             if (!interactionInterfaces) callInteractionInterfaces();
             if (!annotations) callAnnotationsAPI();
@@ -260,7 +262,7 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
 
     //When everythin is ready (API calls done, and web-component instance is recognized)
     useEffect(() => {
-        if (!customData && sequenceData && variationData && seqConservationData)
+        if (!customData && sequenceData && seqConservationData) //variationData
             setCustomData({
                 displayNavigation: true, // Set to false to hide navigation scale
                 displaySequence: true, // Set to false to hide sequence track
@@ -310,8 +312,8 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
 
     if (!seqConservationData)
         return <p>Fetching conservation data ...</p>
-    if (!variationData)
-        return <p>Fetching variation data ...</p>
+    // if (!variationData)
+    //     return <p>Fetching variation data ...</p>
     if (!ligandBindingSites)
         return <p>Fetching ligand binding sites ...</p>
     if (!interactionInterfaces)
