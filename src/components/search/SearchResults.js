@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from "gatsby"
 import axios from 'axios';
 import { ENTITY_ENDPOINT } from '../prokino/Endpoints';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 function splitText(text) {
   //The parenthesis in the regex creates a captured group within the quotes
@@ -45,26 +46,31 @@ function buildSearchTerm(text, mode = "match_all") {
   //newtokens.push(tokens[tokens.length-1]); //add the last item skipped in the for loop
   return newtokens.join('+');
 }
-function getStatus(pageNumber) {
-  if (pageNumber < 0)
-    return " disabled";
-  return " ";
-}
 
 
-export default function SearchResults({searchText,searchOption}) {
+
+export default function SearchResults(props) {
   const [offset, setOffset] = useState(0);
   const [results, setResults] = useState([]);
   const [totalHits, setTotalHits] = useState(null);
   const [pageOffset, setPageOffset] = useState(null);
-
-  
-  if (searchOption)
-      searchOption = "&" + searchOption;
-  else
-      searchOption = ""
+  let searchOptions = !props.searchOption ? "" : "&" + props.searchOption;
+  // if (searchOption)
+  //     searchOptions = "&" + props.searchOption;
+  // else
+  //     searchOptions = ""
   const pageSize = 40;
-
+  function getStatusPreviousPage(pageNumber) {
+    if (pageNumber < 0)
+      return " disabled";
+    return " ";
+  }
+  function getStatusNextPage(pageNumber)
+  {
+    if (pageSize * (pageNumber-1)> (totalHits - pageSize))
+      return " disabled";
+  
+  }
   function immutableMove(arr, from, to) {
     return arr.reduce((prev, current, idx, self) => {
       if (from === to) {
@@ -86,57 +92,67 @@ export default function SearchResults({searchText,searchOption}) {
     }, []);
   }
   function sortByName(field) {
-    return function(a, b) {
+    return function (a, b) {
       return (a[field] > b[field]) - (a[field] < b[field])
     };
   }
   function sortByHuman(field) {
-    return function(a, b) {
+    return function (a, b) {
       if (a[field].toLowerCase().includes("human")) {
         return -1;
-      } else 
+      } else
         return 1;
     };
   }
-  function sortBySearchTermIn(field,searchText) {
-    return function(a, b) {
-      if (a[field].toLowerCase().includes("human") && a[field].toLowerCase().includes(searchText.toLowerCase())) {
+  function sortBySearchTermIn(field) {
+    return function (a, b) {
+      if (a[field].toLowerCase().includes("human") && a[field].toLowerCase().includes(props.searchText.toLowerCase())) {
         return -1;
       } else if (a[field].toLowerCase().includes("human"))
         return 0;
       return 1;
     };
   }
-  function sortResults(items,searchText)
-  {
-    
-    let sorted = [...items] 
+  function sortResults(items) {
+
+    let sorted = [...items]
     sorted.sort(sortByName('entity'));
     sorted.sort(sortByHuman('entity'));
-    sorted.sort(sortBySearchTermIn('entity',searchText));
+    sorted.sort(sortBySearchTermIn('entity', props.searchText));
 
     return sorted;
 
   }
   useEffect(() => {
     const res = async () => {
-      let search_query = buildSearchTerm(searchText);
-      let url = `${ENTITY_ENDPOINT}?contains=${search_query}&pagesize=${pageSize}&pageoffset=${offset}${searchOption}`;
+      let search_query = buildSearchTerm(props.searchText);
+      let url = `${ENTITY_ENDPOINT}?contains=${search_query}&pagesize=${pageSize}&pageoffset=${offset}${searchOptions}`;
 
-      const result = await axios.get(url);
-      const data = result.data;
-      console.log("search results",data);
-      setTotalHits(data.totalHits);
-      setPageOffset(data.pageOffset);
-      const sortedResults = sortResults(result.data.hits,searchText)
-      setResults(sortedResults);
+      try {
+        const result = await axios.get(url);
+        const data = result.data;
+        console.log("search results", data);
+        setTotalHits(data.totalHits);
+        setPageOffset(data.pageOffset);
+        if (result.data && result.data.totalHits > 0) {
+          const sortedResults = sortResults(result.data.hits)
+          setResults(sortedResults);
+        }
+        else
+          setResults(null);
+      } catch (error) {
+        setResults(null);
+      }
+
+      props.onFinishedSearch(true);
     };
-    res();
+    if (props.triggerSearch)
+      res();
   }, [offset]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setOffset(0);
-  },[searchText]);
+  }, [props.searchText]);
 
   const goToPage = (e) => {
     e.preventDefault();
@@ -144,6 +160,7 @@ export default function SearchResults({searchText,searchOption}) {
     // console.log(val);
     if (val < 0) val = 0;
     setOffset(val);
+    props.onFinishedSearch(false);
     //props.onChange(Number(offset));
   };
 
@@ -177,7 +194,7 @@ export default function SearchResults({searchText,searchOption}) {
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
 
-              <li className={`page-item${getStatus(pageOffset - 1)}`}>
+              <li className={`page-item${getStatusPreviousPage(pageOffset - 1)}`}>
                 <a className="page-link" onClick={goToPage} name="-1" tabIndex="-1">Previous</a>
               </li>
 
@@ -185,7 +202,7 @@ export default function SearchResults({searchText,searchOption}) {
               <li className={`page-item${getStatus(pageOffset + 1)}`}><a onClick={goToPage} name="1" className="page-link" >{pageOffset + 2}</a></li>
               <li className={`page-item${getStatus(pageOffset + 2)}`}><a onClick={goToPage} name="2" className="page-link" >{pageOffset + 3}</a></li> */}
 
-              <li className={`page-item${getStatus(pageOffset + 1)}`}>
+              <li className={`page-item${getStatusNextPage(pageOffset + 1)}`}>
                 <a className="page-link" onClick={goToPage} name="1">Next</a>
               </li>
             </ul>

@@ -7,74 +7,70 @@ import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby';
 
-export default function Browse({location, data}) { //{protein}
-const urlParams = new URLSearchParams(location.hash.substring(1));
+export default function Browse({ location, data }) { //{protein}
+    const urlParams = new URLSearchParams(location.hash.substring(1));
 
-const [cifFileNames,setCifFileNames] = useState(null);
-const [entityClass,setEntityClass] = useState(urlParams.get("c"));
-const [value,setValue] = useState(urlParams.get("v"));
-console.log(entityClass);    
-const [uniprotId,setUniprotId] = useState(null);
-const [uniprotIdRequired,setUniprotIdRequired] = useState(false);
+    const [cifFileNames, setCifFileNames] = useState(null);
+    const [entityClass, setEntityClass] = useState(urlParams.get("c"));
+    const [value, setValue] = useState(urlParams.get("v"));
+    console.log(entityClass);
+    const [uniprotId, setUniprotId] = useState(null);
+    const [uniprotIdRequired, setUniprotIdRequired] = useState(false);
 
-const [prokinoData,setProkinoData] = useState(null);
+    const [prokinoData, setProkinoData] = useState(null);
 
-//For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
+    //For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
 
 
-// const { data, error } = useSWR(url, fetcher);
-// if (error) 
-//     return <Layout>Failed to load</Layout>
+    // const { data, error } = useSWR(url, fetcher);
+    // if (error) 
+    //     return <Layout>Failed to load</Layout>
 
-// if (!data) 
-//     return <Layout>Loading...</Layout>
-useEffect(()=>{
-    if (data.allFile && data.allFile.nodes.length > 0)
-    {
-        let cifFileArr = data["allFile"]["nodes"].filter(f=> f.name.split("_")[2] === uniprotId);
-        if (cifFileArr.length > 0) //filename found successfully
-        {
-            cifFileArr.push({name:"clear",relativeDirectory:"clear"})
-            setCifFileNames(cifFileArr)
+    // if (!data) 
+    //     return <Layout>Loading...</Layout>
+    useEffect(() => {
+        if (data.allFile && data.allFile.nodes.length > 0) {
+            let cifFileArr = data["allFile"]["nodes"].filter(f => f.name.split("_")[2] === uniprotId);
+            if (cifFileArr.length > 0) //filename found successfully
+            {
+                cifFileArr.push({ name: "clear", relativeDirectory: "clear" })
+                setCifFileNames(cifFileArr)
+            }
         }
-    }
-},[uniprotId])
+    }, [uniprotId])
 
-useEffect(() => {
-    const getProkinoData = async () => {
-        // if (!value)
-        //     return <></>
+    useEffect(() => {
+        const getProkinoData = async () => {
+            // if (!value)
+            //     return <></>
 
-        const resourceType = entityClass === 'prokino:Sequence' ? 'sequence' : 'entity';
-        let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
+            const resourceType = entityClass === 'prokino:Sequence' ? 'sequence' : 'entity';
+            let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
 
-        const result = await axios.get(url);
-        console.log("prokino",result.data)
-        setProkinoData(result.data);
-        
-        if (result.data.entityClass === "prokino:Protein")
-            setUniprotIdRequired(true);
-    };
-    getProkinoData();
-}, [entityClass]);
+            const result = await axios.get(url);
+            console.log("prokino", result.data)
+            setProkinoData(result.data);
 
-
-
-useEffect(() => {
-    const getUniprotId = async () => {
-
-        let url = `${BASE_ENDPOINT}/protein/${value}/identifier`;
-        const result = await axios.get(url);
-        setUniprotId(result.data.identifier);
-        console.log("uniprot from browse.js",uniprotId);
-    };
-    if (uniprotIdRequired)
-        getUniprotId();
-}, [uniprotIdRequired]);
+            if (result.data.entityClass === "prokino:Protein")
+                setUniprotIdRequired(true);
+        };
+        getProkinoData();
+    }, [entityClass]);
 
 
 
-    
+    useEffect(() => {
+        const getUniprotId = async () => {
+
+            let url = `${BASE_ENDPOINT}/protein/${value}/identifier`;
+            const result = await axios.get(url);
+            setUniprotId(result.data.identifier);
+            console.log("uniprot from browse.js", uniprotId);
+        };
+        if (uniprotIdRequired)
+            getUniprotId();
+    }, [uniprotIdRequired]);
+
     if (!prokinoData)
         return <Layout>Loading ...</Layout>;
 
@@ -102,8 +98,9 @@ useEffect(() => {
 
     switch (entityClass) {
         case "prokino:Protein":
-            if (!cifFileNames)
-                return "Loading CIF files..."
+            // if (!cifFileNames)
+            //     return "Loading CIF files..."
+            
             return <ProteinItem
                 uniprotId={uniprotId}
                 localName={prokinoData.localName}
@@ -137,7 +134,7 @@ useEffect(() => {
 //     }
 //   }
 // `
- 
+
 export const query = graphql`
 query cifFileNames {
     allFile(sort: {fields: name}) {

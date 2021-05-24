@@ -23,7 +23,6 @@
     "gatsby-transformer-sharp": "^3.5.0",
     "litemol": "^2.4.2",
     "ncats-protvista-viewer": "git+https://github.com/prokino/protvista-viewer.git",
-    "pdbe-molstar": "^1.1.0-dev.4",
     "postcss": "^8.2.15",
     "prop-types": "^15.7.2",
     "protvista-uniprot": "^2.6.1",
