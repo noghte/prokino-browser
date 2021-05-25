@@ -27,7 +27,7 @@ export default function MolstarViewer({ viewerWidth = 900, viewerHeight = 300, u
     useEffect(() => {
         setTimeout(() => {
             setIsReady(true)
-        }, 1000)
+        }, 1500)
         setIsReady(false)
     }, [cifPath]);
     if (!isReady)
@@ -58,7 +58,7 @@ export default function MolstarViewer({ viewerWidth = 900, viewerHeight = 300, u
 
     else //if (uniprotId) // do not call pdb api
     {
-        return <div>Not Available</div>
+        return <div></div>
     }
 
 

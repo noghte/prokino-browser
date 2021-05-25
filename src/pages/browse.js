@@ -33,7 +33,7 @@ export default function Browse({ location, data }) { //{protein}
             let cifFileArr = data["allFile"]["nodes"].filter(f => f.name.split("_")[2] === uniprotId);
             if (cifFileArr.length > 0) //filename found successfully
             {
-                cifFileArr.push({ name: "clear", relativeDirectory: "clear" })
+                cifFileArr.unshift({ name: "Select a molecule ...", relativeDirectory: "" })
                 setCifFileNames(cifFileArr)
             }
         }

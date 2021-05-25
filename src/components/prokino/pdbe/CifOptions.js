@@ -36,7 +36,8 @@ export default function CifOptions(props) {
   let cifList = props.options && props.options.length > 0
   && props.options.map((item, i) => {
     const nameParts = item.name.split("_");
-    const optionLabel = nameParts.length>5 ? `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`:`Clear`;
+    // const optionLabel = nameParts.length>5 ? `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`:`Clear`;
+    const optionLabel = i ===0? `Select a molecule ...`: `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`;
   return (
     <option key={i} value={`/cif/${item["relativeDirectory"]}/${item["name"]}.cif`}>{optionLabel}</option>
   )
