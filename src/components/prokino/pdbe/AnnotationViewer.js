@@ -75,12 +75,16 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
             let url = `https://www.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/annotations/${uniprotId}`;
             try {
                 const result = await axios.get(url);
-                setAnnotations(result.data[`${uniprotId}`]);
+                let annotRes = result.data[`${uniprotId}`];
+                //remove the Curated regularity motifs track, because we already have it
+                annotRes.tracks = annotRes.tracks.filter(item => item.label != "Curated regularity motifs")
+                setAnnotations(annotRes);
             }
             catch (error) { setAnnotations("NA"); }
         }
 
         const handleStructuralMotifs = () => {
+            //TODO: check sequenceData.motifs not null
             const structuralMotifsData = sequenceData.motifs.filter(m => m.entityClass == "prokino:StructuralMotif");
             //returning an array grouped by localName
             const results = structuralMotifsData.reduce(function (r, a) {
@@ -323,21 +327,21 @@ export default function AnnotationViewer({ prokinoSequence, sequenceData, unipro
     if (!customData)
         return <p>Loading...</p>;
 
-    if (subdomains)
-        customData.tracks = customData.tracks.concat(subdomains.tracks);
+    
     if (structuralMotifs)
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
     if (sequenceMotifs)
         customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+    if (subdomains)
+        customData.tracks = customData.tracks.concat(subdomains.tracks);        
+    if (ligandBindingSites && ligandBindingSites !== "NA")
+        customData.tracks = customData.tracks.concat(ligandBindingSites.tracks);    
     if (functionalFeatures)
         customData.tracks = customData.tracks.concat(functionalFeatures.tracks);
     
-
-    if (ligandBindingSites !== "NA")
-        customData.tracks = customData.tracks.concat(ligandBindingSites.tracks);
-    if (interactionInterfaces !== "NA")
+    if (interactionInterfaces && interactionInterfaces !== "NA")
         customData.tracks = customData.tracks.concat(interactionInterfaces.tracks);
-    if (annotations !== "NA")
+    if (annotations && annotations !== "NA")
         customData.tracks = customData.tracks.concat(annotations.tracks);
 
 

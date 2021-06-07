@@ -13,7 +13,7 @@ export default function Browse({ location, data }) { //{protein}
     const [cifFileNames, setCifFileNames] = useState(null);
     const [entityClass, setEntityClass] = useState(urlParams.get("c"));
     const [value, setValue] = useState(urlParams.get("v"));
-    console.log(entityClass);
+    console.log("entityClass",entityClass);
     const [uniprotId, setUniprotId] = useState(null);
     const [uniprotIdRequired, setUniprotIdRequired] = useState(false);
 
@@ -48,9 +48,8 @@ export default function Browse({ location, data }) { //{protein}
             let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
 
             const result = await axios.get(url);
-            console.log("prokino", result.data)
             setProkinoData(result.data);
-
+            console.log("Prokino API result", result.data)
             if (result.data.entityClass === "prokino:Protein")
                 setUniprotIdRequired(true);
         };
