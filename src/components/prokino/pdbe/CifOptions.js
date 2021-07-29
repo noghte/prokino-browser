@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CifOptions(props) {
-  
+
   // const [selectedOption, setSelectedOption] = React.useState(props.options[0]);
   function selectedOptionChanged(event) {
     //const cifPath = `/cif/${cif["relativeDirectory"]}/${cif["name"]}.cif`// cif/Atypical_Atypical_O00329_PK3CD/Atypical_Atypical_O00329_PK3CD_r0.cif
@@ -34,21 +34,21 @@ export default function CifOptions(props) {
 
 
   let cifList = props.options && props.options.length > 0
-  && props.options.map((item, i) => {
-    const nameParts = item.name.split("_");
-    // const optionLabel = nameParts.length>5 ? `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`:`Clear`;
-    const optionLabel = i ===0? `Select a 3D structure ...`: `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`;
-  return (
-    <option key={i} value={`/cif/${item["relativeDirectory"]}/${item["name"]}.cif`}>{optionLabel}</option>
-  )
-}, this);
+    && props.options.map((item, i) => {
+      //const nameParts = item.name.split("_");
+      // const optionLabel = nameParts.length>5 ? `Uniprot Id: ${nameParts[2]}, Pdb Id: ${nameParts[5]}`:`Clear`;
+      const optionLabel = i === 0 ? `Select a 3D structure ...` : item.name;
+      return (
+        <option key={i} value={[`/cif/${item["filename"]}`, item.uniprotId] }>{optionLabel}</option>
+      )
+    }, this);
 
   return (
     <div className="col-auto">
       <select className="form-control " id="cifsearch1" value={props.cifPath} onChange={selectedOptionChanged}>
-          {cifList}
-    </select>
-      
+        {cifList}
+      </select>
+
     </div>
   );
 }

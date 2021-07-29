@@ -37,11 +37,17 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [isOpenPathways, setIsOpenPathways] = React.useState(false);
     const [isOpenReferences, setIsOpenReferences] = React.useState(false);
     const [selectedCif, setSelectedCif] = React.useState(cifFileNames && cifFileNames.length>0 ? `/cif/${cifFileNames[0]["relativeDirectory"]}/${cifFileNames[0]["name"]}.cif`: "");
-    const handleCifChange = (cifPath) => {
-        if (cifPath.includes("/cif//")) // no path (e.g., first item in dropdown selected)
+    const [cifUniprotId,setCifUniprotId] = useState(null);
+
+    const handleCifChange = (cifCallback) => {
+        let path = cifCallback.split(",")[0]
+        if (path.includes("/cif//")) // no path (e.g., first item in dropdown selected)
             setSelectedCif("")
         else   
-            setSelectedCif(cifPath);
+            setSelectedCif(path);
+
+        if (cifCallback.split(",")[1])
+            setCifUniprotId(cifCallback.split(",")[1])
       };
 
       useEffect(() => {
@@ -70,7 +76,8 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
 
             <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
             <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
-            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
+            <script src={withPrefix('js/protvista-uniprot.js')} type="text/javascript" />
+            {/* <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script> */}
             {/* <script type="text/javascript" src="https://unpkg.com/protvista-pdb-prokino@2.0.1-2/dist/protvista-pdb-prokino-2.0.1.js" crossorigin="anonymous"></script> */}
 
         </Helmet>
@@ -272,10 +279,13 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                             <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Annotations</div>
                                             <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
                                                 <div>
-                                                    <AnnotationViewer
+                                                 <AnnotationViewer
                                                         prokinoSequence={objectProperties["prokino:hasSequence"]}
                                                         sequenceData={sequenceData ? sequenceData : ""}
-                                                        uniprotId={uniprotId} />
+                                                        uniprotId={cifUniprotId}
+                                                        selectedCif={selectedCif}
+                                                        />
+                                                    
                                                 </div>
                                             </div>
                                         </div>
