@@ -77,7 +77,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
             <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
             <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
             <script src={withPrefix('js/protvista-uniprot.js')} type="text/javascript" />
-            {/* <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script> */}
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
             {/* <script type="text/javascript" src="https://unpkg.com/protvista-pdb-prokino@2.0.1-2/dist/protvista-pdb-prokino-2.0.1.js" crossorigin="anonymous"></script> */}
 
         </Helmet>

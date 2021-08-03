@@ -6920,7 +6920,8 @@ export default function Browse({ location, data }) { //{protein}
                         "relevantPDBs": [
                             "3cok-B",
                             "4yur-A",
-                            "3cok-A"
+                            "3cok-A",
+                            "model-v1"
                         ]
                     },
                     {
@@ -7379,6 +7380,7 @@ query cifFileNames {
     allFile(sort: {fields: name}) {
       nodes {
         name
+        relativeDirectory
       }
     }
   }
