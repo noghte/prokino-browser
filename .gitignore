@@ -70,3 +70,4 @@ yarn-error.log
 
 update-prokino.sh
 *.zip
+.vscode
