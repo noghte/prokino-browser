@@ -214,6 +214,68 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
 
     }
 
+    const handleLigandMotifs = () => {
+        const sequenceMotifsData = sequenceData.ligandmotifs.filter(m => m.entityClass == "prokino:SequenceMotif");
+        //returning an array grouped by localName
+        const results = sequenceMotifsData.reduce(function (r, a) {
+            const key = a.localName || 'unknown';
+            r[key] = r[key] || [];
+            r[key] = a;
+
+            a['motifData'] = a['motifData'] || [];
+            a.motifs && a.motifs.forEach(sm => {
+                a['motifData'].push(sequenceData.motifs.filter(item => item.localName === sm)[0]);
+            });
+            return r;
+        }, {});
+        const values = Object.values(results);
+
+        let mainTrack = { labelType: "text", label: "Ligand Motifs", data: [] };
+        let subdomainsTrack = { labelType: "text", label: "Subdomains", data: [] }; //subdomains are part of sequence motifs
+
+        //creating tracks
+        values.forEach(value => {
+            let fragments = []
+            let fragment = { start: parseInt(value.startLocation), end: parseInt(value.endLocation), tooltipContent: value.name }
+            fragments.push(fragment);
+            let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(165, 85, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [{ "fragments": fragments }] }
+
+            if (value.name.toLowerCase().includes("subdomain"))
+                subdomainsTrack.data.push(dataItem);
+            else
+                mainTrack.data.push(dataItem);
+        })
+
+        const mainTrackLegends = {
+            "alignment": "right",
+            "data": {
+                "SequenceMotifs": [
+                    {
+                        "color": "rgb(104,10,228)",
+                        "text": "LigandMotifs"
+                    }
+                ]
+            }
+        }
+        let superTrackSequenceMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
+        setSequenceMotifs(superTrackSequenceMotifs);
+
+        const subdomainsTrackLegends = {
+            "alignment": "right",
+            "data": {
+                "Subdomains": [
+                    {
+                        "color": "rgb(94,220,128)",
+                        "text": "Subdomains"
+                    }
+                ]
+            }
+        }
+        let superTrackSubdomains = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: subdomainsTrackLegends, tracks: [subdomainsTrack] }
+        setSubdomains(superTrackSubdomains);
+
+    }
+
     const handleFunctionalFeatures = () => {
         if (!sequenceData.functionalfeatures)
             return
@@ -335,6 +397,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             handleFunctionalFeatures();
             handleStructuralMotifs();
             handleSequenceMotifs();
+            handleLigandMotifs();
 
             //api calls
             callSequenceConservationAPI();

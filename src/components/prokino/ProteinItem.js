@@ -16,7 +16,7 @@ import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 import { Link, withPrefix } from "gatsby"
 import CifOptions from './pdbe/CifOptions';
-
+import AppendHead from 'react-append-head';
 // import '../../styles/icon-lib.css'
 // import '../../styles/sprite.css'
 // import '../../styles/rtheme.css'
@@ -35,6 +35,8 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [isOpenProtein, setIsOpenProtein] = React.useState(true);
     const [isOpenFeaturedSubstitutions, setIsOpenFeaturedSubstitutions] = React.useState(false);
     const [isOpenPathways, setIsOpenPathways] = React.useState(false);
+    const [isOpenGeneExpressions, setIsOpenGeneExpressions] = React.useState(false);
+    const [isOpenLigandActivities, setIsOpenLigandActivities] = React.useState(false);
     const [isOpenReferences, setIsOpenReferences] = React.useState(false);
     const [selectedCif, setSelectedCif] = React.useState(cifFileNames && cifFileNames.length>0 ? `/cif/${cifFileNames[0]["relativeDirectory"]}/${cifFileNames[0]["name"]}.cif`: "");
     const [cifUniprotId,setCifUniprotId] = useState(null);
@@ -70,17 +72,17 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     if (!sequenceData)
         return <Layout>Loading sequence data...</Layout>
     return (<Layout>
-        <Helmet>
+        <AppendHead>
             {/* <script src={withPrefix('../../js/ncats-protvista-viewer-bundle.js')} type="text/javascript" /> */}
-            <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
+            <script name="es5adapter" order="0" src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 
-            <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
-            <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
+            <link name="ebifonts" order="1" rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
+            <script name="d3v4" order="0" src="https://d3js.org/d3.v4.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
             {/* <script src={withPrefix('js/protvista-uniprot.js')} type="text/javascript" /> */}
-            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
+            <script name="protvistapdb" order="2" type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/protvista-pdb-2.0.1.js" crossorigin="anonymous"></script>
             {/* <script type="text/javascript" src="https://unpkg.com/protvista-pdb-prokino@2.0.1-2/dist/protvista-pdb-prokino-2.0.1.js" crossorigin="anonymous"></script> */}
 
-        </Helmet>
+        </AppendHead>
         <div id="fav-container" className="fav-container">
             {/* remove if do not need margins  */}
             <div className="favth-container">
@@ -197,7 +199,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                             <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Present In</div>
                                             <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
                                                 <div>
-                                                    <PairLinks values={objectProperties["prokino:presentIn"]} entityClass="prokino:Organism" />
+                                                    <PairLinks values={objectProperties["prokino:presentIn"]} entityClass="prokino:Organism" key="organism_links" />
                                                 </div>
                                             </div>
                                         </div>
@@ -207,7 +209,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                             <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Also Present In</div>
                                             <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
                                                 <div>
-                                                    <GenericList protein={localName} seperator=", " apiClassName="organisms" />
+                                                    <GenericList protein={localName} seperator=", " apiClassName="organisms" key="organism_generic" />
                                                 </div>
                                             </div>
                                         </div>
@@ -514,6 +516,54 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                                     </div>
                                                 </div>
                                             </div>
+
+                                        </fieldset>
+                                    </div>
+                                </Card.Body>
+                            </Collapse>
+
+                        </Card>
+                        <Card>
+                            <Card.Header onClick={() => setIsOpenGeneExpressions(!isOpenGeneExpressions)}
+                                style={{cursor:'pointer'}}
+                                aria-controls="geneexpressions"
+                                style={{cursor:'pointer'}}
+                                aria-expanded={isOpenGeneExpressions}>
+                                <h5 className="details-title">
+                                    Gene Expressions
+                                </h5>
+                            </Card.Header>
+                            <Collapse in={isOpenGeneExpressions}>
+                                <Card.Body>
+                                    <div className="favth-clearfix" id="geneexpressions">
+                                        <fieldset className="fieldset-details">
+                                            <legend>Gene Expressions</legend>
+
+                   
+
+                                        </fieldset>
+                                    </div>
+                                </Card.Body>
+                            </Collapse>
+
+                        </Card>
+                        <Card>
+                            <Card.Header onClick={() => setIsOpenLigandActivities(!isOpenLigandActivities)}
+                                style={{cursor:'pointer'}}
+                                aria-controls="ligandactivities"
+                                style={{cursor:'pointer'}}
+                                aria-expanded={isOpenLigandActivities}>
+                                <h5 className="details-title">
+                                    Ligand Activities
+                                </h5>
+                            </Card.Header>
+                            <Collapse in={isOpenLigandActivities}>
+                                <Card.Body>
+                                    <div className="favth-clearfix" id="ligandactivities">
+                                        <fieldset className="fieldset-details">
+                                            <legend>Ligand Activities</legend>
+
+                   
 
                                         </fieldset>
                                     </div>
