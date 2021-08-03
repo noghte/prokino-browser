@@ -215,6 +215,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     }
 
     const handleLigandMotifs = () => {
+        if (!sequenceData.ligandmotifs)
+            return;
         const sequenceMotifsData = sequenceData.ligandmotifs.filter(m => m.entityClass == "prokino:SequenceMotif");
         //returning an array grouped by localName
         const results = sequenceMotifsData.reduce(function (r, a) {
