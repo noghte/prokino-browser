@@ -10278,7 +10278,7 @@ export default function Browse({ location, data }) { //{protein}
             );
 
             alphaFolds.forEach(af => {
-                let relatedFile = cifFilesOnDisk.filter(f => f.name.split("_")[f.name.split("_").length - 1] == af)
+                let relatedFile = cifFilesOnDisk.filter(f => f.name == af.split(".")[0])
                 let fname = ""
                 const uniprotId = currentProtein.UniProt_ID;
                 const organism = currentProtein.organism;
