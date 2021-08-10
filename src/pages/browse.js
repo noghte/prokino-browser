@@ -60,31 +60,27 @@ export default function Browse({ location, data }) { //{protein}
                         })
 
                 });
-                //Assume we have one alphaFold for each protein
+                sv.relevantAlphaFoldPredicts && sv.relevantAlphaFoldPredicts.forEach(af => {
+                    let relatedFile = cifFilesOnDisk.filter(f => f.name == af.split(".")[0])
+                    let fname = ""
+                    const uniprotId = currentProtein.UniProt_ID;
+                    const organism = currentProtein.organism;
+                    if (relatedFile.length > 0) //file found
+                        fname = relatedFile[0]["name"] + ".cif";
+                    cifFileArr.push({
+                        name: "AlphaFold:" + af + ", uniprot: " + uniprotId + ", organism: " + organism,
+                        pdbId: af,
+                        uniprotId: uniprotId,
+                        organismName: organism,
+                        filename: fname
+                    })
+    
+                })
 
-
-
-                // console.log("organism", sv.organism)
             }
             );
 
-            const alphaFolds = currentProtein.relevantAlphaFoldPredicts;
-            alphaFolds && alphaFolds.forEach(af => {
-                let relatedFile = cifFilesOnDisk.filter(f => f.name == af.split(".")[0])
-                let fname = ""
-                const uniprotId = currentProtein.UniProt_ID;
-                const organism = currentProtein.organism;
-                if (relatedFile.length > 0) //file found
-                    fname = relatedFile[0]["name"] + ".cif";
-                cifFileArr.push({
-                    name: "AlphaFold:" + af + ", uniprot: " + uniprotId + ", organism: " + organism,
-                    pdbId: af,
-                    uniprotId: uniprotId,
-                    organismName: organism,
-                    filename: fname
-                })
 
-            })
             //let cifFileArr = data["allFile"]["nodes"].filter(f => f.name.split("_")[2] === uniprotId);
             //let cifFileArr = av.content.filter(f => f.name.split("_")[2] === uniprotId);
             //Read relevant PDBs to list CIF files
