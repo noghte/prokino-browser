@@ -6,7 +6,6 @@ import SequenceItem from '../components/prokino/SequenceItem';
 import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby';
-//import av from '../../content/annotationviewerdata.json'
 
 export default function Browse({ location, data }) { //{protein}
     const av = {
@@ -10226,7 +10225,7 @@ export default function Browse({ location, data }) { //{protein}
     const [uniprotId, setUniprotId] = useState(null);
     const [uniprotIdRequired, setUniprotIdRequired] = useState(false);
 
-    const [annotationViewerData, setAnnotationViewerData] = useState(null);
+    // const [annotationViewerData, setAnnotationViewerData] = useState(null);
     const [prokinoData, setProkinoData] = useState(null);
 
     //For now, any resource is an entity except prokino:Sequence, that is sequence. If more resource types added, this line should be converted to a switch-case statement.
@@ -10251,7 +10250,6 @@ export default function Browse({ location, data }) { //{protein}
             let cifFileArr = []
             const currentProtein = filteredArray[0];
             const avSvwr = currentProtein.structureViewerData; //list of Pdbs from structure viewer data
-            const alphaFolds = currentProtein.relevantAlphaFoldPredicts;
             avSvwr.forEach(sv => {
                 console.log("unpiprotId", sv.unpiprotId)
                 sv.relevantPDBs.forEach(pdb => {
@@ -10277,6 +10275,7 @@ export default function Browse({ location, data }) { //{protein}
             }
             );
 
+            const alphaFolds = currentProtein.relevantAlphaFoldPredicts;
             alphaFolds.forEach(af => {
                 let relatedFile = cifFilesOnDisk.filter(f => f.name == af.split(".")[0])
                 let fname = ""
@@ -10333,10 +10332,10 @@ export default function Browse({ location, data }) { //{protein}
     //     getAnnotationViewerData();
     // }, []);
 
-    useEffect(() => {
-        if (annotationViewerData)
-            console.log(annotationViewerData)
-    }, [annotationViewerData]);
+    // useEffect(() => {
+    //     if (annotationViewerData)
+    //         console.log(annotationViewerData)
+    // }, [annotationViewerData]);
 
 
     useEffect(() => {
