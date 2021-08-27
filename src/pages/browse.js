@@ -9,7 +9,6 @@ import { graphql } from 'gatsby';
 
 export default function Browse({ location, data }) { //{protein}
     let av = require(`../../static/av.json`);
-
     const urlParams = new URLSearchParams(location.hash.substring(1));
     const [cifFileNames, setCifFileNames] = useState(null);
     const [entityClass, setEntityClass] = useState(urlParams.get("c"));

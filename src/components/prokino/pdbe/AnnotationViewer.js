@@ -3,8 +3,7 @@ import { PDB_BESTSTRUCTURE_ENDPOINT } from '../../../components/prokino/Endpoint
 import ProtvistaPdbDisplay from './ProtvistaPdbDisplay'
 import axios from 'axios';
 
-export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif }) { //{protein}
-
+export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif, ligandMappings }) { //{protein}
     const [isReady, setIsReady] = React.useState(true);
 
     //Tell the component to setIsready to false for a few seconds when selectedCif changes
@@ -25,6 +24,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     const [functionalFeatures, setFunctionalFeatures] = useState(null);
     const [structuralMotifs, setStructuralMotifs] = useState(null);
     const [sequenceMotifs, setSequenceMotifs] = useState(null);
+    const [ligandMotifs, setLigandMotifs] = useState(null);
     const [subdomains, setSubdomains] = useState(null);
 
     const [customData, setCustomData] = useState(null);
@@ -215,6 +215,15 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     }
 
     const handleLigandMotifs = () => {
+        function getLigandMappings(loc) {
+            if (ligandMappings && ligandMappings.data[loc]) {
+                const oldPosition = ligandMappings.data[loc].split(':')[0];
+                const newPosition = ligandMappings.data[loc].split(':')[1];
+                if (ligandMappings.data[oldPosition])
+                    return parseInt(newPosition)
+            }
+            return parseInt(loc)
+        }
         if (!sequenceData.ligandmotifs)
             return;
         const sequenceMotifsData = sequenceData.ligandmotifs.filter(m => m.entityClass == "prokino:SequenceMotif");
@@ -238,7 +247,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         //creating tracks
         values.forEach(value => {
             let fragments = []
-            let fragment = { start: parseInt(value.startLocation), end: parseInt(value.endLocation), tooltipContent: value.name }
+            let fragment = { start: getLigandMappings(value.startLocation), end: getLigandMappings(value.endLocation), tooltipContent: value.name }
             fragments.push(fragment);
             let dataItem = { accession: value.name, labelType: "text", label: value.name, color: "rgb(165, 85, 225)", type: "UniProt range", tooltipContent: value.localName, labelTooltip: value.name, locations: [{ "fragments": fragments }] }
 
@@ -251,7 +260,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         const mainTrackLegends = {
             "alignment": "right",
             "data": {
-                "SequenceMotifs": [
+                "LigandMotifs": [
                     {
                         "color": "rgb(104,10,228)",
                         "text": "LigandMotifs"
@@ -259,8 +268,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
                 ]
             }
         }
-        let superTrackSequenceMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
-        setSequenceMotifs(superTrackSequenceMotifs);
+        let superLigandMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
+        setLigandMotifs(superLigandMotifs);
 
         const subdomainsTrackLegends = {
             "alignment": "right",
@@ -399,7 +408,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             handleFunctionalFeatures();
             handleStructuralMotifs();
             handleSequenceMotifs();
-            handleLigandMotifs();
+            // handleLigandMotifs();
 
             //api calls
             callSequenceConservationAPI();

@@ -30,6 +30,18 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     // console.log("incomingObjectProperties", incomingObjectProperties);
     // console.log("uniprot from proteinitem", uniprotId);
     // console.log("sequence", sequenceData);
+    let ligandMappings = null;
+    try {
+         ligandMappings = require(`/static/ligand-motif-mappings/pdb-to-uniprot-${uniprotId}.json`)
+
+    } catch (e) {
+        if (e.code !== 'MODULE_NOT_FOUND') {
+            console.log(`No mapping for ${uniprotId} found.`)
+        }
+    }
+
+    console.log("ligandMappings",ligandMappings)
+
     const [sequenceData,setSequenceData] = useState(null);
 
     const [isOpenProtein, setIsOpenProtein] = React.useState(true);
@@ -286,6 +298,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                                         sequenceData={sequenceData ? sequenceData : ""}
                                                         uniprotId={cifUniprotId}
                                                         selectedCif={selectedCif}
+                                                        ligandMappings={ligandMappings}
                                                         />
                                                     
                                                 </div>
