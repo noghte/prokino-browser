@@ -408,7 +408,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             handleFunctionalFeatures();
             handleStructuralMotifs();
             handleSequenceMotifs();
-            // handleLigandMotifs();
+            handleLigandMotifs();
 
             //api calls
             callSequenceConservationAPI();
