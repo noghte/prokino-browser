@@ -215,17 +215,22 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     }
 
     const handleLigandMotifs = () => {
-        function getLigandMappings(loc) {
-            if (ligandMappings && ligandMappings.data[loc]) {
-                const oldPosition = ligandMappings.data[loc].split(':')[0];
-                const newPosition = ligandMappings.data[loc].split(':')[1];
-                if (ligandMappings.data[oldPosition])
-                    return parseInt(newPosition)
-            }
-            return parseInt(loc)
-        }
         if (!sequenceData.ligandmotifs)
             return;
+        function getLigandMappings(loc) {
+            let newPosition = parseInt(loc);
+            if (ligandMappings) {
+                ligandMappings.data.forEach(element => {
+                    if (Object.keys(element)[0] == loc) 
+                      {
+                      //const oldPosition = Object.keys(element)[0]
+                        newPosition = Object.values(element)[0]
+                      }
+                });
+            }
+            return newPosition;
+        }
+
         const sequenceMotifsData = sequenceData.ligandmotifs.filter(m => m.entityClass == "prokino:SequenceMotif");
         //returning an array grouped by localName
         const results = sequenceMotifsData.reduce(function (r, a) {
@@ -444,6 +449,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
     if (sequenceMotifs)
         customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
+        if (ligandMotifs)
+        customData.tracks = customData.tracks.concat(ligandMotifs.tracks);
     if (subdomains)
         customData.tracks = customData.tracks.concat(subdomains.tracks);
     if (ligandBindingSites && ligandBindingSites !== "NA")
