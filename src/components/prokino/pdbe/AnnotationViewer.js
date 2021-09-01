@@ -21,6 +21,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     const [ligandBindingSites, setLigandBindingSites] = useState(null);
     const [interactionInterfaces, setInteractionInterfaces] = useState(null);
     const [annotations, setAnnotations] = useState(null);
+    const [alphafoldPredictions, setAlphafoldPredictions] = useState(null);
+
     const [functionalFeatures, setFunctionalFeatures] = useState(null);
     const [structuralMotifs, setStructuralMotifs] = useState(null);
     const [sequenceMotifs, setSequenceMotifs] = useState(null);
@@ -96,7 +98,42 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         }
         catch (error) { setAnnotations("NA"); }
     }
+    const handleAlphafoldPredictions = () => {
+        let track = { labelType: "text", label: "AlphaFold-Predictions", data: [] };
+        const data = [{ from: 50, to: 100, label: "some description" }, { from: 120, to: 290, label: "another description" }]
+        // let dataItem = { accession: "", labelType: "text", label: p.label, color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: p.label, labelTooltip: "lt", locations: [] }
+        let dataItem = { accession: "", labelType: "text", label: "Prediction", color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: "tooltip test", labelTooltip: "lt", locations: [] }
+        data.forEach(p => {
+            let fragments = []
 
+            //setting fragments for each track (smf)
+            let fragment = {}
+            fragment.start = parseInt(p.from)
+            fragment.end = parseInt(p.to)
+            fragment.tooltipContent = p.label;
+            fragments.push(fragment)
+            dataItem.locations.push({ "fragments": fragments })
+
+        });
+        track.data.push(dataItem);
+        let tracks = []
+        tracks.push(track)
+        //structuralMotifTrack.data.push(dataItem)
+        const legends = {
+            "alignment": "right",
+            "data": {
+                "AlphaFoldPredictions": [
+                    {
+                        "color": "rgb(160,28,128)",
+                        "text": "AlphaFold Predictions"
+                    }
+                ]
+            }
+        }
+        let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: tracks }
+        setAlphafoldPredictions(superTrack);
+
+    }
     const handleStructuralMotifs = () => {
         //TODO: check sequenceData.motifs not null
         const structuralMotifsData = sequenceData.motifs.filter(m => m.entityClass == "prokino:StructuralMotif");
@@ -221,11 +258,10 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             let newPosition = parseInt(loc);
             if (ligandMappings) {
                 ligandMappings.data.forEach(element => {
-                    if (Object.keys(element)[0] == loc) 
-                      {
-                      //const oldPosition = Object.keys(element)[0]
+                    if (Object.keys(element)[0] == loc) {
+                        //const oldPosition = Object.keys(element)[0]
                         newPosition = Object.values(element)[0]
-                      }
+                    }
                 });
             }
             return newPosition;
@@ -414,6 +450,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             handleStructuralMotifs();
             handleSequenceMotifs();
             handleLigandMotifs();
+            handleAlphafoldPredictions();
 
             //api calls
             callSequenceConservationAPI();
@@ -430,7 +467,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         return <div>Please select a 3D structure</div>
     if (!isReady)
         return <div>Loading ...</div>
-
+    if (!alphafoldPredictions)
+        return <p>Loading alpha folds ...</p>
     if (!seqConservationData)
         return <p>Fetching conservation data ...</p>
     // if (!variationData)
@@ -444,12 +482,13 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     if (!customData)
         return <p>Loading...</p>;
 
-
+    if (alphafoldPredictions)
+        customData.tracks = customData.tracks.concat(alphafoldPredictions.tracks);
     if (structuralMotifs)
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
     if (sequenceMotifs)
         customData.tracks = customData.tracks.concat(sequenceMotifs.tracks);
-        if (ligandMotifs)
+    if (ligandMotifs)
         customData.tracks = customData.tracks.concat(ligandMotifs.tracks);
     if (subdomains)
         customData.tracks = customData.tracks.concat(subdomains.tracks);
