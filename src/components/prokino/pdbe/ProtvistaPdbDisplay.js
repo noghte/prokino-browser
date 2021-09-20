@@ -4,11 +4,11 @@ import React, { useEffect, useState, useRef } from 'react';
 export default function ProtvistaPdbDisplay({ data, uniprotId }) { //{protein}
     // const [show, setShow] = React.useState(false)
     let pv1 = useRef(null)
-    useEffect(() => {
-        if (pv1.current)
-            // console.log("data",data)
-            pv1.current.viewerdata = data;
-    }, [])
+    // useEffect(() => {
+    //     if (pv1.current)
+    //         // console.log("data",data)
+    //         pv1.current.viewerdata = data;
+    // }, [])
     // React.useEffect(() => {
     //     setTimeout(() => {
     //       setShow(true)
@@ -16,8 +16,8 @@ export default function ProtvistaPdbDisplay({ data, uniprotId }) { //{protein}
     //   }, [show])
     if (data) { // && show
         return <div>
-            <protvista-pdb ref={pv1} custom-data="true" accession={uniprotId} id="pv1" ></protvista-pdb>;
-
+            {/* <protvista-pdb ref={pv1} custom-data="true" accession={uniprotId} id="pv1" ></protvista-pdb>; */}
+            <protvista-uniprot ref={pv1} id="pv1" accession="P05067" />
             </div>
     }
     else return <p>Component loading...</p>
