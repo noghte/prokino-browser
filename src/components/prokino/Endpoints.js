@@ -1,5 +1,6 @@
 // const BASE_ENDPOINT = `http://vulcan.cs.uga.edu:8080/prokinosrv/rest`;
-const BASE_ENDPOINT = `http://vulcan.cs.uga.edu/prokinosrv`; //If cors error, a workaround is to add this prefix to the url: https://cors-anywhere.herokuapp.com/
+//If cors error, a workaround is to add this prefix to the url: https://cors-anywhere.herokuapp.com/
+const BASE_ENDPOINT = `http://vulcan.cs.uga.edu/prokinosrv`; //`http://vulcan.cs.uga.edu:8080/prokinosrv/rest` 
 const PROTEIN_ENDPOINT = `${BASE_ENDPOINT}/protein`;
 const ENTITY_ENDPOINT = `${BASE_ENDPOINT}/entity`;
 const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification`;

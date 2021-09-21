@@ -10,7 +10,7 @@ export default function QueryCards({categories,index}) {
 }
 /*
 export default function QueryCards({categories,index}) {
- 
+ p
     let url = `example_queries.json`;
     const { data, error } = useSWR(url, fetcher);
     if (error) {

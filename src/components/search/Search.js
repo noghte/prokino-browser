@@ -37,6 +37,7 @@ export default function Search()
     }
     function handleFinishedSearch(isFinishedSearch)
     {
+      console.log("on finish")
       setShouldTrigger(!isFinishedSearch);
     }
     function selectedOptionChanged(event) {
@@ -49,7 +50,7 @@ export default function Search()
           <div className="col-12 col-md-10 col-lg-8">
               <form>
                 <br />
-                <h4 className="align-center display-5">
+                <h4 className="align-center display-7">
                   Look into proteins, diseases, pathways, or all classes:
                 </h4>
                   <div className="card-body row searchbox align-items-center">

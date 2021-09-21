@@ -19,6 +19,30 @@ export default function OneClass() {
   }
     , []);
 
+  // const instance = axios.create({
+  //   baseURL: `http://vulcan.cs.uga.edu/prokinosrv/classification`,
+  //   withCredentials: false,
+
+  //   headers: {
+  //     'Access-Control-Allow-Origin' : '*',
+  //     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+  //     }
+  // });
+
+
+
+  // axios.get(`${CLASSIFICATION_ENDPOINT}/kinase`)
+  // // axios.get('http://vulcan.cs.uga.edu/prokinosrv/sequence/prokino:Human_EGFR')
+  //      .then(function (result) {
+  //        console.log("oook")
+  //        // handle success
+  //        setKinase(result.data);
+     
+  //      })
+  //      .catch(function (error) {
+  //        // handle error
+  //        console.error("error",error);
+  //      });
 
   return (
     kinase ? <OneClassSearchResult data={kinase} /> : <span>Loading...</span>

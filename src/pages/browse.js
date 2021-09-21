@@ -96,7 +96,7 @@ export default function Browse({ location, data }) { //{protein}
     useEffect(() => {
         const getProkinoData = async () => {
             // if (!value)
-            //     return <></>
+            //     return <></>`
 
             const resourceType = entityClass === 'prokino:Sequence' ? 'sequence' : 'entity';
             let url = `${BASE_ENDPOINT}/${resourceType}/${value}`;
