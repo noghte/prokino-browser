@@ -15,7 +15,7 @@ const TablePagination = ({
       <PaginationLink onClick={handlePreviousClick} previous href="#" />
     </PaginationItem>
 
-    {[...Array(pagesCount)].map((page, i) => (
+    {[...Array(pagesCount>20?20:pagesCount)].map((page, i) => (
       <PaginationItem active={i === currentPage} key={i}>
         <PaginationLink onClick={e => handlePageClick(e, i)} href="#">
           {i + 1}

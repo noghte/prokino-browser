@@ -1,8 +1,8 @@
 //pagination from https://github.com/gifthove/conference-registration/blob/master/conference-registration.ui.web/ClientApp/src/components/registration/RegistrationList.js
 import React, { useEffect } from 'react';
 import { Table } from 'reactstrap';
-import { TablePagination } from '../TablePagination';
-
+import TablePagination from '../TablePagination';
+import {getSparqlQueryLabel} from '../StringHelper'
 
 
 export default function QueryResultTable(props) {
@@ -18,6 +18,7 @@ export default function QueryResultTable(props) {
   }
   
   function renderTable(filteredData,headers, pagesCount, handlePageClick, handlePreviousClick, handleNextClick) {
+
     if (filteredData.length > 0) {
       return (
         <>
@@ -31,19 +32,19 @@ export default function QueryResultTable(props) {
               {filteredData.map((items, index) => (
                 <tr key={"row" + index}>
                   {Object.keys(items).map((element, elindex) => (
-                    <td key={"row" + index + "-col" + elindex}>{items[element]["value"].toString()}</td>
+                    <td key={"row" + index + "-col" + elindex}>{getSparqlQueryLabel(items[element]["value"].toString(),["http://prokino.uga.edu/prokino#","group"])}</td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </Table>
-          {/* <TablePagination
+          <TablePagination
             pagesCount={pagesCount}
             currentPage={currentPage}
             handlePageClick={handlePageClick}
             handlePreviousClick={handlePreviousClick}
             handleNextClick={handleNextClick}
-          /> */}
+          />
         </>
       )
     }

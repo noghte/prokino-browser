@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "title": "Hypothesis-driven",
+      "description": "Queries related to hypothesis-driven analysis"
+    },
+    {
+      "id": 2,
+      "title": "Kinase",
+      "description": "The queries listed below were introduced and discussed in Gosal, Gurinder, Krys J. Kochut, and Natarajan Kannan, \"ProKinO: An ontology for integrative analysis of protein kinases in cancer,\" PloS ONE 6.12 (2011): e28782. <a href='http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0028782'>view article</a>"
+    },
+    {
+      "id": 3,
+      "title": "Mutations",
+      "description": "Queries counting mutations"
+    },
+    {
+      "id": 4,
+      "title": "Pathways",
+      "description": "Queries counting pathways"
+    },
+    {
+      "id": 5,
+      "title": "Other",
+      "description": "Uncategorized queries"
+    }
+  ]

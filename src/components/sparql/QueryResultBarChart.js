@@ -3,7 +3,7 @@ import { VictoryChart,VictoryBar,VictoryTheme,VictoryLabel,VictoryAxis,VictoryVo
 
 function renderBarchart(data)
 {
- 
+  const MAX_ITEMS = 20;
   let chartData = [];
   if (data.results.bindings.length>0)
   {
@@ -29,11 +29,21 @@ function renderBarchart(data)
       dataItems.push(dataItem);
         
     } 
+    dataItems = dataItems.sort((a, b) => (parseInt(a.value) < parseInt(b.value)) ? 1 : -1)
+    const extraItems = dataItems.slice(-1 * (dataItems.length - MAX_ITEMS)); //get all items, except first MAX_ITEMS
+    dataItems = dataItems.slice(0, MAX_ITEMS);
+
     dataItems.forEach(dataItem => {
       chartData.push({"x":dataItem["label"],"y":parseInt(dataItem["value"])});
-    });   
+    });
+    if (extraItems.length>0)
+    {
+      const extraSum = extraItems.reduce((n, {value}) => n + parseInt(value), 0);
+      chartData.push({"x":"Other","y":extraSum});
+    }
     
   return (
+    <>
     <VictoryChart
   theme={VictoryTheme.material}
   domainPadding={1}
@@ -82,6 +92,7 @@ function renderBarchart(data)
 
 
 </VictoryChart>
+</>
   )
 
   }

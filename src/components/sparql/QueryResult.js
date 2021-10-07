@@ -4,9 +4,9 @@ import QueryResultTable from './QueryResultTable';
 import QueryResultBarChart from './QueryResultBarChart';
 import QueryResultPieChart from './QueryResultPieChart';
 import axios from 'axios';
-import { SPROXY_ENDPOINT } from '../prokino/Endpoints';
+import { SPARQL_ENDPOINT } from '../prokino/Endpoints';
+import {TABLE, BARCHART, PIECHART} from './Constants';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
 function cleanQuery(query)
 {
   return query;
@@ -21,7 +21,7 @@ export default function QueryResult(props) {
     const [data,setData] = useState(null);
     
     useEffect(() => {
-      let url = `${SPROXY_ENDPOINT}?query=${encodeURIComponent(query)}&output=json`;
+      let url = `${SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}&output=json`;
   
       const res = async () => {
         try {
@@ -47,13 +47,13 @@ export default function QueryResult(props) {
     let renderedChart = null;
     switch (chartType)
     {
-      case "TABLE":
+      case TABLE:
         renderedChart = <QueryResultTable data={data} />
         break;
-      case "BARCHART":
+      case BARCHART:
         renderedChart = <QueryResultBarChart data={data} />
         break;
-      case "PIECHART":
+      case PIECHART:
         renderedChart = <QueryResultPieChart data={data} />
         break;
     }

@@ -4,7 +4,7 @@ const BASE_ENDPOINT = `http://vulcan.cs.uga.edu/prokinosrv`; //`http://vulcan.cs
 const PROTEIN_ENDPOINT = `${BASE_ENDPOINT}/protein`;
 const ENTITY_ENDPOINT = `${BASE_ENDPOINT}/entity`;
 const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification`;
-const SPROXY_ENDPOINT = `${BASE_ENDPOINT}/sproxy`
+const SPARQL_ENDPOINT = `${BASE_ENDPOINT}/sparql`
 const PDB_BESTSTRUCTURE_ENDPOINT="https://www.ebi.ac.uk/pdbe/graph-api/mappings/best_structures"
 //for annotation viewer:
 //const PDB_STRUCTURE = `https://www${this.appUrlEnv}.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/unipdb/${this.accession}`
@@ -17,7 +17,7 @@ export {
         PROTEIN_ENDPOINT, 
         ENTITY_ENDPOINT, 
         CLASSIFICATION_ENDPOINT,
-        SPROXY_ENDPOINT,
+        SPARQL_ENDPOINT,
         PDB_BESTSTRUCTURE_ENDPOINT
 }
 

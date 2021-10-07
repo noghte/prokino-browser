@@ -1,0 +1,172 @@
+
+[
+    {
+      "id": 1,
+      "title": "Query 15",
+      "category": 1,
+      "description": "Find all missense mutations that occur in the canonical RD Pocket, then sort the results by protein name and the corresponding PKA position.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n                  PREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n                  PREFIX prokino: <http://prokino.uga.edu/prokino#>\n                  PREFIX     xsd: <http://www.w3.org/2001/XMLSchema#>\n\n                  SELECT distinct (STR(?pname) as ?Protein)\n                        (STR(?mname) as ?Motif)\n                        (STR(?wt) AS ?Wild_Type) \n                        (STR(?pos) as ?Position)\n                        (STR(?mutt) as ?Mutant_Type)\n                        (STR(?pka) as ?PKA_Position)  \n                        (STR(?dname) as ?Disease)\n                        (STR(?psite) as ?Primary_Site)\n                        (STR(?subsite) as ?Subsite)\n                  WHERE\n                  {\n                    ?mut   rdf:type                    prokino:Missense .\n                    ?pro   prokino:hasMutation         ?mut .\n                    ?pro   prokino:hasPrimaryName      ?pname .\n                    ?mut   prokino:hasWildTypeResidue  ?wt .\n                    ?mut   prokino:hasMutantType       ?mutt .\n                    ?mut   prokino:hasStartLocation    ?pos .\n                    ?mut   prokino:hasPKAStartLocation ?pka .\n                    filter(STR(?pka) != '0')\n\n                    ?mut   prokino:locatedIn           ?motif .\n                    ?motif prokino:hasPrimaryName      ?mname .\n                    filter(STR(?mname) = 'Canonical RD Pocket')\n\n                    ?mut   prokino:inSample            ?samp .\n                    ?samp  prokino:hasPrimarySite      ?psite .\n                    ?samp  prokino:hasSiteSubType      ?subsite .\n                    ?samp  prokino:hasPrimaryHistology ?dname .\n                  }\n                  ORDER BY ?pname xsd:integer(?pka)"
+    },
+    {
+      "id": 2,
+      "title": "Query 16",
+      "category": 1,
+      "description": "Find all missense mutations that occur in the KE salt bridge, then sort the results by protein name and the corresponding PKA position.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n                PREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n                PREFIX prokino: <http://prokino.uga.edu/prokino#>\n                PREFIX     xsd: <http://www.w3.org/2001/XMLSchema#>\n\n                SELECT distinct (STR(?pname) as ?Protein)\n                    (STR(?mname) as ?Motif)\n                    (STR(?wt) AS ?Wild_Type) \n                    (STR(?pos) as ?Position)\n                    (STR(?mutt) as ?Mutant_Type)\n                    (STR(?pka) as ?PKA_Position)  \n                    (STR(?dname) as ?Disease)\n                    (STR(?psite) as ?Primary_Site)\n                    (STR(?subsite) as ?Subsite)\n                WHERE\n                {\n                ?mut   rdf:type                    prokino:Missense .\n                ?pro   prokino:hasMutation         ?mut .\n                ?pro   prokino:hasPrimaryName      ?pname .\n                ?mut   prokino:hasWildTypeResidue  ?wt .\n                ?mut   prokino:hasMutantType       ?mutt .\n                ?mut   prokino:hasStartLocation    ?pos .\n                ?mut   prokino:hasPKAStartLocation ?pka .\n                filter(STR(?pka) != '0')\n\n                ?mut   prokino:locatedIn           ?motif .\n                ?motif prokino:hasPrimaryName      ?mname .\n                filter(STR(?mname) = 'KE Salt Bridge')\n\n                ?mut   prokino:inSample            ?samp .\n                ?samp  prokino:hasPrimarySite      ?psite .\n                ?samp  prokino:hasSiteSubType      ?subsite .\n                ?samp  prokino:hasPrimaryHistology ?dname .\n                }\n                ORDER BY ?pname xsd:integer(?pka)"
+    },
+    {
+      "id": 3,
+      "title": "Query 17",
+      "category": 1,
+      "description": "Find all missense mutations that occur in the catalytic spine (C-spine), then sort the results by protein name and the corresponding PKA position.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\nPREFIX     xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT distinct (STR(?pname) as ?Protein)\n       (STR(?mname) as ?Motif)\n       (STR(?wt) AS ?Wild_Type) \n       (STR(?pos) as ?Position)\n       (STR(?mutt) as ?Mutant_Type)\n       (STR(?pka) as ?PKA_Position)  \n       (STR(?dname) as ?Disease)\n       (STR(?psite) as ?Primary_Site)\n       (STR(?subsite) as ?Subsite)\nWHERE\n{\n  ?mut   rdf:type                    prokino:Missense .\n  ?pro   prokino:hasMutation         ?mut .\n  ?pro   prokino:hasPrimaryName      ?pname .\n  ?mut   prokino:hasWildTypeResidue  ?wt .\n  ?mut   prokino:hasMutantType       ?mutt .\n  ?mut   prokino:hasStartLocation    ?pos .\n  ?mut   prokino:hasPKAStartLocation ?pka .\n  filter(STR(?pka) != '0')\n\n  ?mut   prokino:locatedIn           ?motif .\n  ?motif prokino:hasPrimaryName      ?mname .\n  filter(STR(?mname) = 'Catalytic Spine')\n\n  ?mut   prokino:inSample            ?samp .\n  ?samp  prokino:hasPrimarySite      ?psite .\n  ?samp  prokino:hasSiteSubType      ?subsite .\n  ?samp  prokino:hasPrimaryHistology ?dname .\n}\nORDER BY ?pname xsd:integer(?pka)"
+    },
+    {
+      "id": 4,
+      "title": "Query 18",
+      "category": 1,
+      "description": "Find all missense mutations that occur in the hydrophobic regulatory spine (Regulatory Spine), then sort the results by protein name and the corresponding PKA position.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\nPREFIX     xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT distinct (STR(?pname) as ?Protein)\n       (STR(?mname) as ?Motif)\n       (STR(?wt) AS ?Wild_Type) \n       (STR(?pos) as ?Position)\n       (STR(?mutt) as ?Mutant_Type)\n       (STR(?pka) as ?PKA_Position)  \n       (STR(?dname) as ?Disease)\n       (STR(?psite) as ?Primary_Site)\n       (STR(?subsite) as ?Subsite)\nWHERE\n{\n  ?mut   rdf:type                    prokino:Missense .\n  ?pro   prokino:hasMutation         ?mut .\n  ?pro   prokino:hasPrimaryName      ?pname .\n  ?mut   prokino:hasWildTypeResidue  ?wt .\n  ?mut   prokino:hasMutantType       ?mutt .\n  ?mut   prokino:hasStartLocation    ?pos .\n  ?mut   prokino:hasPKAStartLocation ?pka .\n  filter(STR(?pka) != '0')\n\n  ?mut   prokino:locatedIn           ?motif .\n  ?motif prokino:hasPrimaryName      ?mname .\n  filter(STR(?mname) = 'Regulatory Spine')\n\n  ?mut   prokino:inSample            ?samp .\n  ?samp  prokino:hasPrimarySite      ?psite .\n  ?samp  prokino:hasSiteSubType      ?subsite .\n  ?samp  prokino:hasPrimaryHistology ?dname .\n}\nORDER BY ?pname xsd:integer(?pka)"
+    },
+    {
+      "id": 5,
+      "title": "Query 19",
+      "category": 1,
+      "description": "Find all reactions in which a specified kinase acts as either a reactant, a product or a catalyst.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proteinName) as ?Protein) \n       (STR(?rname) as ?Reaction)\nWHERE\n{\n\n SELECT distinct ?rname ?proteinName WHERE\n {\n   {\n     SELECT distinct ?pro WHERE\n     {\n       ?pro       rdf:type                prokino:Protein .\n       ?pro       prokino:presentIn       prokino:Human .\n       ?pro       prokino:hasMutation     ?mut .\n     }\n   }\n  \n   ?pro           prokino:hasPrimaryName  ?proteinName .\n   filter(STR(?proteinName) = 'EGFR')\n\n   ?container      prokino:includes*       ?pro .\n   { { ?reaction   prokino:consumes        ?container }\n     UNION\n     { ?reaction   prokino:produces        ?container }\n     UNION\n     { ?reaction   prokino:hasCatalyst     ?container }\n   }\n   ?reaction       rdf:type                prokino:Reaction .\n   ?reaction       prokino:hasPrimaryName  ?rname .\n \n }\n}"
+    },
+    {
+      "id": 6,
+      "title": "Query 20",
+      "category": 1,
+      "description": "Find all pathways in which a specified kinase participates.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proteinName) as ?Protein) \n       (STR(?pname) as ?Pathway)\nWHERE\n{\n   {\n     SELECT distinct ?pro WHERE\n     {\n       ?pro       rdf:type                prokino:Protein .\n       ?pro       prokino:presentIn       prokino:Human .\n       ?pro       prokino:hasMutation     ?mut .\n     }\n   }\n  \n   ?pro           prokino:hasPrimaryName  ?proteinName .\n   ?pro           prokino:participatesIn  ?pathway .\n   ?pathway       prokino:hasPrimaryName  ?pname . \n\n   filter(STR(?proteinName) = 'EGFR')\n}"
+    },
+    {
+      "id": 7,
+      "title": "Query 21",
+      "category": 1,
+      "description": "Find the counts of the wild type amino acid residues located in the protein kinase domain and mutated.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?wt) AS ?Wild_Type_Residue)\n       (Count(*) AS ?Count) \nWHERE\n{\n  ?mut rdf:type                    prokino:Missense .\n  ?mut prokino:hasWildTypeResidue  ?wt .\n  ?mut prokino:hasPKAStartLocation ?pka .\n  filter(STR(?pka) != '0')\n}\nGROUP BY ?wt"
+    },
+    {
+      "id": 8,
+      "title": "Query 22",
+      "category": 1,
+      "description": "Find the counts of wild type arginine mutations for each kinase. Answers the question: which kinase has the most arginine mutations?",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?pname) AS ?Protein)\n       (Count(*) AS ?Count)\nWHERE\n{\n  ?mut rdf:type                    prokino:Missense .\n  ?mut prokino:hasWildTypeResidue  ?wt .\n  ?mut prokino:hasPKAStartLocation ?pka .\n  filter(STR(?pka) != '0')\n  filter(STR(?wt) != 'R')\n\n  ?pro prokino:hasMutation    ?mut .\n  ?pro prokino:hasPrimaryName ?pname .\n}\nGROUP BY ?pname\nORDER BY DESC(?Count)"
+    },
+    {
+      "id": 9,
+      "title": "Query 23",
+      "category": 1,
+      "description": "Find all the missense mutations that alter an arginine in the epidermal growth factor receptor (EGFR).",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT distinct (STR(?mutAA) AS ?Mutation) \nWHERE\n{\n  ?mut rdf:type                    prokino:Missense .\n  ?mut prokino:hasMutationAA       ?mutAA .\n  ?mut prokino:hasWildTypeResidue  ?wt .\n  ?mut prokino:hasPKAStartLocation ?pka .\n  filter(STR(?pka) != '0')\n  filter(STR(?wt) != 'R')\n\n  ?pro prokino:hasMutation        ?mut .\n  ?pro prokino:hasPrimaryName     ?pname .\n  filter(STR(?pname) = 'EGFR')\n}\nORDER BY ?mutAA"
+    },
+    {
+      "id": 10,
+      "title": "Query 5b",
+      "category": 2,
+      "description": "Find the counts of protein kinases having missense mutations implicated in different types of cancer and display them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (str(?cancerName) AS ?CancerType) (COUNT(*) AS ?No_Proteins) WHERE\n{\n  ?cancer rdf:type   prokino:Cancer .\n  ?cancer rdfs:label ?cancerName\n\n  {\n    SELECT ?pro ?cancer WHERE\n    {\n       ?pro    rdf:type                       prokino:Protein .\n       ?pro    prokino:presentIn              prokino:Human .\n       ?pro    prokino:hasMutation            ?mut .\n       ?mut    prokino:inSample               ?sample.\n       ?sample prokino:implicatedIn           ?cancer .\n       ?mut    rdf:type                       prokino:Missense .\n    }\n    GROUP BY ?pro ?cancer\n  }\n}\nGROUP BY ?cancer ?cancerName\nHAVING (count(*) >= 2)\nORDER BY desc(?No_Proteins)"
+    },
+    {
+      "id": 11,
+      "title": "Query 6",
+      "category": 2,
+      "description": "Find the counts of protein kinases having missense mutations implicated in haematopoietic neoplasm and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_Mutations) WHERE\n{\n   ?pro    rdf:type                 prokino:Protein .\n   ?pro    prokino:presentIn        prokino:Human .\n   ?pro    prokino:hasPrimaryName   ?proName .\n   ?pro    prokino:hasMutation      ?mut .\n   ?mut    prokino:inSample         ?sample.\n   ?sample prokino:implicatedIn     ?cancer .\n   ?cancer prokino:hasPrimaryName   ?cancer_name .\n   ?mut    rdf:type                 prokino:Missense .\n   FILTER regex( str(?cancer_name), \"^haematopoietic_neoplasm\" )\n}\nGROUP BY ?proName\nORDER BY DESC(?No_Mutations)\nLIMIT 10"
+    },
+    {
+      "id": 12,
+      "title": "Query 9",
+      "category": 2,
+      "description": "Find the counts of protein kinases (at least 2) having mutations (of any type) implicated in different types of cancer and display them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (str(?cancername) AS ?Cancer_Type) (COUNT(*) AS ?No_Proteins) WHERE\n{\n  ?cancer rdf:type   prokino:Cancer .\n  ?cancer rdfs:label ?cancername .\n  {\n    SELECT ?pro ?cancer WHERE\n    {\n       ?pro     rdf:type                  prokino:Protein .\n       ?pro     prokino:presentIn         prokino:Human .\n       ?pro     prokino:hasMutation       ?mut .\n       ?mut     prokino:inSample          ?sample.\n       ?sample  prokino:implicatedIn      ?cancer .\n    }\n    GROUP BY ?pro ?cancer\n  }\n}\nGROUP BY ?cancer ?cancername\nHAVING (count(*) >= 2)\nORDER BY desc(?No_Proteins)"
+    },
+    {
+      "id": 13,
+      "title": "Query 10",
+      "category": 2,
+      "description": "Find the counts of protein kinases (at least 4) pariticipating in pathways and display them in descending order; include only pathways with 4 or more participating kinases.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?pathwayname) AS ?Pathway) (COUNT(*) AS ?No_Proteins) WHERE\n{\n  ?pathway rdf:type               prokino:Pathway .\t\t\n  ?pathway prokino:hasPrimaryName ?pathwayname .\n  {\n    SELECT ?pathway ?mut ?pro WHERE\n    {\n       ?pro    rdf:type               prokino:Protein .\n       ?pro    prokino:presentIn      prokino:Human .\n       ?pro    prokino:hasMutation    ?mut .\n       ?pro    prokino:participatesIn ?pathway .\n    }\n    GROUP BY ?pathway ?pro\n  }\n}\nGROUP BY ?pathway ?pathwayname\nHAVING (count(*) >= 4)\nORDER BY DESC(?No_Proteins)"
+    },
+    {
+      "id": 14,
+      "title": "Query 12",
+      "category": 2,
+      "description": "Find the counts of protein kinases having mutations (of any type) in various primary sites and display them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?primarysite) AS ?PrimarySite) (COUNT(*) AS ?No_Proteins) WHERE\n{\n  ?pro  rdf:type  prokino:Protein .\n  {\n    SELECT ?pro ?primarysite WHERE\n    {\n       ?pro  rdf:type               prokino:Protein .\n       ?pro  prokino:presentIn      prokino:Human .\n       ?pro  prokino:hasMutation    ?mut .\n       ?mut  prokino:inSample       ?s.\n       ?s    prokino:hasPrimarySite ?primarysite .  \n    }\n    GROUP BY ?primarysite ?pro\n  }\n}\nGROUP BY ?primarysite\nORDER BY DESC(?No_Proteins)"
+    },
+    {
+      "id": 15,
+      "title": "Query 5a",
+      "category": 3,
+      "description": "Find the counts of substitution missense mutations (at least 4) implicated in different types of cancer and display them in descending order",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (STR(?cancerName) AS ?CancerType) (COUNT(*) AS ?No_Mutations) WHERE\n{\n   ?pro    rdf:type                       prokino:Protein .\n   ?pro    prokino:presentIn              prokino:Human .\n   ?pro    prokino:hasMutation            ?mut .\n   ?mut    prokino:inSample               ?sample.\n   ?sample prokino:implicatedIn           ?cancer .\n   ?mut    rdf:type                       prokino:Missense .\n   ?cancer rdfs:label                     ?cancerName\n}\nGROUP BY ?cancerName\nHAVING (count(*) >= 4)\nORDER BY DESC(?No_Mutations)"
+    },
+    {
+      "id": 16,
+      "title": "Query 7",
+      "category": 3,
+      "description": "Find the counts of different mutations (of all types) for all kinase proteins and display the top 10 in the descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_Mutations) WHERE\n{\n    ?pro  rdf:type               prokino:Protein .\n    ?pro  prokino:presentIn      prokino:Human .\n    ?pro  prokino:hasMutation    ?mut .\n    ?pro  prokino:hasPrimaryName ?proName .\n}\nGROUP BY ?pro ?proName\nORDER BY DESC(?No_Mutations)\nLIMIT 10"
+    },
+    {
+      "id": 17,
+      "title": "Query 8",
+      "category": 3,
+      "description": "Find the counts of substitution missense mutations for all proteins and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_Mutations) WHERE\n{\n    ?pro  rdf:type                       prokino:Protein .\n    ?pro  prokino:presentIn              prokino:Human .\n    ?pro  prokino:hasMutation            ?mut .\n    ?pro  prokino:hasPrimaryName         ?proName .\n    ?mut  rdf:type                       prokino:Missense .\n}\nGROUP BY ?pro ?proName\nORDER BY DESC(?No_Mutations)\nLIMIT 10"
+    },
+    {
+      "id": 18,
+      "title": "Query 13",
+      "category": 3,
+      "description": "Find the counts of different mutations (all types) for all sub-domains and display them in descending order.",
+      "query": "PREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?motifName) AS ?Subdomain_Name) (COUNT(*) AS\n?No_Mutations)\nWHERE\n{\n    ?pro       a                       prokino:Protein .\n    ?pro       prokino:presentIn       prokino:Human .\n    ?pro       prokino:hasMutation     ?mutation .\n    ?mutation  prokino:locatedIn       ?motif .\n    ?motif     a                       prokino:SequenceMotif .\n    ?motif     prokino:hasPrimaryName  ?motifName\n}\nGROUP BY ?motifName\nORDER BY DESC(?No_Mutations)"
+    },
+    {
+      "id": 19,
+      "title": "Query 14",
+      "category": 3,
+      "description": "Find the counts of subsititution missense mutations of the protein kinase FLT3 all having the primary site of Haematopoietic and Lymphoid tissue, and located in various sub-domains and display them in descending order.",
+      "query": "PREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT\n       (STR(?motifName) AS ?Subdomain_Name)\n       (COUNT(*) AS ?No_Mutations)\nWHERE\n{\n    ?pro           a                              prokino:Protein .\n    ?pro           prokino:hasPrimaryName         \"FLT3\"^^<http://www.w3.org/2001/XMLSchema#string> .\n    ?pro           prokino:presentIn              prokino:Human .\n    ?pro           prokino:hasMutation            ?mutation .\n    ?mutation      a                              prokino:Missense .\n    ?mutation      prokino:inSample               ?sample .\n    ?sample        prokino:hasPrimarySite        \"haematopoietic_and_lymphoid_tissue\"^^<http://www.w3.org/2001/XMLSchema#string> .\n    ?mutation      prokino:locatedIn              ?motif .\n    ?motif         a                              prokino:SequenceMotif .\n    ?motif         prokino:hasPrimaryName         ?motifName .\n}\nGROUP BY ?motifName\nORDER BY DESC(?No_Mutations)"
+    },
+    {
+      "id": 20,
+      "title": "Query 3",
+      "category": 4,
+      "description": "Find the counts of pathways associated with protein kinases and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proteinName) AS ?Protein_Name) (COUNT(*) AS ?No_Pathways) WHERE\n{\n  ?protein rdf:type               prokino:Protein .\n  ?protein prokino:hasPrimaryName ?proteinName .\n  {\n    SELECT ?protein ?pathway WHERE\n    {\n       ?protein    rdf:type               prokino:Protein .\n       ?protein    prokino:presentIn      prokino:Human .\n       ?protein    prokino:participatesIn ?pathway .\n    }\n    GROUP BY ?protein ?pathway\n  }\n}\nGROUP BY ?proteinName\nORDER BY DESC(?No_Pathways)\nLIMIT 10"
+    },
+    {
+      "id": 21,
+      "title": "Query 11",
+      "category": 4,
+      "description": "Find the counts of pathways in which mutated protein kinases pariticipate and display them in descending order; include only kinases with 4 or more pathways in which they participate.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_Pathways) WHERE\n{\n  ?pro rdf:type               prokino:Protein .\n  ?pro prokino:hasPrimaryName ?proName .\n  {\n    SELECT ?pro ?pathway WHERE\n    {\n       ?pro    rdf:type               prokino:Protein .\n       ?pro    prokino:presentIn      prokino:Human .\n       ?pro    prokino:hasMutation    ?mut .\n       ?pro    prokino:participatesIn ?pathway .\n    }\n    GROUP BY ?pro ?pathway\n  }\n}\nGROUP BY ?proName\nHAVING (count(*) >= 4)\nORDER BY DESC(?No_Pathways)"
+    },
+    {
+      "id": 22,
+      "title": "Query 1",
+      "category": 5,
+      "description": "Find the counts of crystal structures for all protein kinases and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (STR(?proteinName) As ?Protein_Name) (COUNT(*) AS ?No_Structures) WHERE\n{\n   ?pro  rdf:type                     prokino:Protein .\n   ?pro  prokino:presentIn            prokino:Human .\n   ?pro  prokino:hasPrimaryName       ?proteinName .\n   ?pro  prokino:hasSequence          ?seq .\n   ?seq   prokino:hasProteinStructure ?struct\n}\nGROUP BY ?proteinName\nORDER BY DESC(?No_Structures)\nLIMIT 10"
+    },
+    {
+      "id": 23,
+      "title": "Query 2",
+      "category": 5,
+      "description": "Find the counts of isoforms for all protein kinases and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_Sequences) WHERE\n{\n   ?pro  rdf:type               prokino:Protein .\n   ?pro  prokino:presentIn      prokino:Human .\n   ?pro  prokino:hasPrimaryName ?proName .\n   ?pro  prokino:hasSequence    ?seq .\n   filter( regex( str(?seq), \"Isoform\" ) || regex( str(?seq), \"UniProt\" ) )\n}\nGROUP BY ?proName\nORDER BY DESC(?No_Sequences)\nLIMIT 10"
+    },
+    {
+      "id": 24,
+      "title": "Query 4",
+      "category": 5,
+      "description": "Find the counts of different cancer types implicated in protein kinases and display top 10 of them in descending order.",
+      "query": "PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX prokino: <http://prokino.uga.edu/prokino#>\n\nSELECT (STR(?proName) AS ?Protein_Name) (COUNT(*) AS ?No_CancerTypes) WHERE\n{\n  ?pro rdf:type               prokino:Protein .\n  ?pro prokino:hasPrimaryName ?proName .\n  {  \n    SELECT ?pro ?cancer WHERE\n    {\n       ?pro     rdf:type              prokino:Protein .\n       ?pro     prokino:presentIn     prokino:Human .\n       ?pro     prokino:hasMutation   ?mut .\n       ?mut     prokino:inSample      ?sample.\n       ?sample  prokino:implicatedIn  ?cancer .\n    }\n    GROUP BY ?pro ?cancer\n  }\n}\nGROUP BY ?proName\nORDER BY DESC(?No_CancerTypes)\nLIMIT 10"
+    }
+  ]
+  

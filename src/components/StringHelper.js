@@ -1,3 +1,5 @@
+import { func } from "prop-types";
+
 export function display(text)
 {
    return text.split(":")[1];
@@ -22,4 +24,14 @@ export function getValues(arr)
 
 export function splitString(item)  {
    return item.replace(/.{5}/g, "$&" + " ");
-};
+}
+
+export function getSparqlQueryLabel(rawtext,toRemove)
+{
+     let text = rawtext;
+     toRemove && toRemove.forEach(rm => {
+       text = text.replace(rm,"")
+     });
+     return text;
+}
+;

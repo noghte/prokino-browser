@@ -8,7 +8,7 @@ import {
     CardSubtitle, CardBody, CardHeader, Collapse, Container
 } from 'reactstrap';
 
-export default function ExampleQueries() {
+export default function ExampleQueries(props) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const queryList =
@@ -74,13 +74,56 @@ export default function ExampleQueries() {
                     title: "Query 5b",
                     category: 1,
                     description: "Find the counts of protein kinases having missense mutations implicated in different types of cancer and display them in descending order.",
-                    query: "",
+                    query: `PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX prokino: <http://prokino.uga.edu/prokino#>
+                    
+                    
+                    SELECT (str(?cancerName) AS ?CancerType) (COUNT(*) AS ?No_Proteins) WHERE
+                    {
+                      ?cancer rdf:type   prokino:Cancer .
+                      ?cancer rdfs:label ?cancerName
+                    
+                      {
+                        SELECT ?pro ?cancer WHERE
+                        {
+                           ?pro    rdf:type                       prokino:Protein .
+                           ?pro    prokino:presentIn              prokino:Human .
+                           ?pro    prokino:hasMutation            ?mut .
+                           ?mut    prokino:inSample               ?sample.
+                           ?sample prokino:implicatedIn           ?cancer .
+                           ?mut    rdf:type                       prokino:Missense .
+                        }
+                        GROUP BY ?pro ?cancer
+                      }
+                    }
+                    GROUP BY ?cancer ?cancerName
+                    HAVING (count(*) >= 2)
+                    ORDER BY desc(?No_Proteins)
+                    `,
                 },
                 {
                     title: "Query 5a",
                     category: 2,
                     description: "Find the counts of substitution missense mutations (at least 4) implicated in different types of cancer and display them in descending order",
-                    query: "",
+                    query: `PREFIX     rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX    rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX prokino: <http://prokino.uga.edu/prokino#>
+                    
+                    
+                    SELECT (STR(?cancerName) AS ?CancerType) (COUNT(*) AS ?No_Mutations) WHERE
+                    {
+                       ?pro    rdf:type                       prokino:Protein .
+                       ?pro    prokino:presentIn              prokino:Human .
+                       ?pro    prokino:hasMutation            ?mut .
+                       ?mut    prokino:inSample               ?sample.
+                       ?sample prokino:implicatedIn           ?cancer .
+                       ?mut    rdf:type                       prokino:Missense .
+                       ?cancer rdfs:label                     ?cancerName
+                    }
+                    GROUP BY ?cancerName
+                    HAVING (count(*) >= 4)
+                    ORDER BY DESC(?No_Mutations)`
                 },
                 {
                     title: "Query 7",
@@ -99,6 +142,7 @@ export default function ExampleQueries() {
     }
     const viewQuery = (q) => {
         console.log(q);
+        props.onSelect(q);
         // router.push({
         //   pathname: '/queries',
         //   query: { query: q }
