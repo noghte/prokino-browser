@@ -2,7 +2,6 @@ import Layout from '../components/Layout';
 import Search from '../components/search/Search'
 import React, { useState } from 'react';
 import {Link} from 'gatsby';
-
 export default function Browser() {
         const showSearch = true;
         const showBrowse = false;    
