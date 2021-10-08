@@ -149,10 +149,12 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             });
             return r;
         }, {});
+        console.log("results",results);
         const smfValues = Object.values(results);
         let tracks = []
 
         let track = { labelType: "text", label: "Structural Motifs", data: [] };
+
         //creating tracks
         smfValues.forEach(smf => {
             //let track = {labelType:"text", label:smf.name,data:[]};
@@ -161,11 +163,14 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             //setting fragments for each track (smf)
             let fragments = []
             smf.motifData.forEach(motifData => {
-                let fragment = {}
-                fragment.start = parseInt(motifData.startLocation)
-                fragment.end = parseInt(motifData.endLocation)
-                fragment.tooltipContent = motifData.name;
-                fragments.push(fragment)
+                if (motifData)
+                {
+                    let fragment = {}
+                    fragment.start = parseInt(motifData.startLocation)
+                    fragment.end = parseInt(motifData.endLocation)
+                    fragment.tooltipContent = motifData.name;
+                    fragments.push(fragment)
+                }
             });
             dataItem.locations.push({ "fragments": fragments })
             track.data.push(dataItem);
