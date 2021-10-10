@@ -5,6 +5,9 @@ const PROTEIN_ENDPOINT = `${BASE_ENDPOINT}/protein`;
 const ENTITY_ENDPOINT = `${BASE_ENDPOINT}/entity`;
 const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification`;
 const SPARQL_ENDPOINT = `${BASE_ENDPOINT}/sparql`
+const SPARQL_CATEGORIES =`${BASE_ENDPOINT}/squerycategory`
+const SPARQL_SAMPLEQUERIES =`${BASE_ENDPOINT}/squery`
+
 const PDB_BESTSTRUCTURE_ENDPOINT="https://www.ebi.ac.uk/pdbe/graph-api/mappings/best_structures"
 //for annotation viewer:
 //const PDB_STRUCTURE = `https://www${this.appUrlEnv}.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/unipdb/${this.accession}`
@@ -18,6 +21,8 @@ export {
         ENTITY_ENDPOINT, 
         CLASSIFICATION_ENDPOINT,
         SPARQL_ENDPOINT,
-        PDB_BESTSTRUCTURE_ENDPOINT
+        PDB_BESTSTRUCTURE_ENDPOINT,
+        SPARQL_CATEGORIES,
+        SPARQL_SAMPLEQUERIES
 }
 

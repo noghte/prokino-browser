@@ -3,12 +3,13 @@ import React, { useEffect } from 'react';
 import { Table } from 'reactstrap';
 import TablePagination from '../TablePagination';
 import {getSparqlQueryLabel} from '../StringHelper'
-
+import { useSelector } from 'react-redux';
 
 export default function QueryResultTable(props) {
 
   const [currentPage, setCurrentPage] = React.useState(0);
-  const data = props.data;
+ const data = props.data;
+  // const data = useSelector(state => state.app.sparqlResult)
 
   function renderTableHeaders(row) {
   
@@ -22,6 +23,7 @@ export default function QueryResultTable(props) {
     if (filteredData.length > 0) {
       return (
         <>
+       
           <Table striped id='sparql-result' style={{ tableLayout: 'fixed' }}>
             <tbody>
               {/* header */}
@@ -49,7 +51,7 @@ export default function QueryResultTable(props) {
       )
     }
     else
-      return (<div class="alert alert-danger" style={{ width: '100%' }} role="alert">
+      return (<div className="alert alert-danger" style={{ width: '100%' }} role="alert">
         No data found!
       </div>)
   }
@@ -77,3 +79,4 @@ function handlePreviousClick(e)
   const filteredData = data.results.bindings.slice(pageSize*currentPage,pageSize*currentPage+pageSize);
   return renderTable(filteredData, headers, pagesCount, handlePageClick, handlePreviousClick, handleNextClick);
 }
+

@@ -1,5 +1,15 @@
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import QueryResult from '../components/sparql/QueryResult';
+import fileDownload from 'js-file-download';
+import { useSelector,connect } from 'react-redux';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setSparqlResult } from '../state/app';
+
+import { SPARQL_ENDPOINT } from '../components/prokino/Endpoints';
+
 import {
     Button,
     Collapse,
@@ -16,20 +26,23 @@ import {
     NavbarText,
     Label
 } from 'reactstrap';
-import {TABLE, BARCHART, PIECHART} from '../components/sparql/Constants';
+
+import { TABLE, BARCHART, PIECHART } from '../components/sparql/Constants';
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
 import ExampleQueries from '../components/sparql/ExampleQueries';
-export default function Queries() {
+function Queries(props) {
     const [query, setQuery] = useState('');
-    const [executeMessage, setExecuteMessage] = useState('Execute');
-    const [submitting, setSubmitting] = useState(false);
+    // const [csvData, setCsvData] = useState(null);
+    // const [executeMessage, setExecuteMessage] = useState('Execute');
+    // const [submitting, setSubmitting] = useState(false);
     const [shouldShowResults, setShouldShowResults] = React.useState(false);
 
     const [displayType, setDisplayType] = useState(TABLE);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const sparqlResult = useSelector(state => state.app.sparqlResult)
 
+    const notify = () => toast("Getting the query result");
 
     function executeQuery(event) {
         event.preventDefault()
@@ -38,12 +51,14 @@ export default function Queries() {
             alert('No query entered.');
             return;
         }
-        setSubmitting(false);
-        setExecuteMessage("Execute");
-        setSubmitting(true);
+        // setSubmitting(false);
+        // setExecuteMessage("Execute");
+        // setSubmitting(true);
         setShouldShowResults(true);
+        // notify();
         if (window)
             window.scrollTo(0, 0);
+        // showUpdateFeelings();
 
     }
     function displayBarchart(event) {
@@ -61,19 +76,47 @@ export default function Queries() {
         setDisplayType(PIECHART);
     }
 
-    function handleQueryChange(event) {
-        setQuery(event.target.value)
-    }
-    function exampleQuerySelected(query)
-    {
-        setQuery(query)
-    }
-    function saveCsv(event)
-    {
-        alert("CSV saved")
-        console.log("Saved")
+    // function handleQueryChange(event) {
+    //     setQuery(event.target.value)
+    // }
+    function exampleQuerySelected(query) {
+        setShouldShowResults(false);
+        props.dispatch(setSparqlResult(null));
+        setQuery(query);
+        if (window)
+            window.scrollTo(0, 0);
     }
 
+    function saveCsv() {
+        let url = `${SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}&output=csv`;
+        axios.get(url)
+            .then((result) => {
+
+                //filename
+                const dt = new Date();
+                let filename = dt.toISOString().slice(0, 10) + '-';
+                filename += dt.getTime().toString()
+                filename += '.csv';
+
+                fileDownload(result.data, filename);
+            });
+
+    }
+    function saveJson() {
+        if (sparqlResult) {
+            //filename
+            const dt = new Date();
+            let filename = dt.toISOString().slice(0, 10) + '-';
+            filename += dt.getTime().toString()
+            filename += '.json'
+
+            const contents = JSON.stringify(sparqlResult, null, 2);
+            fileDownload(contents, filename)
+        }
+        else
+            alert('The query result is not ready. Please try again.')
+
+    }
     return (<Layout>
         <style jsx>{`
 .dropdown-item-checked::before {
@@ -88,6 +131,8 @@ export default function Queries() {
                 <h3 className="display-5">Run your own SPARQL query</h3>
             </div>
             <br />
+            <div>{shouldShowResults && <ToastContainer autoClose={2000} newestOnTop closeOnClick />}</div>
+
             <div className="row">
 
                 {
@@ -98,7 +143,7 @@ export default function Queries() {
                             <Nav className="nav-item dropdown ml-auto" navbar>
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
-                                       <Label> {displayType}</Label>
+                                        <Label> {displayType}</Label>
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                         <DropdownItem onClick={displayTable}>
@@ -112,15 +157,13 @@ export default function Queries() {
                                             <span className={displayType === PIECHART ? "dropdown-item-checked" : ""}>Display as Piechart</span>
                                         </DropdownItem>
                                         <DropdownItem divider />
-                                        <DropdownItem onclick={saveCsv}>
+                                        <DropdownItem onClick={saveCsv}>
                                             Save as CSV
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        <DropdownItem onClick={saveJson}>
                                             Save as JSON
                                         </DropdownItem>
-                                        <DropdownItem>
-                                            Save as XML
-                                        </DropdownItem>
+
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             </Nav>
@@ -129,7 +172,7 @@ export default function Queries() {
                         <NavbarText>SPARQL Result</NavbarText>
 
                     </Navbar>
-                    
+
                 }
                 {shouldShowResults && <QueryResult query={query} chartType={displayType} />}
                 {/* {shouldShowResults && displayType === "table" && <QueryResultTable input={query} />}
@@ -145,40 +188,44 @@ export default function Queries() {
                             <tr>
                                 <td>
                                     <p>Enter your <a href="http://www.w3.org/TR/sparql11-query/" target="_blank">SPARQL 1.1</a>
-                                        <sup>1</sup> query below. Only <code>Select</code> queries are allowed; <br /> navigate to <Link to="/example-queries">examples</Link> to view some practical queries.
+                                        <sup>1</sup> query below, or select and modify an example query from the panel on the right side. <br />
+                                        
+                                        {/* navigate to <Link to="/example-queries">examples</Link> to view some practical queries. */}
                                     </p>
 
                                     {/* <div id="visualization" style="display: none">
 		             <input type="button" id="hidebutton" value="Hide visualization" onclick="vizHide()">
 		             <div id="results"></div>
 		           </div> */}
-                                    <pre style={{ margin: 0, width:'87%' }}>
+                                    {/* <pre style={{ margin: 0, width: '87%' }}>
                                         <span>
                                             PREFIX     rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; <br />
                                             PREFIX    rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; <br />
                                             PREFIX prokino: &lt;http://prokino.uga.edu/prokino#&gt; <br />
                                         </span>
-                                    </pre>
+                                    </pre> */}
+                                    {/* <p>Write or modify an SPARQL query:</p> */}
                                     <textarea
                                         style={{ fontFamily: "'Courier New', Courier, monospace" }}
                                         rows="20"
                                         cols="62"
                                         name="query"
                                         placeholder="Write your SPARQ query or select an example..."
-                                        onChange={handleQueryChange}
+                                        // onChange={handleQueryChange}
                                         value={query}
                                     />
 
 
                                     <div>
                                         <Button className="btn btn-primary" aria-label="Execute" onClick={executeQuery}>
-                                            {executeMessage}
+                                            Execute Query 
+                                            {/* {executeMessage} */}
                                         </Button>
+                                        <p style={{fontStyle:'italic'}}> Note: Only <code>Select</code> queries are allowed.</p>
                                         {/* <span style={{ paddingLeft: '10px', float: 'right' }}>
                                             <Link to="/example-queries">Example queries</Link>
 
                                         </span> */}
-                                        {/* <input type="button" value="Execute" onclick="execute( myform.query.value, myform.display.value )" /> */}
 
                                     </div>
                                 </td>
@@ -213,3 +260,8 @@ export default function Queries() {
         </div>
     </Layout>)
 }
+
+
+export default connect(state => ({
+    sparqlResult: state.app.sparqlResult
+  }), null)(Queries);

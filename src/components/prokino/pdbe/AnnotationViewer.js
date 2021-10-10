@@ -99,7 +99,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         catch (error) { setAnnotations("NA"); }
     }
     const handleAlphafoldPredictions = () => {
-        let track = { labelType: "text", label: "AlphaFold-Predictions", data: [] };
+        let track = { labelType: "text", label: "AlphaFold Predictions", data: [] };
         const data = [{ from: 50, to: 100, label: "some description" }, { from: 120, to: 290, label: "another description" }]
         // let dataItem = { accession: "", labelType: "text", label: p.label, color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: p.label, labelTooltip: "lt", locations: [] }
         let dataItem = { accession: "", labelType: "text", label: "Prediction", color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: "tooltip test", labelTooltip: "lt", locations: [] }
@@ -117,7 +117,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         });
         track.data.push(dataItem);
         let tracks = []
-        tracks.push(track)
+        //#todo: uncomment to add predictions
+        //tracks.push(track); 
         //structuralMotifTrack.data.push(dataItem)
         const legends = {
             "alignment": "right",
@@ -131,7 +132,8 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             }
         }
         let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: tracks }
-        setAlphafoldPredictions(superTrack);
+      
+        setAlphafoldPredictions(superTrack); 
 
     }
     const handleStructuralMotifs = () => {
