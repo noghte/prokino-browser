@@ -305,18 +305,16 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #b90d2f;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
-  text-decoration: underline;
+  color:#ca0e33;
+  text-decoration: none;
+  /* font-weight: bold; */
 }
-a:focus {
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
+
 figure {
   margin: 0;
 }

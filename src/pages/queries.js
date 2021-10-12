@@ -7,7 +7,6 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setSparqlResult } from '../state/app';
-
 import { SPARQL_ENDPOINT } from '../components/prokino/Endpoints';
 
 import {
@@ -32,6 +31,7 @@ import React, { useState } from 'react';
 import ExampleQueries from '../components/sparql/ExampleQueries';
 function Queries(props) {
     const [query, setQuery] = useState('');
+    const [exampleQueryTitle, setExampleQueryTitle] = useState('');
     // const [csvData, setCsvData] = useState(null);
     // const [executeMessage, setExecuteMessage] = useState('Execute');
     // const [submitting, setSubmitting] = useState(false);
@@ -79,10 +79,13 @@ function Queries(props) {
     // function handleQueryChange(event) {
     //     setQuery(event.target.value)
     // }
-    function exampleQuerySelected(query) {
+    function exampleQuerySelected(evt) {
+        console.log("evt",evt)
         setShouldShowResults(false);
         props.dispatch(setSparqlResult(null));
-        setQuery(query);
+        setExampleQueryTitle(evt.title);
+        setQuery(evt.query);
+
         if (window)
             window.scrollTo(0, 0);
     }
@@ -204,11 +207,13 @@ function Queries(props) {
                                             PREFIX prokino: &lt;http://prokino.uga.edu/prokino#&gt; <br />
                                         </span>
                                     </pre> */}
-                                    {/* <p>Write or modify an SPARQL query:</p> */}
+                                    <p style={{margin:'0 0 0px', textAlign:'right'}}>
+                                    <span style={{  float:'left'}}>Query:</span>
+                                     <span style={{fontWeight:'bold', fontStyle:'italic'}}>{exampleQueryTitle}</span>
+                                    </p>
                                     <textarea
-                                        style={{ fontFamily: "'Courier New', Courier, monospace" }}
+                                        style={{ width:'100%', fontFamily: "'Courier New', Courier, monospace" }}
                                         rows="20"
-                                        cols="62"
                                         name="query"
                                         placeholder="Write your SPARQ query or select an example..."
                                         // onChange={handleQueryChange}
@@ -218,7 +223,7 @@ function Queries(props) {
 
                                     <div>
                                         <Button className="btn btn-primary" aria-label="Execute" onClick={executeQuery}>
-                                            Execute Query 
+                                            Execute 
                                             {/* {executeMessage} */}
                                         </Button>
                                         <p style={{fontStyle:'italic'}}> Note: Only <code>Select</code> queries are allowed.</p>

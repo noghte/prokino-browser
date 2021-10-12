@@ -1,10 +1,104 @@
 body
 {
-    padding-top: 56px;
+    padding-top: 0.1rem;
 }
 #ugalogo
 {
     height:30px;
+    padding-left: 35px;
+}
+
+#prokino-title
+{
+  font-family: 'poppins', Arial, Helvetica, sans-serif;
+  color: #ddd;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+  0px 8px 13px rgba(0,0,0,0.1),
+  0px 18px 23px rgba(0,0,0,0.1);
+  font-size: x-large;
+}
+#prokino-main
+{
+  padding: 20px;
+  min-height: 100%;
+  margin: 0 auto -100px;
+}
+#prokino-navbar
+{
+  border-bottom: 3px solid rgba(241, 9, 9, 0.5);
+}
+
+.prokino-btn
+ {
+  padding: 3px 3px;
+  font-size: 14px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+  background-color: rgba(241, 9, 9);
+  border-color: #ddd;
+}
+.prokino-btn:focus,
+.prokino-btn:hover,
+.prokino-btn:active
+ {
+  color: #fff;
+  background-color: rgba(241, 9, 9);
+  border-color: #aaa;
+}
+.box-bordered {
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  position: relative;
+  /* background: white; */
+  border-radius: 5%;
+  /* color: white; */
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,.25);
+  /* font-weight: 450; */
+  transition: all .2s ease;
+}
+.box-bordered:hover {
+  border-radius: 2% 2% 6% 6%;
+  box-shadow: 1px 1px 1px 1px #ddd;
+  /* font-weight: 400; */
+}
+
+.back-to-top-link {
+  /* display: inline-block;
+  text-decoration: none;
+  font-size: 2rem;
+  line-height: 3rem;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #d6e3f0;
+
+  padding: 0.25rem; */
+}
+
+.back-to-top-wrapper {
+  /* // uncomment to visualize "track" */
+  /* outline: 1px solid red; */
+  /* position: absolute;
+  top: 100vh;
+  right: 0.25rem;
+  bottom: -5em;
+  width: 3em;
+  pointer-events: none; */
+  text-align: right;
+}
+
+
+
+.footer,
+.push {
+  height: 80px;
+}
+.wrapper-for-footer {
+  min-height: 100%;
+  vertical-align:middle;
+  margin-bottom: -80px;/* Equal to height of footer */
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -501,5 +595,6 @@ body
   {
     margin-right: 0;
     margin-left: 0;
-  
   }
+
+ 

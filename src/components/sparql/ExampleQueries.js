@@ -99,7 +99,7 @@ export default function ExampleQueries(props) {
                                 <CardText style={{ borderTop: '1px' }}>
                                     {q.description}
                                 </CardText>
-                                <Button color="primary" size="sm" onClick={() => viewQuery(q.query)}>View</Button>
+                                <Button color="primary" size="sm" onClick={() => viewQuery(q)}>View</Button>
                             </CardBody>
                         </Card>
                         return card;

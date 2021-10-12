@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 import QueryResultTable from './QueryResultTable';
 import QueryResultBarChart from './QueryResultBarChart';
 import QueryResultPieChart from './QueryResultPieChart';
@@ -65,7 +66,7 @@ function QueryResult(props) {
   }
 
   if (!props.sparqlResult)
-    return <span>Loading...</span>
+    return <Skeleton count={10} height={20} tyle={{ borderRadius: 5 }} />
 
   let data = props.sparqlResult; //from redux
   let renderedChart = null;

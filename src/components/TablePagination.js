@@ -2,21 +2,29 @@
 import React from "react";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import PropTypes from "prop-types";
+const MAX_PAGES = 20;
+function updatePagesToShow(pagesCount,currentPage)
+{
 
+}
 const TablePagination = ({
   pagesCount,
   currentPage,
   handlePageClick,
   handlePreviousClick,
   handleNextClick
-}) => (
+}) => {
+  const MAX_PAGES = 20;
+  let pagesToShow = updatePagesToShow(pagesCount,currentPage)
+
+  return (
   <Pagination>
     <PaginationItem disabled={currentPage <= 0}>
       <PaginationLink onClick={handlePreviousClick} previous href="#" />
     </PaginationItem>
-
-    {[...Array(pagesCount>20?20:pagesCount)].map((page, i) => (
-      <PaginationItem active={i === currentPage} key={i}>
+  
+    {[...Array( Math.min(pagesCount,MAX_PAGES))].map((page, i) => (
+      <PaginationItem active={i === currentPage} key={`page-${i}`}>
         <PaginationLink onClick={e => handlePageClick(e, i)} href="#">
           {i + 1}
         </PaginationLink>
@@ -27,7 +35,7 @@ const TablePagination = ({
       <PaginationLink onClick={handleNextClick} next href="#" />
     </PaginationItem>
   </Pagination>
-);
+);}
 TablePagination.propTypes = {
   pagesCount: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
