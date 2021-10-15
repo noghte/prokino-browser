@@ -13,7 +13,23 @@
   background: #ddd;
 
 }
+.menu-item
+{
+  /* font-weight: 400; */
+  /* height: 2.5em; */
+  margin-top: 1rem;
 
+}
+.menu-item-category
+{
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.menu-item-level2
+{
+  margin-left: 1rem;
+}
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
   background: #fff;
@@ -54,20 +70,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
     font-size: 1.35em;
     font-family: 'Raleway', Arial, sans-serif
   }
-  .bm-menu a 
+
+  .bm-menu a, a:visited
   {
     color: #b8b7ad;
-    height: 2.5em;
   }
-  .bm-menu a:hover a:active
+  .bm-menu a:hover, a:active
   {
-    color: #fff;
+    /* color: #b8b7ad; */
+    color: red;
     text-decoration: underline;
   }
-  .bm-menu a:visited
-  {
-    color: #b8b7ad !important;
-  }
+
   /* Morph shape necessary with bubble or elastic */
   .bm-morph-shape {
     fill: #373a47;

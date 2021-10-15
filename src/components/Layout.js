@@ -31,7 +31,10 @@ const Layout = ({ children }) => {
       <Menu>
           <Link id="home" className="menu-item" to="/">Home</Link>
           <Link id="search" className="menu-item" to="/browser">Search</Link>
-          <Link id="browse-data" className="menu-item" to="/browse-data">Browse</Link>
+          <p className="menu-item menu-item-category">Browse</p>
+              <Link id="browse-organisms" className="menu-item-level2" to="/organisms">Organisms</Link>
+              <Link id="browse-diseases" className="menu-item-level2" to="/diseases">Diseases</Link>
+              <Link id="browse-fd" className="menu-item-level2" to="/functional-domains">Functional Domains</Link>
           <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
           <Link id="about" className="menu-item" to="/about">About</Link>
         </Menu>
@@ -68,8 +71,7 @@ const Layout = ({ children }) => {
 
         <main className="prokino-main">{children}</main>
         {/* Begin Footer */}
-        {/* style={{ marginTop: '2rem' }} */}
-        <div class="push"></div>
+        {/* <div class="push"></div> */}
         <footer className="footer bg-secondary"> 
           <div className="container">
             <div className="row align-items-center">

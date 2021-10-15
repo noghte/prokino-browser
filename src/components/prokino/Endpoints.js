@@ -7,6 +7,9 @@ const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification`;
 const SPARQL_ENDPOINT = `${BASE_ENDPOINT}/sparql`
 const SPARQL_CATEGORIES =`${BASE_ENDPOINT}/squerycategory`
 const SPARQL_SAMPLEQUERIES =`${BASE_ENDPOINT}/squery`
+const ORGANISM_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:Organism`
+const FUNCDOMAINS_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:FunctionalDomain`
+const DISEASES_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:Cancer`
 
 const PDB_BESTSTRUCTURE_ENDPOINT="https://www.ebi.ac.uk/pdbe/graph-api/mappings/best_structures"
 //for annotation viewer:
@@ -23,6 +26,9 @@ export {
         SPARQL_ENDPOINT,
         PDB_BESTSTRUCTURE_ENDPOINT,
         SPARQL_CATEGORIES,
-        SPARQL_SAMPLEQUERIES
+        SPARQL_SAMPLEQUERIES,
+        ORGANISM_ENDPOINT,
+        FUNCDOMAINS_ENDPOINT,
+        DISEASES_ENDPOINT
 }
 
