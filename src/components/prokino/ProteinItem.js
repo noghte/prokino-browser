@@ -40,7 +40,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
         }
     }
 
-    console.log("ligandMappings",ligandMappings)
 
     const [sequenceData,setSequenceData] = useState(null);
 
@@ -70,7 +69,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
             //     return <></>
             let seqNames = objectProperties["prokino:hasSequence"][0]["v"].filter(s=>s.toLowerCase().includes("uniprot") && s.toLowerCase().includes("prokino"));
             if (!seqNames)
-                console.log("no sequence found in " + seqNames[0]["v"])
+                console.error("no sequence found in " + seqNames[0]["v"])
             let seqName = seqNames[0] //'prokino:Human_EGFR-UniProt_Seq'
             let url = `${BASE_ENDPOINT}/sequence/${seqName}`;
             const result = await axios.get(url);

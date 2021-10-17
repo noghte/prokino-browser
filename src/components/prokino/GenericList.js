@@ -28,7 +28,9 @@ export default function GenericList({ protein, entityClass, apiClassName, sepera
   if (!prokinoData)
     return <p>Loading ...</p>
 
-  return <LinkList values={prokinoData.hits} entityClass={entityClass} seperator={seperator} />;
+  return  <LinkList values={prokinoData.hits} entityClass={entityClass} seperator={seperator} />
+
+
 
 }
 

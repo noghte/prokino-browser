@@ -9,8 +9,10 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
         {
             //we should have a target value to get filtered values, if not, consider the first element as the main element
             let entity = entityClass ? values.find(el => el[key] === entityClass) : values[0];
+            
             if (entity) 
             {
+                entityClass = entity[key];
                 const length = entity[value].length;
                 for (let i=0;i<length;i++) //loop through pairs of values
                 {
@@ -20,9 +22,9 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <Link to={`/browse/#?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
+                            <a href={`/browse/?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
                                 {label}
-                            </Link>
+                            </a>
                         );
                         if (i<length-1) //if it is not the last item (don't add separator to the last item)
                             links.push(seperator); // add a seperator (e.g. a comma) to seprate list of links

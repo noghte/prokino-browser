@@ -76,9 +76,10 @@ function Queries(props) {
         setDisplayType(PIECHART);
     }
 
-    // function handleQueryChange(event) {
-    //     setQuery(event.target.value)
-    // }
+    function handleQueryChange(event) {
+        setShouldShowResults(false);
+        setQuery(event.target.value)
+    }
     function exampleQuerySelected(evt) {
         console.log("evt",evt)
         setShouldShowResults(false);
@@ -216,7 +217,7 @@ function Queries(props) {
                                         rows="20"
                                         name="query"
                                         placeholder="Write your SPARQ query or select an example..."
-                                        // onChange={handleQueryChange}
+                                        onChange={handleQueryChange}
                                         value={query}
                                     />
 

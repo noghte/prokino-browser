@@ -9,11 +9,11 @@ import { graphql } from 'gatsby';
 
 export default function Browse({ location, data }) { //{protein}
     let av = require(`../../static/av.json`);
-    const urlParams = new URLSearchParams(location.hash.substring(1));
+    const urlParams = new URLSearchParams(location.search);
     const [cifFileNames, setCifFileNames] = useState(null);
     const [entityClass, setEntityClass] = useState(urlParams.get("c"));
     const [value, setValue] = useState(urlParams.get("v"));
-    console.log("entityClass", entityClass);
+
     const [uniprotId, setUniprotId] = useState(null);
     const [uniprotIdRequired, setUniprotIdRequired] = useState(false);
 
@@ -108,7 +108,7 @@ export default function Browse({ location, data }) { //{protein}
                 setUniprotIdRequired(true);
         };
         getProkinoData();
-    }, [entityClass]);
+    }, []);
 
     // useEffect(() => {
     //     const getAnnotationViewerData = async () => {
@@ -162,7 +162,6 @@ export default function Browse({ location, data }) { //{protein}
 
     // if (!entityClass)
     //     return <p>Loading..</p>
-
     switch (entityClass) {
         case "prokino:Protein":
             // if (!cifFileNames)

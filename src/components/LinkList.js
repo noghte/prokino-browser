@@ -1,10 +1,12 @@
 import React from "react";
 import {Link} from 'gatsby';
+import { navigate } from '@reach/router';
 
 export default function LinkList({values, entityClass, seperator, key="entity",value: label="entityDisplay"})
 {
-    
+
     let links = []
+
     if (values)
         {
             //we should have a target value to get filtered values, if not, consider the first element as the main element
@@ -13,9 +15,10 @@ export default function LinkList({values, entityClass, seperator, key="entity",v
                 const element = values[i];
                 links.push(
                     <>
-                    <Link to={`/browse/#?c=${entityClass}&v=${element[key]}`}  key={`link-${entityClass}-${i}`}>
+                    {/* onClick={linkClicked(entityClass,element,i)} */}
+                    <a href={`?c=${entityClass}&v=${element[key]}`} key={`link-${entityClass}-${i}`}>
                         {element[label]}
-                    </Link>
+                    </a>
                     {i<values.length-1 && seperator }  {/* add seperator if it's not the last item */}
                     </>
                 );
