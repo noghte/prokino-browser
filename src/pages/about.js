@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from "gatsby"
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import classnames from 'classnames'
 
@@ -125,9 +125,9 @@ export default function About() {
                                                     The picture below is an outline of the ProKinO schema as a UML class diagram.
                                                     It shows major ProKinO classes and object properties
                                                     (relationships connecting ProKinO classes). It is
-                                                    <Link to="../ui/ProKinO-Schema-3.pdf"> available in PDF</Link>, as well<p>
+                                                    <Link to={withPrefix("/ui/ProKinO-Schema-3.pdf")}> available in PDF</Link>, as well<p>
 
-                                                        <Link to="../ui/ProKinO-Schema-3.png">
+                                                        <Link to={withPrefix("/ui/ProKinO-Schema-3.png")}>
                                                             <img src="../ui/ProKinO-Schema-3.png" alt="ProKinO Schema" style={{ width: '700px' }} />
                                                         </Link>
 

@@ -1,5 +1,6 @@
 import React from "react";
-import {Link} from 'gatsby';
+import { Link, withPrefix } from "gatsby"
+
 
 export default function LinkList({values, entityClass, seperator = ", ", key="c",value="v"})
 {
@@ -22,7 +23,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <a href={`/browse/?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
+                            <a href={withPrefix(`/browse/?c=${entityClass}&v=${link}`)} key={`link-${entityClass}-${i}`}>
                                 {label}
                             </a>
                         );

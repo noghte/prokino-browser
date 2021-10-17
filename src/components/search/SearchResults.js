@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link } from "gatsby"
+import { Link, withPrefix } from "gatsby"
 import axios from 'axios';
 import { ENTITY_ENDPOINT } from '../prokino/Endpoints';
 import { propTypes } from 'react-bootstrap/esm/Image';
@@ -178,7 +178,7 @@ export default function SearchResults(props) {
                 </div>
               </div>
               <div className="search-results profile-teaser-main">
-                <Link activeClassName="nav-link" key={index} to={`/browse/?c=${item.entityClass}&v=${item.entity}`}>
+                <Link activeClassName="nav-link" key={index} to={withPrefix(`/browse/?c=${item.entityClass}&v=${item.entity}`)}>
                   <div>{item.entity}</div>
                 </Link>
                 <div className="profile-info">
