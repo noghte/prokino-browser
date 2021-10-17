@@ -23,8 +23,7 @@ export default function QueryResultTable(props) {
     if (filteredData.length > 0) {
       return (
         <>
-       
-          <Table striped id='sparql-result' style={{ tableLayout: 'fixed' }}>
+          <Table striped id='sparql-result' style={{  tableLayout: 'fixed' }}>
             <tbody>
               {/* header */}
               <tr>

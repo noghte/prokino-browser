@@ -172,7 +172,7 @@ function Queries(props) {
                             </Nav>
 
                         </Collapse>
-                        <NavbarText>SPARQL Result</NavbarText>
+                        <NavbarText style={{fontStyle:'italic'}}>SPARQL Result</NavbarText>
 
                     </Navbar>
 

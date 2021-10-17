@@ -141,9 +141,6 @@ export default function Browse({ location, data }) { //{protein}
     if (!prokinoData)
         return <Layout>Loading ...</Layout>;
 
-
-
-
     // handle success
     let dataProps = {};
     if (prokinoData.datatypeProperties)

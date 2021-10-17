@@ -29,15 +29,16 @@ const Layout = ({ children }) => {
   return (
     <>
       <Menu>
-          <Link id="home" className="menu-item" to="/">Home</Link>
-          <Link id="search" className="menu-item" to="/browser">Search</Link>
-          <p className="menu-item menu-item-category">Browse</p>
-              <Link id="browse-organisms" className="menu-item-level2" to="/organisms">Organisms</Link>
-              <Link id="browse-diseases" className="menu-item-level2" to="/diseases">Diseases</Link>
-              <Link id="browse-fd" className="menu-item-level2" to="/functional-domains">Functional Domains</Link>
-          <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
-          <Link id="about" className="menu-item" to="/about">About</Link>
-        </Menu>
+        <Link id="home" className="menu-item" to="/">Home</Link>
+        <Link id="search" className="menu-item" to="/browser">Search</Link>
+        <p className="menu-item menu-item-category">Browse</p>
+        <a id="browse-organisms" className="menu-item-level2" href="/browse-data/?v=organisms">Organisms</a>
+        <a id="browse-diseases" className="menu-item-level2" href="/browse-data/?v=diseases">Diseases</a>
+        <a id="browse-diseases" className="menu-item-level2" href="/browse-data/?v=fdomains">Functional Domains</a>
+
+ <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
+        <Link id="about" className="menu-item" to="/about">About</Link>
+      </Menu>
       <nav id="prokino-navbar" className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
         <div className="container">
 
@@ -72,7 +73,7 @@ const Layout = ({ children }) => {
         <main className="prokino-main">{children}</main>
         {/* Begin Footer */}
         {/* <div class="push"></div> */}
-        <footer className="footer bg-secondary"> 
+        <footer className="footer bg-secondary">
           <div className="container">
             <div className="row align-items-center">
               <div className="col">
