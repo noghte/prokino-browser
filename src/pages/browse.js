@@ -32,7 +32,6 @@ export default function Browse({ location, data }) { //{protein}
     useEffect(() => {
         if (uniprotId && data.allFile && data.allFile.nodes.length > 0) {
 
-            console.log("uniprotId", uniprotId)
             const filteredArray = Object.values(av.content).filter(function (itm) {
                 return itm.UniProt_ID == uniprotId;
             });
@@ -203,11 +202,9 @@ export default function Browse({ location, data }) { //{protein}
 
 export const query = graphql`
 query cifFileNames {
-    allFile(sort: {fields: name}) {
+    allFile(sort: {fields: name}, filter: {relativeDirectory: {eq: "cif"}, ext:{eq:".cif"}}) {
       nodes {
         name
-        relativeDirectory
       }
     }
-  }
-  `
+  }`

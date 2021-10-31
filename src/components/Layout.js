@@ -7,8 +7,9 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import { Link,withPrefix } from "gatsby"
 import ugaLogo from '../images/GEORGIA-FS-CW-1024x335.png'
+import AppendHead from 'react-append-head';
 
 //import { useStaticQuery, graphql } from "gatsby"
 
@@ -28,15 +29,16 @@ const Layout = ({ children }) => {
 
   return (
     <>
+
       <Menu>
         <Link id="home" className="menu-item" to="/">Home</Link>
         <Link id="search" className="menu-item" to="/browser">Search</Link>
         <p className="menu-item menu-item-category">Browse</p>
-        <a id="browse-organisms" className="menu-item-level2" href="/browse-data/?v=organisms">Organisms</a>
-        <a id="browse-diseases" className="menu-item-level2" href="/browse-data/?v=diseases">Diseases</a>
-        <a id="browse-diseases" className="menu-item-level2" href="/browse-data/?v=fdomains">Functional Domains</a>
+        <a id="browse-organisms" className="menu-item-level2" href={withPrefix("/browse-data/?v=organisms")}>Organisms</a>
+        <a id="browse-diseases" className="menu-item-level2" href={withPrefix("/browse-data/?v=diseases")}>Diseases</a>
+        <a id="browse-diseases" className="menu-item-level2" href={withPrefix("/browse-data/?v=fdomains")}>Functional Domains</a>
 
- <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
+        <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
         <Link id="about" className="menu-item" to="/about">About</Link>
       </Menu>
       <nav id="prokino-navbar" className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">

@@ -16,7 +16,7 @@ export default function LinkList({values, entityClass, seperator, key="entity",v
                 links.push(
                     <>
                     {/* onClick={linkClicked(entityClass,element,i)} */}
-                    <a href={`?c=${entityClass}&v=${element[key]}`} key={`link-${entityClass}-${i}`}>
+                    <a className="prokino-link" href={`?c=${entityClass}&v=${element[key]}`} key={`link-${entityClass}-${i}`}>
                         {element[label]}
                     </a>
                     {i<values.length-1 && seperator }  {/* add seperator if it's not the last item */}

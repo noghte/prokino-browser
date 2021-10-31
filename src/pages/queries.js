@@ -173,8 +173,8 @@ function Queries(props) {
                             </Nav>
 
                         </Collapse>
-                        <NavbarText style={{fontStyle:'italic'}}>SPARQL Result</NavbarText>
-
+                        {/* <NavbarText style={{fontStyle:'italic'}}>SPARQL Result</NavbarText> */}
+                        <a href="#q" className="prokino-link">Scroll Down</a>
                     </Navbar>
 
                 }
@@ -243,7 +243,7 @@ function Queries(props) {
                         </tbody>
                     </table>
                 </div>
-                <div className="col">
+                <div className="col" id="q">
                     <ExampleQueries onSelect={exampleQuerySelected} />
                 </div>
 

@@ -125,11 +125,11 @@ export default function About() {
                                                     The picture below is an outline of the ProKinO schema as a UML class diagram.
                                                     It shows major ProKinO classes and object properties
                                                     (relationships connecting ProKinO classes). It is
-                                                    <Link to={withPrefix("/ui/ProKinO-Schema-3.pdf")}> available in PDF</Link>, as well<p>
+                                                    <a href={withPrefix("/ui/ProKinO-Schema-3.pdf")}> available in PDF</a>, as well<p>
 
-                                                        <Link to={withPrefix("/ui/ProKinO-Schema-3.png")}>
-                                                            <img src="../ui/ProKinO-Schema-3.png" alt="ProKinO Schema" style={{ width: '700px' }} />
-                                                        </Link>
+                                                        <a href={withPrefix("/ui/ProKinO-Schema-3.png")}>
+                                                            <img src={withPrefix("/ui/ProKinO-Schema-3.png")} alt="ProKinO Schema" style={{ width: '700px' }} />
+                                                        </a>
 
                                                     </p></td>
                                             </tr>

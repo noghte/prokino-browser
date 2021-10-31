@@ -44,7 +44,7 @@ const IndexPage = () => (
               You can use this ontology browser to quickly locate protein kinase genes and a lot of information related to the genes, including the sequence, structure, function, mutation and pathway information on kinases.</p>
           </div>
           <div className="card-footer">
-            <a href="browser" className="btn btn-primary btn-sm">Launch</a>
+            <a href="browser" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ const IndexPage = () => (
             <p className="card-text">The Kinome Viewer (KinView) can be used as a comparative tool to identify differences and similarities in natural variation, cancer variants and post-translational modifications between kinase groups, families and subfamilies. </p>
           </div>
           <div className="card-footer">
-            <a href="https://prokino.uga.edu/kinview" className="btn btn-primary btn-sm">Launch</a>
+            <a href="https://prokino.uga.edu/kinview" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@ const IndexPage = () => (
             <p className="card-text">To download a version of the ontology, or an offline version of the KinView, you can visit the Downloads page.</p>
           </div>
           <div className="card-footer">
-            <a href="downloads.html" className="btn btn-primary btn-sm">Launch</a>
+            <a href="downloads.html" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>
           </div>
         </div>
       </div>

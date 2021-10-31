@@ -23,7 +23,7 @@ export default function LinkList({values, entityClass, seperator = ", ", key="c"
                         const label = entity[value][i];
                         const link = entity[value][i-1];
                         links.push(
-                            <a href={withPrefix(`/browse/?c=${entityClass}&v=${link}`)} key={`link-${entityClass}-${i}`}>
+                            <a className="prokino-link" href={`?c=${entityClass}&v=${link}`} key={`link-${entityClass}-${i}`}>
                                 {label}
                             </a>
                         );

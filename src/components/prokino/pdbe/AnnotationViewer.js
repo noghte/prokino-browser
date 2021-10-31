@@ -98,27 +98,59 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         }
         catch (error) { setAnnotations("NA"); }
     }
+    const getAlphaFoldGroupLabel = (score) => {
+        let pr = { "label": "", "color": "" }
+        switch (true) {
+            case score > 90: //background-color: rgb(0, 83, 214);
+                pr["label"] = "Very High";
+                pr["color"] = "rgb(0, 83, 214)";
+                break;
+            case score > 70: //background-color: rgb(101, 203, 243);
+                pr["label"] = "Confident";
+                pr["color"] = "rgb(101, 203, 243)";
+                break;
+            case score > 50: //background-color: rgb(255, 219, 19);
+                pr["label"] = "Low";
+                pr["color"] = "rgb(255, 219, 19)";
+                break;
+            default: //<50 & // background-color: rgb(255, 125, 69);
+                pr["label"] = "Very Low";
+                pr["color"] = "rgb(255, 125, 69)";
+                break;
+        }
+        return pr;
+    }
+    function getAlphaFoldData() {
+        let pr = null;
+        try {
+            const alphafoldPredictions = require(`/static/alphafolds/O00444.json`).data; //${uniprotId}
+            pr = alphafoldPredictions.map(pr => {
+                const afVals = getAlphaFoldGroupLabel(pr.confidence)
+                return {
+                    start: parseInt(pr.pos),
+                    end: parseInt(pr.pos),
+                    tooltipContent: afVals.label + ", Confidence Score=" + pr.confidence,
+                    color: afVals.color,
+                }
+            });
+            console.log("alphafoldPredictions", pr);
+
+        } catch (e) {
+            if (e.code == 'MODULE_NOT_FOUND') {
+                console.log(`No mapping for ${uniprotId}'s alphafold prediction found.`)
+            }
+        }
+        //const afData = [{ from: 50, to: 100, label: "some description" }, { from: 120, to: 290, label: "another description" }];
+        return pr;
+    }
+
     const handleAlphafoldPredictions = () => {
-        let track = { labelType: "text", label: "AlphaFold Predictions", data: [] };
-        const data = [{ from: 50, to: 100, label: "some description" }, { from: 120, to: 290, label: "another description" }]
-        // let dataItem = { accession: "", labelType: "text", label: p.label, color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: p.label, labelTooltip: "lt", locations: [] }
-        let dataItem = { accession: "", labelType: "text", label: "Prediction", color: "rgb(65, 105, 225)", type: "UniProt range", tooltipContent: "tooltip test", labelTooltip: "lt", locations: [] }
-        data.forEach(p => {
-            let fragments = []
-
-            //setting fragments for each track (smf)
-            let fragment = {}
-            fragment.start = parseInt(p.from)
-            fragment.end = parseInt(p.to)
-            fragment.tooltipContent = p.label;
-            fragments.push(fragment)
-            dataItem.locations.push({ "fragments": fragments })
-
-        });
-        track.data.push(dataItem);
-        let tracks = []
+        let dataItem = { accession: "", labelType: "text", label: "Prediction",  type: "UniProt range", tooltipContent: "tooltip test", labelTooltip: "lt", locations: [{ "fragments": getAlphaFoldData() }] }
+        let track = { labelType: "text", label: "AlphaFold Predictions", data: [dataItem] };
+ 
+        // let tracks = []
         //#todo: uncomment to add predictions
-        //tracks.push(track); 
+        // tracks.push(track);
         //structuralMotifTrack.data.push(dataItem)
         const legends = {
             "alignment": "right",
@@ -131,9 +163,9 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
                 ]
             }
         }
-        let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: tracks }
-      
-        setAlphafoldPredictions(superTrack); 
+        let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: track }
+
+        setAlphafoldPredictions(superTrack);
 
     }
     const handleStructuralMotifs = () => {
@@ -151,7 +183,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             });
             return r;
         }, {});
-        console.log("results",results);
+        console.log("results", results);
         const smfValues = Object.values(results);
         let tracks = []
 
@@ -165,8 +197,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             //setting fragments for each track (smf)
             let fragments = []
             smf.motifData.forEach(motifData => {
-                if (motifData)
-                {
+                if (motifData) {
                     let fragment = {}
                     fragment.start = parseInt(motifData.startLocation)
                     fragment.end = parseInt(motifData.endLocation)
@@ -176,6 +207,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             });
             dataItem.locations.push({ "fragments": fragments })
             track.data.push(dataItem);
+
             //tracks.push(track)
         })
         tracks.push(track)
@@ -513,3 +545,13 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     return <ProtvistaPdbDisplay data={customData} uniprotId={uniprotId} />
 
 }
+
+// export const query = graphql`
+// query jsonFileNames {
+//     allFile(sort: {fields: name}, filter: {relativeDirectory: {eq: "alphafolds"}, ext:{eq:".json"}}) {
+//       nodes {
+//         name
+//         relativeDirectory
+//       }
+//     }
+//   }`
