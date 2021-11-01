@@ -123,7 +123,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     function getAlphaFoldData() {
         let pr = null;
         try {
-            const alphafoldPredictions = require(`/static/alphafolds/O00444.json`).data; //${uniprotId}
+            const alphafoldPredictions = require(`/static/alphafolds/${uniprotId}.json`).data;
             pr = alphafoldPredictions.map(pr => {
                 const afVals = getAlphaFoldGroupLabel(pr.confidence)
                 return {
@@ -145,25 +145,46 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     }
 
     const handleAlphafoldPredictions = () => {
-        let dataItem = { accession: "", labelType: "text", label: "Prediction",  type: "UniProt range", tooltipContent: "tooltip test", labelTooltip: "lt", locations: [{ "fragments": getAlphaFoldData() }] }
-        let track = { labelType: "text", label: "AlphaFold Predictions", data: [dataItem] };
- 
-        // let tracks = []
-        //#todo: uncomment to add predictions
-        // tracks.push(track);
-        //structuralMotifTrack.data.push(dataItem)
-        const legends = {
-            "alignment": "right",
-            "data": {
-                "AlphaFoldPredictions": [
+        const fragments = getAlphaFoldData();
+        if (!fragments)
+        {
+            setAlphafoldPredictions("NA");
+            return;
+        }
+
+        let superTrack = {
+            largeLabels: true,
+            sequence: sequenceData.residues,
+            length: sequenceData.residues.length,
+            legends: {
+                "alignment": "right",
+                "data": {
+                    "AlphaFoldPredictions": [
+                        {
+                            "color": "rgb(160,28,128)",
+                            "text": "AlphaFold Predictions"
+                        }
+                    ]
+                }
+            },
+            tracks: {
+                labelType: "text",
+                label: "AlphaFold Predictions",
+                data: [
                     {
-                        "color": "rgb(160,28,128)",
-                        "text": "AlphaFold Predictions"
+                        accession: "",
+                        labelType: "text",
+                        label: "Prediction",
+                        type: "UniProt range",
+                        tooltipContent: "tooltip test",
+                        labelTooltip: "lt",
+                        locations: [
+                            { "fragments": fragments }
+                        ]
                     }
                 ]
             }
         }
-        let superTrack = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: legends, tracks: track }
 
         setAlphafoldPredictions(superTrack);
 
@@ -521,7 +542,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     if (!customData)
         return <p>Loading...</p>;
 
-    if (alphafoldPredictions)
+    if (alphafoldPredictions && alphafoldPredictions!== "NA")
         customData.tracks = customData.tracks.concat(alphafoldPredictions.tracks);
     if (structuralMotifs)
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);
