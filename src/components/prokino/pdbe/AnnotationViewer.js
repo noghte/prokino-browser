@@ -98,29 +98,30 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         }
         catch (error) { setAnnotations("NA"); }
     }
-    const getAlphaFoldGroupLabel = (score) => {
-        let pr = { "label": "", "color": "" }
-        switch (true) {
-            case score > 90: //background-color: rgb(0, 83, 214);
-                pr["label"] = "Very High";
-                pr["color"] = "rgb(0, 83, 214)";
-                break;
-            case score > 70: //background-color: rgb(101, 203, 243);
-                pr["label"] = "Confident";
-                pr["color"] = "rgb(101, 203, 243)";
-                break;
-            case score > 50: //background-color: rgb(255, 219, 19);
-                pr["label"] = "Low";
-                pr["color"] = "rgb(255, 219, 19)";
-                break;
-            default: //<50 & // background-color: rgb(255, 125, 69);
-                pr["label"] = "Very Low";
-                pr["color"] = "rgb(255, 125, 69)";
-                break;
-        }
-        return pr;
-    }
+   
     function getAlphaFoldData() {
+        const getAlphaFoldGroupLabel = (score) => {
+            let pr = { "label": "", "color": "" }
+            switch (true) {
+                case score > 90: //background-color: rgb(0, 83, 214);
+                    pr["label"] = "Very High";
+                    pr["color"] = "rgb(0, 83, 214)";
+                    break;
+                case score > 70: //background-color: rgb(101, 203, 243);
+                    pr["label"] = "Confident";
+                    pr["color"] = "rgb(101, 203, 243)";
+                    break;
+                case score > 50: //background-color: rgb(255, 219, 19);
+                    pr["label"] = "Low";
+                    pr["color"] = "rgb(255, 219, 19)";
+                    break;
+                default: //<50 & // background-color: rgb(255, 125, 69);
+                    pr["label"] = "Very Low";
+                    pr["color"] = "rgb(255, 125, 69)";
+                    break;
+            }
+            return pr;
+        }
         let pr = null;
         try {
             const alphafoldPredictions = require(`/static/alphafolds/${uniprotId}.json`).data;
@@ -152,7 +153,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             return;
         }
 
-        let superTrack = {
+        const superTrack = {
             largeLabels: true,
             sequence: sequenceData.residues,
             length: sequenceData.residues.length,
@@ -450,22 +451,39 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
                 legends: {
                     alignment: 'right', // expected values 'left', 'right' or 'center'
                     data: { // Legend Row, key is used as the row label
-                        "Domains": [ // legends for Domains row
+                        // "Domains": [ // legends for Domains row
+                        //     {
+                        //         color: ["rgb(135,158,247)", "rgb(160,174,232)"], // legend color, supported rgb and hex code value
+                        //         text: "Domains 1" // legend text
+                        //     },
+                        //     {
+                        //         color: ["rgb(107,119,39)", "rgb(90,102,23)"],
+                        //         text: "Domains 2"
+                        //     }
+                        // ],
+                        "AlphaFold Predictions Scores": [ // legends for Domains row
                             {
-                                color: ["rgb(135,158,247)", "rgb(160,174,232)"], // legend color, supported rgb and hex code value
-                                text: "Domains 1" // legend text
+                                 
+                                color: ["rgb(0, 83, 214)"], // legend color, supported rgb and hex code value
+                                text: "Very High" // legend text
                             },
                             {
-                                color: ["rgb(107,119,39)", "rgb(90,102,23)"],
-                                text: "Domains 2"
-                            }
-                        ],
-                        "Annotations": [ // legends for Annotation row row
+                                 
+                                color: ["rgb(101, 203, 243)"], // legend color, supported rgb and hex code value
+                                text: "Confident" // legend text
+                            },
                             {
-                                color: ["rgb(255,99,163)"],
-                                text: "Custom Annotations"
-                            }
-                        ]
+                                 
+                                color: ["rgb(255, 219, 19)"], // legend color, supported rgb and hex code value
+                                text: "Low" // legend text
+                            },
+                            {
+                                 
+                                color: ["rgb(255, 125, 69)"], // legend color, supported rgb and hex code value
+                                text: "Very Low" // legend text
+                            },                    
+                        ],
+             
                     }
                 }
             });
