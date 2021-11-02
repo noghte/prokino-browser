@@ -98,7 +98,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         }
         catch (error) { setAnnotations("NA"); }
     }
-   
+
     function getAlphaFoldData() {
         const getAlphaFoldGroupLabel = (score) => {
             let pr = { "label": "", "color": "" }
@@ -147,8 +147,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
 
     const handleAlphafoldPredictions = () => {
         const fragments = getAlphaFoldData();
-        if (!fragments)
-        {
+        if (!fragments) {
             setAlphafoldPredictions("NA");
             return;
         }
@@ -249,7 +248,29 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         setStructuralMotifs(superTrack);
 
     }
+    const appendSubdomains = (subdomainsTrack) => {
+        //TODO: uncomment to add subdomains track
+        // if (!subdomains) { //new
+        //     const subdomainsTrackLegends = {
+        //         "alignment": "right",
+        //         "data": {
+        //             "Subdomains": [
+        //                 {
+        //                     "color": "rgb(94,220,128)",
+        //                     "text": "Subdomains"
+        //                 }
+        //             ]
+        //         }
+        //     }
+        //     let superTrackSubdomains = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: subdomainsTrackLegends, tracks: [subdomainsTrack] }
+        //     setSubdomains(superTrackSubdomains);
+        // }
+        // else { //append //TODO: check the problem
+        //     const newSubdomainsTrack = subdomains.tracks.push(subdomainsTrack);
+        //     setSubdomains(newSubdomainsTrack);
 
+        // }
+    }
     const handleSequenceMotifs = () => {
         const sequenceMotifsData = sequenceData.motifs.filter(m => m.entityClass == "prokino:SequenceMotif");
         //returning an array grouped by localName
@@ -296,20 +317,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         let superTrackSequenceMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
         setSequenceMotifs(superTrackSequenceMotifs);
 
-        const subdomainsTrackLegends = {
-            "alignment": "right",
-            "data": {
-                "Subdomains": [
-                    {
-                        "color": "rgb(14,120,28)",
-                        "text": "Subdomains"
-                    }
-                ]
-            }
-        }
-        let superTrackSubdomains = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: subdomainsTrackLegends, tracks: [subdomainsTrack] }
-        setSubdomains(superTrackSubdomains);
-
+        appendSubdomains(subdomainsTrack);
     }
 
     const handleLigandMotifs = () => {
@@ -373,19 +381,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         let superLigandMotifs = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: mainTrackLegends, tracks: [mainTrack] }
         setLigandMotifs(superLigandMotifs);
 
-        const subdomainsTrackLegends = {
-            "alignment": "right",
-            "data": {
-                "Subdomains": [
-                    {
-                        "color": "rgb(94,220,128)",
-                        "text": "Subdomains"
-                    }
-                ]
-            }
-        }
-        let superTrackSubdomains = { largeLabels: true, sequence: sequenceData.residues, length: sequenceData.residues.length, legends: subdomainsTrackLegends, tracks: [subdomainsTrack] }
-        setSubdomains(superTrackSubdomains);
+        appendSubdomains(subdomainsTrack);
 
     }
 
@@ -463,27 +459,27 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
                         // ],
                         "AlphaFold Predictions Scores": [ // legends for Domains row
                             {
-                                 
+
                                 color: ["rgb(0, 83, 214)"], // legend color, supported rgb and hex code value
                                 text: "Very High" // legend text
                             },
                             {
-                                 
+
                                 color: ["rgb(101, 203, 243)"], // legend color, supported rgb and hex code value
                                 text: "Confident" // legend text
                             },
                             {
-                                 
+
                                 color: ["rgb(255, 219, 19)"], // legend color, supported rgb and hex code value
                                 text: "Low" // legend text
                             },
                             {
-                                 
+
                                 color: ["rgb(255, 125, 69)"], // legend color, supported rgb and hex code value
                                 text: "Very Low" // legend text
-                            },                    
+                            },
                         ],
-             
+
                     }
                 }
             });
@@ -560,7 +556,7 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     if (!customData)
         return <p>Loading...</p>;
 
-    if (alphafoldPredictions && alphafoldPredictions!== "NA")
+    if (alphafoldPredictions && alphafoldPredictions !== "NA")
         customData.tracks = customData.tracks.concat(alphafoldPredictions.tracks);
     if (structuralMotifs)
         customData.tracks = customData.tracks.concat(structuralMotifs.tracks);

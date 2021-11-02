@@ -174,7 +174,7 @@ function Queries(props) {
 
                         </Collapse>
                         {/* <NavbarText style={{fontStyle:'italic'}}>SPARQL Result</NavbarText> */}
-                        <a href="#q" className="prokino-link">Scroll Down</a>
+                        <a href="#q" className="prokino-link">Scroll to {exampleQueryTitle}</a>
                     </Navbar>
 
                 }
