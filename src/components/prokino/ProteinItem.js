@@ -17,7 +17,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import { Link, withPrefix } from "gatsby"
 import CifOptions from './pdbe/CifOptions';
 import AppendHead from 'react-append-head';
-import {registerWebComponents} from 'protvista-prokino';
+// import {registerWebComponents} from 'protvista-prokino';
 // import '../../styles/icon-lib.css'
 // import '../../styles/sprite.css'
 // import '../../styles/rtheme.css'
@@ -86,7 +86,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     return (<Layout>
         <AppendHead>
             <script name="d3v5" order="0" src="https://d3js.org/d3.v5.min.js" charset="utf-8"  http-equiv="encoding" crossorigin="anonymous"></script>
-            {/* <script src={withPrefix('../../js/protvista-prokino.js')} type="text/javascript" /> */}
+            <script src={withPrefix('../../js/protvista-prokino.js')} type="text/javascript" />
             <script name="es5adapter" order="0" src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
             <link name="ebifonts" order="1" rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
         </AppendHead>
