@@ -20,8 +20,9 @@ function renderPiechart(data) {
       let hasIntegerValue = false;
       let dataItem = {}
       Object.keys(v).map(function (row) {
-        if (v[row].datatype === 'http://www.w3.org/2001/XMLSchema#integer')
-        {
+        if (v[row].datatype==='http://www.w3.org/2001/XMLSchema#integer'
+        || v[row].datatype==='http://www.w3.org/2001/XMLSchema#float' )
+      {
           hasIntegerValue = true;
           dataItem.value = v[row]["value"];
         }
@@ -40,21 +41,21 @@ function renderPiechart(data) {
       dataItems.push(dataItem);
 
     }
-    dataItems = dataItems.sort((a, b) => (parseInt(a.value) < parseInt(b.value)) ? 1 : -1)
+    dataItems = dataItems.sort((a, b) => (parseFloat(a.value) < parseFloat(b.value)) ? 1 : -1)
     dataItems = dataItems.slice(0, MAX_ITEMS);
 
     const totalValue = dataItems.reduce(function (accumulator, item) {
-      return accumulator + parseInt(item.value);
+      return accumulator + parseFloat(item.value);
     }, 0);
 
     dataItems.forEach(dataItem => {
-      const val = parseInt(dataItem["value"])
+      const val = parseFloat(dataItem["value"])
       chartData.push({ "x": createLabel(dataItem["label"], val, totalValue), "y": val });
     });
     const extraItems = dataItems.slice(-1 * (dataItems.length - MAX_ITEMS)); //get all items, except first MAX_ITEMS
     if (extraItems.length>0)
     {
-      const extraSum = extraItems.reduce((n, {value}) => n + parseInt(value), 0);
+      const extraSum = extraItems.reduce((n, {value}) => n + parseFloat(value), 0);
       chartData.push({"x":"Other","y":extraSum});
     }
 

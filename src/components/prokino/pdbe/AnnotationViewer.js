@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif, ligandMappings }) { //{protein}
     const [isReady, setIsReady] = React.useState(true);
-
     //Tell the component to setIsready to false for a few seconds when selectedCif changes
     // useEffect(() => {
     //     setTimeout(() => {
@@ -146,6 +145,13 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
     }
 
     const handleAlphafoldPredictions = () => {
+        const isAlphaFoldSelected = selectedCif.indexOf("AF_") > 0;
+        if (!isAlphaFoldSelected)
+        {
+            setAlphafoldPredictions("NA");
+            return;
+        }
+
         const fragments = getAlphaFoldData();
         if (!fragments) {
             setAlphafoldPredictions("NA");
@@ -162,19 +168,19 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
                     "AlphaFoldPredictions": [
                         {
                             "color": "rgb(160,28,128)",
-                            "text": "AlphaFold Predictions"
+                            "text": "AlphaFolds"
                         }
                     ]
                 }
             },
             tracks: {
                 labelType: "text",
-                label: "AlphaFold Predictions",
+                label: "Alphafolds",
                 data: [
                     {
                         accession: "",
                         labelType: "text",
-                        label: "Prediction",
+                        label: "Model Confidence",
                         type: "UniProt range",
                         tooltipContent: "tooltip test",
                         labelTooltip: "lt",

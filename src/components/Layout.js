@@ -29,7 +29,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
-
+        <AppendHead>
+        <meta charSet="utf-8" />
+          <title>ProKinO Browser</title>
+        </AppendHead>
       <Menu>
         <Link id="home" className="menu-item" to="/">Home</Link>
         <Link id="search" className="menu-item" to="/browser">Search</Link>
