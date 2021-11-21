@@ -30,11 +30,12 @@ body{
   0px 18px 23px rgba(0,0,0,0.1);
   font-size: x-large;
 }
-#prokino-main
+.prokino-main
 {
-  padding: 20px;
-  min-height: 100%;
-  margin: 0 auto -100px;
+  /* padding: 20px; */
+  /* min-height: 100%; */
+  /* margin: 0 auto -100px; */
+  margin-bottom: 8rem !important;
 }
 #prokino-navbar
 {
@@ -120,14 +121,12 @@ a.prokino-link:hover
 
 
 
-.footer,
-.push {
-  height: 80px;
-}
-.wrapper-for-footer {
-  min-height: 100%;
-  vertical-align:middle;
-  margin-bottom: -80px;/* Equal to height of footer */
+footer
+{
+width: 100%;
+position: fixed;
+left: 0;
+bottom: 0;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {

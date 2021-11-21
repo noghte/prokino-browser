@@ -7,10 +7,12 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { Link,withPrefix } from "gatsby"
+import { Link, withPrefix } from "gatsby"
 import ugaLogo from '../images/GEORGIA-FS-CW-1024x335.png'
 import AppendHead from 'react-append-head';
-
+import {
+  Row, Col
+} from 'reactstrap';
 //import { useStaticQuery, graphql } from "gatsby"
 
 // import "./layout.css"
@@ -29,10 +31,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
-        <AppendHead>
+      <AppendHead>
         <meta charSet="utf-8" />
-          <title>ProKinO Browser</title>
-        </AppendHead>
+        <title>ProKinO Browser</title>
+      </AppendHead>
       <Menu>
         <Link id="home" className="menu-item" to="/">Home</Link>
         <Link id="search" className="menu-item" to="/browser">Search</Link>
@@ -78,28 +80,49 @@ const Layout = ({ children }) => {
         <main className="prokino-main">{children}</main>
         {/* Begin Footer */}
         {/* <div class="push"></div> */}
-        <footer className="footer bg-secondary">
+
+        {/* <footer className="footer bg-secondary">
           <div className="container">
             <div className="row align-items-center">
-              <div className="col">
-                <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
-                  <img alt="Creative Commons License" style={{ borderWidth: 0 }} src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
-                </a>
+              <div className="col" style={{paddingTop:'1.5rem', width:'1px'}}>
+      
               </div>
               <div className="col-11">
                 <p className="m-0 text-center text-white">
-                  This work is licensed under a <a style={{ color: '#FFF', textDecoration: 'underline' }} rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
                 </p>
+                <div className="col" style={{ textAlign:'right'}}>
 
+
+              </div>
               </div>
             </div>
 
           </div>
-        </footer>
+        </footer> */}
         {/* End Footer */}
 
 
       </div>
+      <footer className="footer bg-secondary">
+
+        <Row xs="3" style={{padding: '1rem'}}>
+          <Col>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+              <img alt="Creative Commons License" style={{ paddingTop: '0.5rem' }} src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+            </a>
+          </Col>
+          <Col  style={{textAlign:'center'}}>
+            <p className="text-white">This work is licensed under a <a style={{ color: '#FFF', textDecoration: 'underline' }} rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+            </p>
+          </Col>
+          <Col style={{textAlign:'right'}}>
+            <a href="https://www.netlify.com">
+              <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+            </a>
+          </Col>
+
+        </Row>
+      </footer>
     </>
   )
 }
