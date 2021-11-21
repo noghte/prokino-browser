@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/nb`,
+  // pathPrefix: `/nb`,
   siteMetadata: {
     title: `ProKinO: Protein Kinase Ontology Browser`,
     description: `You can use this ontology browser to quickly locate protein kinase proteins and a lot of information related to the proteins, including the sequence, structure, function, mutation and pathway information on kinases.`,
@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-anchor-links`,
+    `gatsby-plugin-less`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

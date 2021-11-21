@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
-import { FUNCDOMAINS_ENDPOINT } from '../components/prokino/Endpoints'
-import DataGrid from '../components/datagrid'
+import { FUNCTIONALDOMAINS_ENDPOINT } from '../components/prokino/Endpoints'
+import {DataGridWithUrl as DataGrid} from '../components/DatagridWithUrl'
 import Layout from '../components/Layout';
 export default function FunctionalDomains() {
 
-    const url = FUNCDOMAINS_ENDPOINT + "&pagesize=10000&pageoffset=0";
+    const url = FUNCTIONALDOMAINS_ENDPOINT + "&pagesize=10000&pageoffset=0";
     var columnDefs = [
         { headerName: "Functional Domain", field: "entityDisplay", sortable: true },
     ];

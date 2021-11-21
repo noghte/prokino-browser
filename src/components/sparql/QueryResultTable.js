@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 export default function QueryResultTable(props) {
 
   const [currentPage, setCurrentPage] = React.useState(0);
- const data = props.data;
   // const data = useSelector(state => state.app.sparqlResult)
 
   function renderTableHeaders(row) {
@@ -73,9 +72,9 @@ function handlePreviousClick(e)
 
   }
   const pageSize = 10;
-  const pagesCount = Math.ceil(data.results.bindings.length / pageSize);
-  const headers= data.results.bindings[0];
-  const filteredData = data.results.bindings.slice(pageSize*currentPage,pageSize*currentPage+pageSize);
+  const pagesCount = Math.ceil(props.data.bindings.length / pageSize);
+  const headers= props.data.bindings[0];
+  const filteredData = props.data.bindings.slice(pageSize*currentPage,pageSize*currentPage+pageSize);
   return renderTable(filteredData, headers, pagesCount, handlePageClick, handlePreviousClick, handleNextClick);
 }
 

@@ -18,9 +18,10 @@ const IndexPage = () => (
       </div>
       <div className="col-lg-5">
 
-        <h2 className="font-weight-light" style={{marginTop:'-5px'}}>ProKinO: Protein Kinase Ontology</h2>
+        <h2 className="font-weight-light" style={{marginTop:'-5px'}}>Protein Kinase Ontology (ProKinO)</h2>
         <p>
-          The ProKinO is a protein kinase-specific ontology, which
+          The Protein Kinase Ontology (ProKinO) is an ontology and knowledge graph, 
+          which
           provides a controlled vocabulary of terms, their hierarchy,
           and relationships unifying sequence, structure, function,
           mutation and pathway information on kinases. The conceptual
@@ -29,7 +30,7 @@ const IndexPage = () => (
           related to a specific protein kinase, but also enables large
           scale integrative analysis of the protein kinase family. 
           <br />
-          <a href="prokino-info.html">Read More...</a>
+          {/* <a href="prokino-info.html">Read More...</a> */}
         </p>
       </div>
     </div>
@@ -41,7 +42,7 @@ const IndexPage = () => (
           <div className="card-body">
             <h2 className="card-title">ProKinO Browser</h2>
             <p className="card-text">
-              You can use this ontology browser to quickly locate protein kinase genes and a lot of information related to the genes, including the sequence, structure, function, mutation and pathway information on kinases.</p>
+              You can use this ontology browser to quickly query, navigate, and explore the knowledge graph including the sequence, structure, function, disease, pathway, and ligand information on kinases.</p>
           </div>
           <div className="card-footer">
             <a href="browser" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>

@@ -1,6 +1,6 @@
 const TABLE = "Table"
-const PIECHART = "Pie chart"
-const BARCHART = "Bar chart"
+const PIECHART = "Pie Chart"
+const BARCHART = "Bar Chart"
 
 export {
         TABLE, 

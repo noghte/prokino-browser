@@ -47,7 +47,7 @@ export default function Browser() {
                 Search
 
               </h4>
-              <p className="box-item-text mbr-fonts-style align-center display-7">Search into pre-defined collections of proteins, genes, and interactions. </p>
+              <p className="box-item-text mbr-fonts-style align-center display-7">Search information on protein kinases of interest. </p>
             </Link>
           </div>
           <div className="box-bordered box-item col-md-3">
@@ -70,7 +70,7 @@ export default function Browser() {
               <h4 className="box-item-title pb-3 mbr-fonts-style align-center display-8">
                 Browse Data
               </h4>
-              <p className="box-item-text mbr-fonts-style align-center display-7">Locate kinase proteins and other information related to the proteins.</p>
+              <p className="box-item-text mbr-fonts-style align-center display-7">Locate specific organisms, diseases, and functional domains related to protein kinases.</p>
             </Link>
           </div>
         </div>

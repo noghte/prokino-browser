@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
 import { DISEASES_ENDPOINT } from '../components/prokino/Endpoints'
-import DataGrid from '../components/datagrid'
+import {DataGridWithUrl as DataGrid} from '../components/DatagridWithUrl'
 import Layout from '../components/Layout';
 export default function Diseases() {
 

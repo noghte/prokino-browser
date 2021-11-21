@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
 import { ORGANISM_ENDPOINT, DISEASES_ENDPOINT, FUNCTIONALDOMAINS_ENDPOINT } from '../components/prokino/Endpoints'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import DataGrid from '../components/datagrid'
+import {DataGridWithUrl as DataGrid} from '../components/DatagridWithUrl'
 import Layout from '../components/Layout';
-import classnames from 'classnames'
+import classnames from 'classnames';
+import { navigate } from 'gatsby';
+
 export default function BrowseData({ location, data }) {
 
     const organisms_url = ORGANISM_ENDPOINT + "&pagesize=10000&pageoffset=0";
@@ -12,12 +14,18 @@ export default function BrowseData({ location, data }) {
 
     const [activeTab, setActiveTab] = useState(null);
     const toggle = tab => {
-        if (activeTab !== tab) setActiveTab(tab);
+
+        if (activeTab !== tab)
+        {
+            navigate(`../browse-data/?v=${tab}`);
+            setActiveTab(tab);
+
+        }
     }
 
     var columnDefs = [
         { headerName: "Name", field: "entityDisplay", sortable: true },
-        { headerName: "FullName", field: "entity", sortable: true },
+        { headerName: "Full Name", field: "entity", sortable: true },
     ];
 
     useEffect(() => {

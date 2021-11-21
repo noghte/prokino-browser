@@ -63,10 +63,12 @@ export default function About() {
                                             <td width="615">
                                                 <span style={{ fontWeight: 'bold' }}> Current version: 62 </span> <br />
                                                 Date: 2021-09-15
-                                                <p>The Protein Kinase Ontology (ProKinO), is a protein kinase-specific
-                                                    ontology, which provides a controlled vocabulary of terms, their
-                                                    hierarchy, and relationships unifying sequence, structure, function,
-                                                    mutation and pathway information on kinases.
+                                                <p>
+                                                You can use this ontology browser to quickly query, navigate, and explore the knowledge graph including the sequence, structure, function, disease, pathway, and ligand information on kinases.
+                                                    The conceptual representation of such diverse information in one place
+                                                    enables not only rapid discovery of significant information related to
+                                                    a specific protein kinase, but also enables  large scale integrative
+                                                    analysis of the protein kinase family.
                                                     The conceptual representation of such diverse information in one place
                                                     enables not only rapid discovery of significant information related to
                                                     a specific protein kinase, but also enables  large scale integrative

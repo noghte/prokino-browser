@@ -1,13 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Layout from '../components/Layout';
 import QueryResult from '../components/sparql/QueryResult';
 import fileDownload from 'js-file-download';
-import { useSelector,connect } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setSparqlResult } from '../state/app';
+import { setSparqlResult, setChartProperties } from '../state/app';
 import { SPARQL_ENDPOINT } from '../components/prokino/Endpoints';
+import { MdSettings } from "@react-icons/all-files/md/MdSettings"
+import { MdDone } from "@react-icons/all-files/md/MdDone"
+import * as svg from 'save-svg-as-png';
 
 import {
     Button,
@@ -27,6 +30,7 @@ import {
 } from 'reactstrap';
 
 import { TABLE, BARCHART, PIECHART } from '../components/sparql/Constants';
+
 import React, { useState } from 'react';
 import ExampleQueries from '../components/sparql/ExampleQueries';
 function Queries(props) {
@@ -38,12 +42,15 @@ function Queries(props) {
     const [shouldShowResults, setShouldShowResults] = React.useState(false);
 
     const [displayType, setDisplayType] = useState(TABLE);
+    const [maxChartItems, setMaxChartItems] = useState(10);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const sparqlResult = useSelector(state => state.app.sparqlResult)
 
-    const notify = () => toast("Getting the query result");
-
+    // const notify = () => toast("Getting the query result");
+    const victoryRef = useRef(null);
+    const maxChartItemsRef = useRef(null);
+    
     function executeQuery(event) {
         event.preventDefault()
 
@@ -81,7 +88,6 @@ function Queries(props) {
         setQuery(event.target.value)
     }
     function exampleQuerySelected(evt) {
-        console.log("evt",evt)
         setShouldShowResults(false);
         props.dispatch(setSparqlResult(null));
         setExampleQueryTitle(evt.title);
@@ -90,7 +96,17 @@ function Queries(props) {
         if (window)
             window.scrollTo(0, 0);
     }
+    let timeout = null;
+function maxChartItemsChanged(evt)
+{
+    // clearTimeout(timeout);
 
+    // timeout = setTimeout(function(){
+    const m = evt.target.valueAsNumber;
+        if(typeof m == 'number' && m >=2 && m<=10000)
+          setMaxChartItems(parseInt(m));
+    // },1000);
+}
     function saveCsv() {
         let url = `${SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}&output=csv`;
         axios.get(url)
@@ -119,17 +135,80 @@ function Queries(props) {
         }
         else
             alert('The query result is not ready. Please try again.')
-
+    }
+    function watermarkImage(elemImage, text) {
+        // Create test image to get proper dimensions of the image.
+        var testImage = new Image();
+        testImage.onload = function() {
+          var h = testImage.height, w = testImage.width, img = new Image();
+          // Once the image with the SVG of the watermark is loaded...
+          img.onload = function() {
+            // Make canvas with image and watermark
+            var canvas = Object.assign(document.createElement('canvas'), {width: w, height: h});
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(testImage, 0, 0);
+            ctx.drawImage(img, 0, 0);
+            // If PNG can't be retrieved show the error in the console
+            try {
+              elemImage.src = canvas.toDataURL('image/png');
+            }
+            catch (e) {
+              console.error('Cannot watermark image with text:', {src: elemImage.src, text: text, error: e});
+            }
+          };
+          // SVG image watermark (HTML of text at bottom right)
+          img.src = 'data:image/svg+xml;base64,' + window.btoa(
+            '<svg xmlns="http://www.w3.org/2000/svg" height="' + h + '" width="' + w + '">' +
+              '<foreignObject width="100%" height="100%">' +
+                '<div xmlns="http://www.w3.org/1999/xhtml">' +
+                  '<div style="position: absolute;' +
+                              'right: 0;' +
+                              'bottom: 0;' +
+                              'font-family: Tahoma;' +
+                              'font-size: 10pt;' +
+                              'background: #000;' +
+                              'color: #fff;' +
+                              'padding: 0.25em;' +
+                              'border-radius: 0.25em;' +
+                              'opacity: 0.6;' +
+                              'margin: 0 0.125em 0.125em 0;' +
+                  '">' + text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>' +
+                '</div>' +
+              '</foreignObject>' +
+            '</svg>'
+          );
+        };
+        testImage.src = elemImage.src;
+      }
+      
+    function savePng()
+    {
+        const vc = document.getElementsByClassName("VictoryContainer")
+        if (vc && vc.item(0) && vc.item(0).firstChild.tagName == 'svg')
+        {
+            const svgElement = vc.item(0).firstChild.cloneNode(true);
+            const dt = new Date();
+            let filename = dt.toISOString().slice(0, 10) + '-';
+            filename += dt.getTime().toString()
+            filename += '.png';
+            svgElement.style["background-color"] = "#fff";
+            // watermarkImage(svgElement,"ProKinO"); did not test the function
+            svg.saveSvgAsPng(svgElement, filename);
+        }
+    }
+    function setSelectedLabel(lbl) {
+        //    let chp = Object.assign({}, props.chartProperties);
+        let chp = props.chartProperties;
+        chp.selectedLabel = lbl;
+        setChartProperties(chp);
+    }
+    function setSelectedValue(lbl) {
+        let chp = props.chartProperties;
+        chp.selectedValue = lbl;
+        setChartProperties(chp);
     }
     return (<Layout>
-        <style jsx>{`
-.dropdown-item-checked::before {
-  position: absolute;
-  left: .4rem;
-  content: '✓';
-  font-weight: 600;
-}
-      `}</style>
+
         <div className="container">
             <div className="row">
                 <h3 className="display-5">Run your own SPARQL query</h3>
@@ -138,7 +217,6 @@ function Queries(props) {
             <div>{shouldShowResults && <ToastContainer autoClose={2000} newestOnTop closeOnClick />}</div>
 
             <div className="row">
-
                 {
                     shouldShowResults &&
                     <Navbar color="light" light expand="md" style={{ width: "100%" }} >
@@ -147,29 +225,84 @@ function Queries(props) {
                             <Nav className="nav-item dropdown ml-auto" navbar>
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
-                                        <Label> {displayType}</Label>
+                                        <Label> <span style={{ fontWeight: 'lighter' }}> <MdSettings /> </span> {displayType}</Label>
                                     </DropdownToggle>
-                                    <DropdownMenu right>
+                                    <DropdownMenu end>
                                         <DropdownItem onClick={displayTable}>
-                                            <span className={displayType === TABLE ? "dropdown-item-checked" : ""}>Display as Table</span>
+                                            <span className={displayType === TABLE ? <span style={{fontSize:'0.7rem'}}> <MdDone /> </span> : ""}>Display as Table</span>
                                         </DropdownItem>
                                         <DropdownItem onClick={displayBarchart}>
-                                            <span className={displayType === BARCHART ? "dropdown-item-checked" : ""}>Display as Barchart</span>
+                                            <span className={displayType === BARCHART ? <span style={{fontSize:'0.5rem'}}> <MdDone /> </span>  : ""}>Display as Barchart</span>
 
                                         </DropdownItem>
                                         <DropdownItem onClick={displayPiechart}>
-                                            <span className={displayType === PIECHART ? "dropdown-item-checked" : ""}>Display as Piechart</span>
+                                            <span className={displayType === PIECHART ? <span style={{fontSize:'rem'}}> <MdDone /> </span>  : ""}>Display as Piechart</span>
                                         </DropdownItem>
                                         <DropdownItem divider />
                                         <DropdownItem onClick={saveCsv}>
-                                            Save as CSV
+                                            Download data as CSV
                                         </DropdownItem>
                                         <DropdownItem onClick={saveJson}>
-                                            Save as JSON
+                                            Download data as JSON
+                                        </DropdownItem>
+                                        <DropdownItem onClick={savePng} style={{display: displayType != TABLE? "block":"none"}}>
+                                            Download image as PNG
                                         </DropdownItem>
 
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
+                                <div style={{marginLeft:'2rem', marginTop:'0.35rem', fontWeight:'bold', color:'rgba(0, 0, 0, 0.55)', display:displayType != TABLE? "block":"none"}}>
+                                  <span style={{marginRight:'0.5rem'}}>Max items:</span>  
+                                <input type="number" id="maxItems" min="2" max="10000" ref={maxChartItemsRef} defaultValue={maxChartItems} onBlur={maxChartItemsChanged} />
+                                </div>
+                                {/* {props.chartProperties && displayType != TABLE && <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        <Label>
+                                            {<span style={{ fontSize: '1rem' }}> <MdSettings /></span>}
+                                        </Label>
+                                    </DropdownToggle>
+                                    <DropdownMenu end>
+                                        <span style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }}>X-Axis: </span>
+                                        {props.chartProperties.labelColumns.map(i => (
+                                            <DropdownItem onClick={()=>setSelectedLabel(i)}>
+                                                <span>
+                                                    {
+                                                        props.chartProperties.selectedLabel == i ?
+                                                            <> <span style={{ fontSize: '0.7rem' }}><MdDone /></span> {i}</>
+                                                            : i
+                                                    }
+                                                </span>
+                                            </DropdownItem>
+                                        ))}
+                                        <hr />
+                                        <span style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }}>Y-Axis: </span>
+                                        {props.chartProperties.valueColumns.map(i => (
+                                            <DropdownItem onClick={()=>setSelectedValue(i)}>
+                                                <span>
+                                                    {
+                                                        props.chartProperties.selectedValue == i ?
+                                                            <> <span style={{ fontSize: '0.7rem' }}><MdDone /></span> {i}</>
+                                                            : i
+                                                    }
+                                                </span>
+                                            </DropdownItem>
+                                        ))}
+                                        <hr />
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>} */}
+
+                                {/* {props.chartProperties && displayType != TABLE && <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        <Label> {props.chartProperties.selectedValue}</Label>
+                                    </DropdownToggle>
+                                    <DropdownMenu end>
+                                        {props.chartProperties.valueColumns.map(i=>(
+                                            <DropdownItem onClick={displayTable}>
+                                            <span>{i}</span>
+                                        </DropdownItem>
+                                        ))}
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>} */}
                             </Nav>
 
                         </Collapse>
@@ -178,7 +311,7 @@ function Queries(props) {
                     </Navbar>
 
                 }
-                {shouldShowResults && <QueryResult query={query} chartType={displayType} />}
+                {shouldShowResults && <QueryResult query={query} chartType={displayType} ref={victoryRef} maxItems={maxChartItems} />}
                 {/* {shouldShowResults && displayType === "table" && <QueryResultTable input={query} />}
       {shouldShowResults && displayType === "barchart" && <QueryResultBarchart input={query} />}
       {shouldShowResults && displayType === "piechart" && <QueryResultPiechart input={query} />} */}
@@ -193,7 +326,7 @@ function Queries(props) {
                                 <td>
                                     <p>Enter your <a href="http://www.w3.org/TR/sparql11-query/" target="_blank">SPARQL 1.1</a>
                                         <sup>1</sup> query below, or select and modify an example query from the panel on the right side. <br />
-                                        
+
                                         {/* navigate to <Link to="/example-queries">examples</Link> to view some practical queries. */}
                                     </p>
 
@@ -208,12 +341,12 @@ function Queries(props) {
                                             PREFIX prokino: &lt;http://prokino.uga.edu/prokino#&gt; <br />
                                         </span>
                                     </pre> */}
-                                    <p style={{margin:'0 0 0px', textAlign:'right'}}>
-                                    <span style={{  float:'left'}}>Query:</span>
-                                     <span style={{fontWeight:'bold', fontStyle:'italic'}}>{exampleQueryTitle}</span>
+                                    <p style={{ margin: '0 0 0px', textAlign: 'right' }}>
+                                        <span style={{ float: 'left' }}>Query:</span>
+                                        <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{exampleQueryTitle}</span>
                                     </p>
                                     <textarea
-                                        style={{ width:'100%', fontFamily: "'Courier New', Courier, monospace" }}
+                                        style={{ width: '100%', fontFamily: "'Courier New', Courier, monospace" }}
                                         rows="20"
                                         name="query"
                                         placeholder="Write your SPARQ query or select an example..."
@@ -224,10 +357,10 @@ function Queries(props) {
 
                                     <div>
                                         <Button className="btn btn-primary" aria-label="Execute" onClick={executeQuery}>
-                                            Execute 
+                                            Execute
                                             {/* {executeMessage} */}
                                         </Button>
-                                        <p style={{fontStyle:'italic'}}> Note: Only <code>Select</code> queries are allowed.</p>
+                                        <p style={{ fontStyle: 'italic' }}> Note: Only <code>Select</code> queries are allowed.</p>
                                         {/* <span style={{ paddingLeft: '10px', float: 'right' }}>
                                             <Link to="/example-queries">Example queries</Link>
 
@@ -269,5 +402,6 @@ function Queries(props) {
 
 
 export default connect(state => ({
-    sparqlResult: state.app.sparqlResult
-  }), null)(Queries);
+    sparqlResult: state.app.sparqlResult,
+    chartProperties: state.app.chartProperties,
+}), null)(Queries);

@@ -4,14 +4,22 @@ import axios from 'axios';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { navigate } from 'gatsby';
+require('../styles/tree.less')
 
-function DataGrid({ url, resizable = true, title, columns, gridwidth = 500 }) {
+export function DataGridWithDataSource({ datasource, resizable = true, title, columns, gridwidth = 500 }) {
+    const [rowData, setRowData] = useState(null);
 
+    function prepareData()
+    {
+        return datasource;
+    }
     useEffect(() => {
         const res = async () => {
             try {
-                const result = await axios.get(url);
-                setRowData(result.data.hits);
+                const result = prepareData();
+                setRowData(result);
+              
             } catch (error) {
                 console.log(error)
             }
@@ -19,6 +27,14 @@ function DataGrid({ url, resizable = true, title, columns, gridwidth = 500 }) {
         res();
     }, []);
 
+
+    function doubleClicked(e) {
+        console.log(e);
+        // const entity = e.data.entity;
+        // const entityClass = e.data.entityClass;
+        // //https://prokino.uga.edu/nb/browse/?c=prokino:Organism&v=prokino:Human
+        // navigate(`../browse/?c=${entityClass}&v=${entity}`);
+    }
     const defaultColDef = useMemo(() => ({
         resizable: resizable,
         sortable: true,
@@ -26,26 +42,26 @@ function DataGrid({ url, resizable = true, title, columns, gridwidth = 500 }) {
         minWidth: 150,
         filter: true,
     }), []);
-    const [rowData, setRowData] = useState(null);
 
     //loda data
     if (!rowData)
         return <p>Loading ... </p>
 
-    return <div style={{ width: {gridwidth}, }}>
-        <h3>{title}</h3>
-        <div className="ag-theme-alpine" style={{ width: {gridwidth}, height: 500 }}>
+    return <div style={{ width: { gridwidth }, margin: '1rem' }}>
+      
+        <div className="ag-theme-alpine" style={{ width: { gridwidth }}}>
             <AgGridReact
                 reactUi="true"
+                onCellDoubleClicked={doubleClicked}
                 rowData={rowData}
+                domLaytou="domLayout"
                 suppressMenuHide={true}
-                pagination={true}
-                paginationAutoPageSize={true}
-                columnDefs= {columns}
+                pagination={false}
+                paginationAutoPageSize={false}
+                columnDefs={columns}
                 defaultColDef={defaultColDef}>
                 {/* <AgGridColumn field="entityDisplay" headerName="Organism"></AgGridColumn> */}
             </AgGridReact>
         </div>
     </div>
 }
-export default DataGrid;
