@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   // pathPrefix: `/nb`,
   siteMetadata: {
@@ -43,6 +47,7 @@ module.exports = {
         display: 'swap'
       }
     },
+    {resolve: "gatsby-plugin-no-sourcemaps"}
     // {
     //   resolve: `@lekoarts/gatsby-theme-specimens`,
     //   options: {}

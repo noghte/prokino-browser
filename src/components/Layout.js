@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import React from "react"
+import React, {useState,useEffect} from "react"
 import PropTypes from "prop-types"
 import { Link, withPrefix } from "gatsby"
 import ugaLogo from '../images/GEORGIA-FS-CW-1024x335.png'
@@ -29,6 +29,11 @@ const Layout = ({ children }) => {
   //   }
   // `)
 
+const [hostName,setHostName] = useState("");
+useEffect(()=>{
+  if (typeof window === 'undefined' && process.env)
+      setHostName(process.env.GATSBY_HOST_NAME)
+})
   return (
     <>
       <AppendHead>
@@ -115,7 +120,7 @@ const Layout = ({ children }) => {
             <p className="text-white">This work is licensed under a <a style={{ color: '#FFF', textDecoration: 'underline' }} rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
             </p>
           </Col>
-          <Col style={{textAlign:'right'}}>
+          <Col style={{textAlign:'right', display:hostName == 'netlify' ? 'block':'none'}}>
             <a href="https://www.netlify.com">
               <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
             </a>
