@@ -22,7 +22,7 @@ module.exports = {
         path: `${__dirname}/static`,
       }
     },
-
+    `gatsby-plugin-fontawesome-css`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

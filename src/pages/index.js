@@ -67,7 +67,7 @@ const IndexPage = () => (
             <p className="card-text">To download a version of the ontology, or an offline version of the KinView, you can visit the Downloads page.</p>
           </div>
           <div className="card-footer">
-            <a href="downloads.html" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>
+            <a href="downloads" className="btn btn-primary btn-sm" style={{color:"#FFF"}}>Launch</a>
           </div>
         </div>
       </div>

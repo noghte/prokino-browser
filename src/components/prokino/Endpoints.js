@@ -3,7 +3,7 @@
 const BASE_ENDPOINT = `https://vulcan.cs.uga.edu/prokinosrv`; //`http://vulcan.cs.uga.edu:8080/prokinosrv/rest` 
 const PROTEIN_ENDPOINT = `${BASE_ENDPOINT}/protein`;
 const ENTITY_ENDPOINT = `${BASE_ENDPOINT}/entity`;
-const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification`;
+const CLASSIFICATION_ENDPOINT = `${BASE_ENDPOINT}/classification/kinase`;
 const SPARQL_ENDPOINT = `${BASE_ENDPOINT}/sparql`
 const SPARQL_CATEGORIES =`${BASE_ENDPOINT}/squerycategory`
 const SPARQL_SAMPLEQUERIES =`${BASE_ENDPOINT}/squery`

@@ -1,0 +1,49 @@
+{
+    "prokino": [
+        {
+            "version": 62,
+            "date": "2021-09-15",
+            "filenmae": "Prokino_v62_2021-09-15.owl.zip"
+        },
+        {
+            "version": 61,
+            "date": "2021-07-29",
+            "filenmae": "Prokino_v61_2021-07-29.owl.zip"
+        },
+        {
+            "version": 60,
+            "date": "2020-12-29",
+            "filenmae": "Prokino_v60_2020-12-29.owl.zip"
+        },
+        {
+            "version": 59,
+            "date": "2020-11-07",
+            "filenmae": "Prokino_v59_2020-11-07.owl.zip"
+        },
+        {
+            "version": 58,
+            "date": "2020-07-08",
+            "filenmae": "Prokino_v58_July_08-2020.owl.zip"
+        },
+        {
+            "version": 57,
+            "date": "2020-01-21",
+            "filenmae": "Prokino_v57_January_21-2020.owl.zip"
+        }
+    ],
+    "kinview": [
+        {
+            "version": 2.0,
+            "date": "2020-10-20",
+            "downloadLink": "https://github.com/prokino/kinview/archive/refs/tags/v2.0.zip",
+            "viewLink":"https://prokino.github.io/kinview/",
+            "description": "In this version, the KinView project has been rewritten by ReactJS and weblogos are static PNG images."
+        },
+        {
+            "version": 1.0,
+            "date": "2021-09-15",
+            "filenmae": "Prokino_v62_2021-09-15.owl.zip",
+            "description": "The first version is not available for now."
+        }
+    ]
+}

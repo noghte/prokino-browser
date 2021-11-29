@@ -10,7 +10,7 @@ export default function OneClass() {
 
   useEffect(() => {
     const res = async () => {
-      const url = `${CLASSIFICATION_ENDPOINT}/kinase`;
+      const url = `${CLASSIFICATION_ENDPOINT}`;
       const result = await axios.get(url);
       setKinase(result.data);
 

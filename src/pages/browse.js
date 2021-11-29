@@ -3,12 +3,15 @@ import axios from 'axios';
 import ProteinItem from '../components/prokino/ProteinItem';
 import GenericItem from '../components/prokino/GenericItem';
 import SequenceItem from '../components/prokino/SequenceItem';
-import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
+import { BASE_ENDPOINT, CLASSIFICATION_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby';
 
 export default function Browse({ location, data }) { //{protein}
+   
     let av = require(`../../static/av.json`);
+    let classifications = require(`../../static/classifications.json`);
+    
     const urlParams = new URLSearchParams(location.search);
     const [cifFileNames, setCifFileNames] = useState(null);
     const [entityClass, setEntityClass] = useState(urlParams.get("c"));
@@ -72,7 +75,7 @@ export default function Browse({ location, data }) { //{protein}
                         organismName: organism,
                         filename: fname
                     })
-    
+
                 })
 
             }
@@ -109,6 +112,16 @@ export default function Browse({ location, data }) { //{protein}
         getProkinoData();
     }, []);
 
+    //Get classification data
+    // useEffect(() => {
+    //     const getData = async () => {
+
+    //     let url = `${CLASSIFICATION_ENDPOINT}`;
+    //     const result = await axios.get(url);
+    //     setClassifications(result.data);
+    //     }
+    //     getData();
+    // }, []);
     // useEffect(() => {
     //     const getAnnotationViewerData = async () => {
     //         let url = `../../content/annotationviewerdata.json`;
@@ -172,7 +185,9 @@ export default function Browse({ location, data }) { //{protein}
                 datatypeProperties={dataProps}
                 objectProperties={objProps}
                 incomingObjectProperties={incomingProps}
-                cifFileNames={cifFileNames} />;
+                cifFileNames={cifFileNames}
+                classifications={classifications}
+                />;
 
         case "prokino:Sequence":
             return <SequenceItem data={prokinoData} localName={value} />;

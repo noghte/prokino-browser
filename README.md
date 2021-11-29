@@ -8,7 +8,7 @@ This repo contains the `dev` version (untested and not stable) of the ProKinO br
 
 The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, which provides a controlled vocabulary of terms, their hierarchy, and relationships unifying sequence, structure, function, mutation and pathway information on kinases. The conceptual representation of such diverse information in one place enables not only rapid discovery of significant information related to a specific protein kinase, but also enables large scale integrative analysis of the protein kinase family.
 
-*Available to download from: https://prokino.uga.edu/downloads.html*
+*Available to download from: https://prokino.uga.edu/downloads*
 
 
 ### Dev

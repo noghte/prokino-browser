@@ -5,7 +5,6 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { navigate } from 'gatsby';
-require('../styles/tree.less')
 
 export function DataGridWithDataSource({ datasource, resizable = true, title, columns, gridwidth = 500 }) {
     const [rowData, setRowData] = useState(null);
