@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_ENDPOINT } from '../../components/prokino/Endpoints';
+import { BASE_ENDPOINT, PROTEIN_ENDPOINT } from '../../components/prokino/Endpoints';
 
 import Layout from '../Layout';
 import PairLinks from '../PairwiseLinkList';
@@ -30,12 +30,25 @@ import LinkList from '../PairwiseLinkList';
 
 // import FeatureViewer from './FeatureViewer';
 
-export default function ProteinItem({ uniprotId, localName, datatypeProperties, objectProperties, incomingObjectProperties, cifFileNames, classifications }) {
+export default function ProteinItem({ uniprotId, localName, datatypeProperties, objectProperties, incomingObjectProperties, cifFileNames }) {
     // console.log("datatypeProperties",datatypeProperties);
     // console.log("objectProperties",objectProperties);
     // console.log("incomingObjectProperties", incomingObjectProperties);
     // console.log("uniprot from proteinitem", uniprotId);
     // console.log("sequence", sequenceData);
+    const [sequenceData, setSequenceData] = useState(null);
+
+    const [isOpenProtein, setIsOpenProtein] = React.useState(true);
+    const [isOpenFeaturedSubstitutions, setIsOpenFeaturedSubstitutions] = React.useState(false);
+    const [isOpenPathways, setIsOpenPathways] = React.useState(false);
+    const [isOpenGeneExpressions, setIsOpenGeneExpressions] = React.useState(false);
+    const [isOpenLigandActivities, setIsOpenLigandActivities] = React.useState(false);
+    const [isOpenReferences, setIsOpenReferences] = React.useState(false);
+    const [selectedCif, setSelectedCif] = React.useState(cifFileNames && cifFileNames.length > 0 ? `/cif/${cifFileNames[0]["relativeDirectory"]}/${cifFileNames[0]["name"]}.cif` : "");
+    const [cifUniprotId, setCifUniprotId] = useState(null);
+    const [classifications, setClassifications] = useState(null);
+    const [classificationTree, setClassificationTree] = useState([]);
+//todo: remove prokino:ProteinKinaseDomain and remove the prefix
     const flatten = function (data) {
         var result = {};
         function recurse(cur, prop) {
@@ -58,20 +71,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
         }
         recurse(data, "");
         return result;
-    }
-    const flattened_cls = flatten(classifications);
-    const cls_path = Object.keys(flattened_cls).filter(key => flattened_cls[key].includes(localName));
-    let cls_tree = []
-    if (cls_path.length > 0) {
-        const paths = cls_path[0].split(".");
-        for (let i = 0; i < paths.length; i++) {
-            const index = parseInt(paths[i].replace(/\D/g, ''))
-            classifications = classifications.subnodes[index]
-            if (classifications != undefined)
-                cls_tree.push(classifications.name)
-            console.log(classifications.name)
-        }
-
     }
 
     let ligandMappings = null;
@@ -106,16 +105,16 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
             links.pop()
         return links;
     }
-    const [sequenceData, setSequenceData] = useState(null);
+function createClassificationList(arr)
+{
+let list = [];
+arr.forEach(c => {
+    if (c.indexOf("prokino:")>=0)
+        list.push(c);
+});
+return list;
 
-    const [isOpenProtein, setIsOpenProtein] = React.useState(true);
-    const [isOpenFeaturedSubstitutions, setIsOpenFeaturedSubstitutions] = React.useState(false);
-    const [isOpenPathways, setIsOpenPathways] = React.useState(false);
-    const [isOpenGeneExpressions, setIsOpenGeneExpressions] = React.useState(false);
-    const [isOpenLigandActivities, setIsOpenLigandActivities] = React.useState(false);
-    const [isOpenReferences, setIsOpenReferences] = React.useState(false);
-    const [selectedCif, setSelectedCif] = React.useState(cifFileNames && cifFileNames.length > 0 ? `/cif/${cifFileNames[0]["relativeDirectory"]}/${cifFileNames[0]["name"]}.cif` : "");
-    const [cifUniprotId, setCifUniprotId] = useState(null);
+}
 
     const handleCifChange = (cifCallback) => {
         let path = cifCallback.split(",")[0]
@@ -135,6 +134,52 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     //               : null}
     //     </TreeItem>
     //   }
+
+    //classifications
+    useEffect(() => {
+        let url = `${PROTEIN_ENDPOINT}/${localName}/ktbranch`;
+        const res = async () => {
+            try {
+                const result = await axios.get(url);
+                setClassifications(result.data);
+
+            } catch (error) {
+                console.log("error=", error);
+                setClassifications("NA");
+            }
+        };
+        //  if (props.triggerSearch)
+        res();
+    }, []);
+
+    useEffect(() => {
+        let cls_tree = []
+        if (!classifications)
+            return <p>Loading classifications...</p>
+        if (classifications !== "NA") {
+            let clsCopy = JSON.parse(JSON.stringify(classifications));
+
+            const flattened_cls = flatten(clsCopy);
+            // const cls_path = Object.keys(flattened_cls).filter(key => flattened_cls[key].includes(localName));
+            //todo: render a tree view
+            const cls_path = Object.values(flattened_cls);
+            setClassificationTree(createClassificationList(Object.values(cls_path)))
+            // if (cls_path.length > 0) {
+            //     const paths = cls_path[0].split(".");
+            //     for (let i = 0; i < paths.length; i++) {
+            //         const index = parseInt(paths[i].replace(/\D/g, ''))
+            //         clsCopy = clsCopy.subnodes[index]
+            //         if (clsCopy != undefined) {
+            //             cls_tree.push(clsCopy.name)
+            //             console.log(clsCopy.name)
+            //         }
+            //     }
+
+            // }
+        }
+        // setClassificationTree(cls_tree)
+    }, [classifications]);
+
 
 
     useEffect(() => {
@@ -321,7 +366,12 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                             <div className="favth-clearfix">
                                                 <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Classification</div>
                                                 <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
-                                                    {renderClassifications(cls_tree)}
+                                                    {/* {classificationTree.lengh > 0 && renderClassifications(classificationTree)} */}
+                                                    {classificationTree.map(function (c, idx) {
+                    return   <a style={{paddingRight:'0.4rem'}} className="prokino-link" href="#" key={`link-${c}-${idx}`}>
+                    {c}
+                </a>
+                })}
 
                                                     {/* <TreeView
                                                     aria-label="file system navigator"

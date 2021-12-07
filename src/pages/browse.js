@@ -3,14 +3,14 @@ import axios from 'axios';
 import ProteinItem from '../components/prokino/ProteinItem';
 import GenericItem from '../components/prokino/GenericItem';
 import SequenceItem from '../components/prokino/SequenceItem';
-import { BASE_ENDPOINT, CLASSIFICATION_ENDPOINT } from '../components/prokino/Endpoints';
+import { BASE_ENDPOINT } from '../components/prokino/Endpoints';
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby';
 
 export default function Browse({ location, data }) { //{protein}
    
     let av = require(`../../static/av.json`);
-    let classifications = require(`../../static/classifications.json`);
+    //let all_classifications = require(`../../static/classifications.json`);
     
     const urlParams = new URLSearchParams(location.search);
     const [cifFileNames, setCifFileNames] = useState(null);
@@ -186,7 +186,6 @@ export default function Browse({ location, data }) { //{protein}
                 objectProperties={objProps}
                 incomingObjectProperties={incomingProps}
                 cifFileNames={cifFileNames}
-                classifications={classifications}
                 />;
 
         case "prokino:Sequence":

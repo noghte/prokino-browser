@@ -38,7 +38,7 @@ useEffect(()=>{
     <>
       <AppendHead>
         <meta charSet="utf-8" />
-        <title>ProKinO Browser</title>
+        <title>Protein Kinase Ontology (ProKinO)</title>
       </AppendHead>
       <Menu>
         <Link id="home" className="menu-item" to="/">Home</Link>
@@ -55,7 +55,7 @@ useEffect(()=>{
         <div className="container">
 
           <img src={ugaLogo} alt="UGA Logo" id="ugalogo" />
-          <Link id="prokino-title" className="navbar-brand container d-flex justify-content-center" to="/browser">ProKinO Browser</Link>
+          <Link id="prokino-title" className="navbar-brand container d-flex justify-content-center" to="/browser">ProKinO</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
