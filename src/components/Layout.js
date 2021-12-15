@@ -49,6 +49,7 @@ useEffect(()=>{
         <a id="browse-diseases" className="menu-item-level2" href={withPrefix("/browse-data/?v=fdomains")}>Functional Domains</a>
 
         <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
+        <Link id="publications" className="menu-item" to="/publications">Publications</Link>
         <Link id="about" className="menu-item" to="/about">About</Link>
       </Menu>
       <nav id="prokino-navbar" className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
