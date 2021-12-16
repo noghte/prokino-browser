@@ -10,7 +10,7 @@ const SPARQL_SAMPLEQUERIES =`${BASE_ENDPOINT}/squery`
 const ORGANISM_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:Organism`
 const FUNCTIONALDOMAINS_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:FunctionalDomain`
 const DISEASES_ENDPOINT =`${BASE_ENDPOINT}/entity?rdfs:type=prokino:Cancer`
-
+const KINASEDOMAINS_ENDPOINT = `${BASE_ENDPOINT}/kinase`
 const PDB_BESTSTRUCTURE_ENDPOINT="https://www.ebi.ac.uk/pdbe/graph-api/mappings/best_structures"
 //for annotation viewer:
 //const PDB_STRUCTURE = `https://www${this.appUrlEnv}.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/unipdb/${this.accession}`

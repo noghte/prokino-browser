@@ -5,21 +5,23 @@ import {DataGridWithUrl as DataGrid} from '../components/DatagridWithUrl'
 import Layout from '../components/Layout';
 import classnames from 'classnames';
 import { navigate } from 'gatsby';
+import TreeView from '@mui/lab/TreeView';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TreeItem from '@mui/lab/TreeItem';
 
 export default function BrowseData({ location, data }) {
 
     const organisms_url = ORGANISM_ENDPOINT + "&pagesize=10000&pageoffset=0";
     const diseases_url = DISEASES_ENDPOINT + "&pagesize=10000&pageoffset=0";
     const functionaldomains_url = FUNCTIONALDOMAINS_ENDPOINT + "&pagesize=10000&pageoffset=0";
-
+    const kinasedomains_url = "";
     const [activeTab, setActiveTab] = useState(null);
     const toggle = tab => {
-
         if (activeTab !== tab)
         {
             navigate(`../browse-data/?v=${tab}`);
             setActiveTab(tab);
-
         }
     }
 
@@ -27,6 +29,7 @@ export default function BrowseData({ location, data }) {
         { headerName: "Name", field: "entityDisplay", sortable: true },
         { headerName: "Full Name", field: "entity", sortable: true },
     ];
+
 
     useEffect(() => {
         if (location.search)
@@ -63,6 +66,13 @@ export default function BrowseData({ location, data }) {
                     <NavLink
                         className={classnames({ active: activeTab === 'fdomains' })}
                         onClick={() => { toggle('fdomains'); }}>
+                        Functional Domains
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={classnames({ active: activeTab === 'kdomains' })}
+                        onClick={() => { toggle('kdomains'); }}>
                         Functional Domains
                     </NavLink>
                 </NavItem>
@@ -109,6 +119,36 @@ export default function BrowseData({ location, data }) {
                     </Row>
                 </TabPane>
 
+                <TabPane tabId="kdomains">
+                    <Row>
+                        <Col sm="12">
+                            {/* <DataGrid
+                                title="Kinase Domains"
+                                url={kinasedomains_url}
+                                resizable={false}
+                                columns={columnDefs}
+                                gridwidth={300} /> */}
+                            
+                            <TreeView
+  aria-label="file system navigator"
+  defaultCollapseIcon={<ExpandMoreIcon />}
+  defaultExpandIcon={<ChevronRightIcon />}
+  sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+>
+  <TreeItem nodeId="1" label="Applications">
+    <TreeItem nodeId="2" label="Calendar" />
+  </TreeItem>
+  <TreeItem nodeId="5" label="Documents">
+    <TreeItem nodeId="10" label="OSS" />
+    <TreeItem nodeId="6" label="MUI">
+      <TreeItem nodeId="8" label="index.js" />
+    </TreeItem>
+  </TreeItem>
+</TreeView>
+                        </Col>
+
+                    </Row>
+                </TabPane>
 
             </TabContent>
         </div>

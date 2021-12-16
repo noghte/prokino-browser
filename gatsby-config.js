@@ -14,6 +14,7 @@ module.exports = {
     `gatsby-plugin-postcss`,
     `gatsby-plugin-anchor-links`,
     `gatsby-plugin-less`,
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

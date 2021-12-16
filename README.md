@@ -13,7 +13,11 @@ The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, wh
 
 ### Dev
 
+Building the project:
 
+1. Install node version `14.x`:
+1. Go to the project directory and run: `npm install`
+1. `npm run develop`
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
