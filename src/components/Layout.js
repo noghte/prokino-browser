@@ -46,7 +46,8 @@ useEffect(()=>{
         <p className="menu-item menu-item-category">Browse</p>
         <a id="browse-organisms" className="menu-item-level2" href={withPrefix("/browse-data/?v=organisms")}>Organisms</a>
         <a id="browse-diseases" className="menu-item-level2" href={withPrefix("/browse-data/?v=diseases")}>Diseases</a>
-        <a id="browse-diseases" className="menu-item-level2" href={withPrefix("/browse-data/?v=fdomains")}>Functional Domains</a>
+        <a id="browse-fdomains" className="menu-item-level2" href={withPrefix("/browse-data/?v=fdomains")}>Functional Domains</a>
+        <a id="browse-kdomains" className="menu-item-level2" href={withPrefix("/browse-data/?v=kdomains")}>Kinase Domains</a>
 
         <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
         <Link id="publications" className="menu-item" to="/publications">Publications</Link>

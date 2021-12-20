@@ -1,21 +1,18 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react'
-import { ORGANISM_ENDPOINT, DISEASES_ENDPOINT, FUNCTIONALDOMAINS_ENDPOINT } from '../components/prokino/Endpoints'
+import { ORGANISM_ENDPOINT, DISEASES_ENDPOINT, FUNCTIONALDOMAINS_ENDPOINT , CLASSIFICATION_ENDPOINT } from '../components/prokino/Endpoints'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 import {DataGridWithUrl as DataGrid} from '../components/DatagridWithUrl'
 import Layout from '../components/Layout';
 import classnames from 'classnames';
 import { navigate } from 'gatsby';
-import TreeView from '@mui/lab/TreeView';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TreeItem from '@mui/lab/TreeItem';
+import KDomains from '../components/prokino/KDomains';
 
 export default function BrowseData({ location, data }) {
 
     const organisms_url = ORGANISM_ENDPOINT + "&pagesize=10000&pageoffset=0";
     const diseases_url = DISEASES_ENDPOINT + "&pagesize=10000&pageoffset=0";
     const functionaldomains_url = FUNCTIONALDOMAINS_ENDPOINT + "&pagesize=10000&pageoffset=0";
-    const kinasedomains_url = "";
+    const kinasedomains_url = CLASSIFICATION_ENDPOINT + "&pagesize=10000&pageoffset=0";
     const [activeTab, setActiveTab] = useState(null);
     const toggle = tab => {
         if (activeTab !== tab)
@@ -73,7 +70,7 @@ export default function BrowseData({ location, data }) {
                     <NavLink
                         className={classnames({ active: activeTab === 'kdomains' })}
                         onClick={() => { toggle('kdomains'); }}>
-                        Functional Domains
+                        Kinase Domains
                     </NavLink>
                 </NavItem>
             </Nav>
@@ -128,23 +125,8 @@ export default function BrowseData({ location, data }) {
                                 resizable={false}
                                 columns={columnDefs}
                                 gridwidth={300} /> */}
+                                <KDomains></KDomains>
                             
-                            <TreeView
-  aria-label="file system navigator"
-  defaultCollapseIcon={<ExpandMoreIcon />}
-  defaultExpandIcon={<ChevronRightIcon />}
-  sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
->
-  <TreeItem nodeId="1" label="Applications">
-    <TreeItem nodeId="2" label="Calendar" />
-  </TreeItem>
-  <TreeItem nodeId="5" label="Documents">
-    <TreeItem nodeId="10" label="OSS" />
-    <TreeItem nodeId="6" label="MUI">
-      <TreeItem nodeId="8" label="index.js" />
-    </TreeItem>
-  </TreeItem>
-</TreeView>
                         </Col>
 
                     </Row>
