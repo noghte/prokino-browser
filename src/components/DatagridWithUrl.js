@@ -10,27 +10,44 @@ export function DataGridWithUrl({ url, resizable = true, title, columns, gridwid
     const [rowData, setRowData] = useState(null);
 
     function sortResults(field) {
+        const exceptions = {
+            "Human": 1,
+            "FruitFly": 2,
+            "Mouse": 3,
+            "NematodeWorm": 4
+        }
+
         return function (a, b) {
-            if (a[field].toLowerCase() === ("human"))
-                 return -1;
-            return 0;
-        };
+            if (exceptions[a[field]] && exceptions[b[field]]) {
+                //if both items are exceptions
+                return exceptions[a[field]] - exceptions[b[field]];
+            } else if (exceptions[a[field]]) {
+                //only `a` is in exceptions, sort it to front
+                return -1;
+            } else if (exceptions[b[field]]) {
+                //only `b` is in exceptions, sort it to back
+                return 1;
+            } else {
+                //no exceptions to account for, return alphabetic sort
+                return a[field].localeCompare(b[field]);
+            }
+        }
     }
     useEffect(() => {
         const res = async () => {
             try {
-                    let result = await axios.get(url);
+                let result = await axios.get(url);
 
-                    //Modify exceptional data
-                    if (url.toLowerCase().includes("rdfs:type=prokino:organism")) {
-                        let sortedResult = [...result.data.hits].sort(sortResults("entityDisplay"))
-                        result = sortedResult;
-                    }
-                    else
-                        result = result.data.hits;
-                    console.log("datagrid with url=", result);
-                    setRowData(result);
-              
+                //Modify exceptional data
+                if (url.toLowerCase().includes("rdfs:type=prokino:organism")) {
+                    let sortedResult = [...result.data.hits].sort(sortResults("entityDisplay"))
+                    result = sortedResult;
+                }
+                else
+                    result = result.data.hits;
+                console.log("datagrid with url=", result);
+                setRowData(result);
+
             } catch (error) {
                 console.log(error)
             }
