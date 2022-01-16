@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import QueryResultTable from './QueryResultTable';
+// import QueryResultTable from './QueryResultTable';
+import QueryResultGrid from './QueryResultGrid';
 import QueryResultBarChart from './QueryResultBarChart';
 import QueryResultPieChart from './QueryResultPieChart';
 import axios from 'axios';
@@ -102,7 +103,7 @@ function QueryResult(props) {
   let renderedChart = null;
   switch (chartType) {
     case TABLE:
-      renderedChart = <QueryResultTable data={props.sparqlResult.results} />
+      renderedChart = <QueryResultGrid data={props.sparqlResult.results} />
       break;
     case BARCHART:
       renderedChart = <QueryResultBarChart

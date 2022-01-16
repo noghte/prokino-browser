@@ -91,12 +91,12 @@ export default function BrowseData({ location, data }) {
                 <TabPane tabId="diseases">
                     <Row>
                         <Col sm="12">
-                            <DataGrid
+                           {activeTab === 'diseases' && <DataGrid
                                 title="Diseases"
                                 url={diseases_url}
                                 resizable={false}
                                 columns={columnDefs}
-                                gridwidth={300} />
+                                gridwidth={300} /> }
                         </Col>
 
                     </Row>
@@ -105,12 +105,13 @@ export default function BrowseData({ location, data }) {
                 <TabPane tabId="fdomains">
                     <Row>
                         <Col sm="12">
-                            <DataGrid
+                            { activeTab === 'fdomains' &&  <DataGrid
                                 title="Functional Domains"
                                 url={functionaldomains_url}
                                 resizable={false}
                                 columns={columnDefs}
                                 gridwidth={300} />
+                            }
                         </Col>
 
                     </Row>
@@ -119,13 +120,15 @@ export default function BrowseData({ location, data }) {
                 <TabPane tabId="kdomains">
                     <Row>
                         <Col sm="12">
-                            {/* <DataGrid
+                        { activeTab === 'kdomains' &&  <KDomains></KDomains>
+                            /* <DataGrid
                                 title="Kinase Domains"
                                 url={kinasedomains_url}
                                 resizable={false}
                                 columns={columnDefs}
-                                gridwidth={300} /> */}
-                                <KDomains></KDomains>
+                                gridwidth={300} /> */
+                                
+                            }
                             
                         </Col>
 

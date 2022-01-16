@@ -6,30 +6,15 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { navigate } from 'gatsby';
 
-export function DataGridWithUrl({ url, resizable = true, title, columns, gridwidth = 500 }) {
+export function DataGridWithQuery({ query, resizable = true, title, columns, gridwidth = 500 }) {
     const [rowData, setRowData] = useState(null);
 
-    function sortResults(field) {
-        return function (a, b) {
-            if (a[field].toLowerCase() === ("human"))
-                 return -1;
-            return 0;
-        };
-    }
+
     useEffect(() => {
         const res = async () => {
             try {
-                    let result = await axios.get(url);
-
-                    //Modify exceptional data
-                    if (url.toLowerCase().includes("rdfs:type=prokino:organism")) {
-                        let sortedResult = [...result.data.hits].sort(sortResults("entityDisplay"))
-                        result = sortedResult;
-                    }
-                    else
-                        result = result.data.hits;
-                    console.log("datagrid with url=", result);
-                    setRowData(result);
+                const result = prepareData();
+                setRowData(result);
               
             } catch (error) {
                 console.log(error)
@@ -38,12 +23,13 @@ export function DataGridWithUrl({ url, resizable = true, title, columns, gridwid
         res();
     }, []);
 
+
     function doubleClicked(e) {
         console.log(e);
-        const entity = e.data.entity;
-        const entityClass = e.data.entityClass;
-        //https://prokino.uga.edu/nb/browse/?c=prokino:Organism&v=prokino:Human
-        navigate(`../browse/?c=${entityClass}&v=${entity}`);
+        // const entity = e.data.entity;
+        // const entityClass = e.data.entityClass;
+        // //https://prokino.uga.edu/nb/browse/?c=prokino:Organism&v=prokino:Human
+        // navigate(`../browse/?c=${entityClass}&v=${entity}`);
     }
     const defaultColDef = useMemo(() => ({
         resizable: resizable,
@@ -57,16 +43,17 @@ export function DataGridWithUrl({ url, resizable = true, title, columns, gridwid
     if (!rowData)
         return <p>Loading ... </p>
 
-    return <div style={{ width: { gridwidth }, }}>
-        <h3>{title}</h3>
-        <div className="ag-theme-alpine" style={{ width: { gridwidth }, height: 500 }}>
+    return <div style={{ width: { gridwidth }, margin: '1rem' }}>
+      
+        <div className="ag-theme-alpine" style={{ width: { gridwidth }}}>
             <AgGridReact
                 reactUi="true"
                 onCellDoubleClicked={doubleClicked}
                 rowData={rowData}
+                domLaytou="domLayout"
                 suppressMenuHide={true}
-                pagination={true}
-                paginationAutoPageSize={true}
+                pagination={false}
+                paginationAutoPageSize={false}
                 columnDefs={columns}
                 defaultColDef={defaultColDef}>
                 {/* <AgGridColumn field="entityDisplay" headerName="Organism"></AgGridColumn> */}

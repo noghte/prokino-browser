@@ -17,11 +17,9 @@ import Collapse from 'react-bootstrap/Collapse';
 import { Link, withPrefix } from "gatsby"
 import CifOptions from './pdbe/CifOptions';
 import AppendHead from 'react-append-head';
-import TreeView from '@mui/lab/TreeView';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TreeItem from '@mui/lab/TreeItem';
-import LinkList from '../PairwiseLinkList';
+import { TABLE } from '../sparql/Constants';
+import QueryResult from '../sparql/QueryResult';
+import Delayed from '../Delayed';
 // import {registerWebComponents} from 'protvista-prokino';
 // import '../../styles/icon-lib.css'
 // import '../../styles/sprite.css'
@@ -48,6 +46,54 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [cifUniprotId, setCifUniprotId] = useState(null);
     const [classifications, setClassifications] = useState(null);
     const [classificationTree, setClassificationTree] = useState([]);
+
+    const primaryName = datatypeProperties["prokino:hasPrimaryName"].length>0? datatypeProperties["prokino:hasPrimaryName"][0] : "";
+    const geneExpressionQuery =`select
+    (str(?sample_name) as ?Sample)
+    (str(?histology) as ?Histology)
+    (str(?histsubtype) as ?Subtype)
+    (str(?regulation) as ?Regulation)
+    (xsd:float(?zscore) as ?Zscore)
+ from <http://prokino.uga.edu>
+ where {
+    ?geneexp a prokino:GeneExpression .
+    ?geneexp prokino:hasProtein ?protein .
+    ?protein prokino:hasPrimaryName ?protname .
+    filter ( str(?protname) = '${primaryName}' )
+    ?geneexp prokino:inSample ?sample .
+    ?geneexp prokino:hasZscore ?zscore .
+    ?geneexp prokino:hasRegulation ?regulation .
+    filter ( str(?regulation) != 'normal')
+    ?sample a prokino:Sample .
+    ?sample prokino:implicatedIn ?disease .
+    ?disease a prokino:Cancer .
+    ?sample prokino:hasSampleName ?sample_name .
+    ?sample prokino:hasPrimaryHistology ?histology .
+    ?sample prokino:hasHistologySubType ?histsubtype .
+ }
+ order by desc(?Zscore)`;
+    const ligandQuery = `SELECT DISTINCT
+    STR(?protein_name) AS ?Protein_Name
+    STR(?ligand_name) AS ?Ligand_Name
+    STR(?moa) as ?MOA
+    STR(?type) as ?Type
+    ?value
+FROM <http://prokino.uga.edu>
+WHERE
+{
+    ?activity a prokino:LigandActivity .
+    ?activity prokino:hasLigand ?ligand .
+    ?activity prokino:hasProtein ?protein .
+    ?ligand prokino:hasPrimaryName ?ligand_name .
+    ?activity prokino:hasMOA ?moa .
+    ?activity prokino:hasType ?type .
+    ?activity prokino:hasValue ?value .
+    ?protein prokino:hasPrimaryName ?protein_name .
+
+    filter (( str(?protein_name) = '${primaryName}'))
+}`;
+
+
 //todo: remove prokino:ProteinKinaseDomain and remove the prefix
     const flatten = function (data) {
         var result = {};
@@ -134,6 +180,8 @@ return list;
     //               : null}
     //     </TreeItem>
     //   }
+
+
 
     //classifications
     useEffect(() => {
@@ -569,8 +617,8 @@ return list;
                                             <h5 className="details-title">
                                                 Complex Mutations
                                             </h5>
-                                            <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
+                                            <div className="fieldset-pair-container">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label"><span>Complex Insertion in Frame</span></div>
                                                     <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{ maxHeight: '200px', overflow: 'auto' }}>
                                                         <div>
@@ -698,9 +746,13 @@ return list;
                                 <Card.Body>
                                     <div className="favth-clearfix" id="geneexpressions">
                                         <fieldset className="fieldset-details">
-                                            <legend>Gene Expressions</legend>
+                                            {/* <legend>Gene Expressions</legend> */}
 
-
+                                            <div className="fieldset-pair-container">
+                                                <div className="favth-clearfix">
+                                                {primaryName &&  <QueryResult query={geneExpressionQuery} chartType={TABLE}  />}
+                                                </div>
+                                            </div>
 
                                         </fieldset>
                                     </div>
@@ -722,9 +774,15 @@ return list;
                                 <Card.Body>
                                     <div className="favth-clearfix" id="ligandactivities">
                                         <fieldset className="fieldset-details">
-                                            <legend>Ligand Activities</legend>
+                                            {/* <legend>Ligand Activities</legend> */}
 
-
+                                            <div className="fieldset-pair-container">
+                                                <div className="favth-clearfix">
+                                                    <Delayed waitBeforeShow={1500}>
+                                                    <QueryResult query={ligandQuery} chartType={TABLE}  />
+                                                    </Delayed>
+                                                </div>
+                                            </div>
 
                                         </fieldset>
                                     </div>
