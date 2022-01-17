@@ -63,8 +63,7 @@ const handleClick = (e,nodeName) => {
       defaultExpanded={['root']}
       defaultExpandIcon={<ChevronRightIcon />}
       expanded={["prokino:ProteinKinaseDomain"]}
-      sx={{ flexGrow: 1, overflowY: 'auto' }}
-    >
+      sx={{ flexGrow: 1, overflowY: 'auto' }}>
       {renderTree(data)}
     </TreeView>
   );

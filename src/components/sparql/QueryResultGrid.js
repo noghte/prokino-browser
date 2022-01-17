@@ -27,7 +27,7 @@ export default function QueryResultGrid(props) {
 
   //load data
   if (!columns)
-    return <p>Could not load data ... </p>
+    return <p> No data </p>
   var columnDefs = columns.map(v => {
     return { headerName: v.replace("_", " "), field: v, sortable: true }
   })
