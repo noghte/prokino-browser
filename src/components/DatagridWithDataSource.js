@@ -1,10 +1,8 @@
 //source: https://github.com/gifthove/conference-registration/blob/master/conference-registration.ui.web/ClientApp/src/components/common/TablePagination.js
-import React, { useEffect, useState, useRef, useMemo } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useMemo } from 'react';
 import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { navigate } from 'gatsby';
 
 export function DataGridWithDataSource({ datasource, resizable = true, title, columns, gridwidth = 500 }) {
     const [rowData, setRowData] = useState(null);
