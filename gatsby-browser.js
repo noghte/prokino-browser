@@ -1,4 +1,6 @@
 import "./src/styles/app.css";
 import "./src/styles/menu.css";
 import 'bootstrap/dist/css/bootstrap.css';
-export { default as wrapRootElement } from './src/state/ReduxWrapper';
+import wrapWithProvider from "./wrap-with-provider"
+export const wrapRootElement = wrapWithProvider
+// export { default as wrapRootElement } from './src/state/ReduxWrapper';

@@ -8,7 +8,7 @@ import QueryResultPieChart from './QueryResultPieChart';
 import axios from 'axios';
 import { SPARQL_ENDPOINT } from '../prokino/Endpoints';
 import { TABLE, BARCHART, PIECHART } from './Constants';
-import { setSparqlResult, chartProperties, setChartProperties } from '../../state/app';
+import { setSparqlResult, chartProperties, setChartProperties } from '../../state';
 import { connect } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -130,8 +130,11 @@ function QueryResult(props) {
   );
 
 }
+export default connect(({ sparqlResult, chartProperties }) => {
+  return { sparqlResult, chartProperties }
+}, null)(QueryResult)
 
-export default connect(state => ({
-  sparqlResult: state.app.sparqlResult,
-  chartProperties: state.app.chartProperties,
-}), null)(QueryResult);
+// export default connect(state => ({
+//   sparqlResult: state.app.sparqlResult,
+//   chartProperties: state.app.chartProperties,
+// }), null)(QueryResult);

@@ -2,11 +2,14 @@ import { useEffect, useRef } from 'react';
 import Layout from '../components/Layout';
 import QueryResult from '../components/sparql/QueryResult';
 import fileDownload from 'js-file-download';
-import { useSelector, connect } from 'react-redux';
+import { useSelector} from 'react-redux';
+//import createStore from "./src/state/createStore"
+import { connect } from "react-redux"
+
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { setSparqlResult, setChartProperties } from '../state/app';
+import { setSparqlResult, setChartProperties } from '../state';
 import { SPARQL_ENDPOINT } from '../components/prokino/Endpoints';
 import { MdSettings } from "@react-icons/all-files/md/MdSettings"
 import { MdDone } from "@react-icons/all-files/md/MdDone"
@@ -45,7 +48,7 @@ function Queries(props) {
     const [maxChartItems, setMaxChartItems] = useState(10);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const sparqlResult = useSelector(state => state.app.sparqlResult)
+    const sparqlResult = props.sparqlResult;// useSelector(state => state.app.sparqlResult)
 
     // const notify = () => toast("Getting the query result");
     const victoryRef = useRef(null);
@@ -400,8 +403,16 @@ function maxChartItemsChanged(evt)
     </Layout>)
 }
 
+const mapStateToProps = ({ sparqlResult, chartProperties }) => {
+    return { sparqlResult, chartProperties }
+  }
 
-export default connect(state => ({
-    sparqlResult: state.app.sparqlResult,
-    chartProperties: state.app.chartProperties,
-}), null)(Queries);
+  const mapDispatchToProps = dispatch => {
+    return { increment: () => dispatch({ type: `INCREMENT` }) }
+  }
+export default connect(mapStateToProps, null)(Queries)
+
+// export default connect(state => ({
+//     sparqlResult: state.app.sparqlResult,
+//     chartProperties: state.app.chartProperties,
+// }), null)(Queries);

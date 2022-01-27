@@ -1,5 +1,5 @@
-
-import { types } from "../actions/types";
+// import { types } from "../actions/types";
+import { createStore as reduxCreateStore } from "redux"
 
 const initialState = {
   isDarkMode: false,
@@ -25,7 +25,8 @@ export const setChartProperties = val => ({
 });
 
 
-export default (state = initialState, action) => {
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_DARKMODE':
       return { ...state, isDarkMode: action.isDarkMode };
@@ -36,4 +37,21 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
+
+const createStore = () => reduxCreateStore(reducer, initialState)
+export default createStore
+
+
+// export default (state = initialState, action) => {
+//   switch (action.type) {
+//     case 'TOGGLE_DARKMODE':
+//       return { ...state, isDarkMode: action.isDarkMode };
+//     case 'SPARQL_RESULT':
+//       return { ...state, sparqlResult: action.val };
+//     case 'CHART_PROPERTIES':
+//       return { ...state, chartProperties: action.val };
+//     default:
+//       return state;
+//   }
+// };
