@@ -10,7 +10,8 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { setSparqlResult, setChartProperties } from '../state';
-import { SPARQL_ENDPOINT } from '../components/prokino/Endpoints';
+import { SPARQL_ENDPOINT,SPARQL_SAMPLEQUERIES } from '../components/prokino/Endpoints';
+
 import { MdSettings } from "@react-icons/all-files/md/MdSettings"
 import { MdDone } from "@react-icons/all-files/md/MdDone"
 import * as svg from 'save-svg-as-png';
@@ -37,8 +38,11 @@ import { TABLE, BARCHART, PIECHART } from '../components/sparql/Constants';
 import React, { useState } from 'react';
 import ExampleQueries from '../components/sparql/ExampleQueries';
 function Queries(props) {
-    const [query, setQuery] = useState('');
-    const [exampleQueryTitle, setExampleQueryTitle] = useState('');
+    const querystringId = new URLSearchParams(props.location.search).get("id");
+    const [queryId, setQueryId] = useState(querystringId!=undefined && parseInt(querystringId)? parseInt(querystringId):null);
+
+    const [queryObject, setQueryObject] = useState('');
+    // const [exampleQueryTitle, setExampleQueryTitle] = useState('');
     // const [csvData, setCsvData] = useState(null);
     // const [executeMessage, setExecuteMessage] = useState('Execute');
     // const [submitting, setSubmitting] = useState(false);
@@ -53,11 +57,39 @@ function Queries(props) {
     // const notify = () => toast("Getting the query result");
     const victoryRef = useRef(null);
     const maxChartItemsRef = useRef(null);
-    
+    useEffect(()=>{
+        setShouldShowResults(false);
+        setQueryId(querystringId!=undefined && parseInt(querystringId)? parseInt(querystringId):null);
+
+    },[querystringId])
+    useEffect(()=>{
+        if (queryId==null)
+            return;
+        let url = `${SPARQL_SAMPLEQUERIES}`;
+        const res = async () => {
+            try {
+                const result = await axios.get(url);
+                const sampleQueries = result.data;
+                const selectedSample = sampleQueries.filter(p=>p.id == queryId)
+                if (selectedSample.length>0)
+                    setQueryObject(selectedSample[0])
+
+            } catch (error) {
+                console.log("error=", error)
+            }
+        };
+        res();
+
+    },[queryId])
+    // function selectQuery(q)
+    // {
+    //     setQuery(q.query);
+    //     setExampleQueryTitle(`${q.title} (id= ${q.id})`);
+    // }
     function executeQuery(event) {
         event.preventDefault()
 
-        if (query.trim().length === 0) {
+        if (queryObject.query.trim().length === 0) {
             alert('No query entered.');
             return;
         }
@@ -88,14 +120,13 @@ function Queries(props) {
 
     function handleQueryChange(event) {
         setShouldShowResults(false);
-        setQuery(event.target.value)
+        setQueryObject(event.target.value)
     }
     function exampleQuerySelected(evt) {
         setShouldShowResults(false);
         props.dispatch(setSparqlResult(null));
-        setExampleQueryTitle(evt.title);
-        setQuery(evt.query);
-
+        setQueryObject(evt);
+      
         if (window)
             window.scrollTo(0, 0);
     }
@@ -111,7 +142,7 @@ function maxChartItemsChanged(evt)
     // },1000);
 }
     function saveCsv() {
-        let url = `${SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}&output=csv`;
+        let url = `${SPARQL_ENDPOINT}?query=${encodeURIComponent(queryObject.query)}&output=csv`;
         axios.get(url)
             .then((result) => {
 
@@ -310,14 +341,11 @@ function maxChartItemsChanged(evt)
 
                         </Collapse>
                         {/* <NavbarText style={{fontStyle:'italic'}}>SPARQL Result</NavbarText> */}
-                        <a href="#q" className="prokino-link">Scroll to {exampleQueryTitle}</a>
+                        <a href="#q" className="prokino-link">Scroll to {queryObject.title}</a>
                     </Navbar>
 
                 }
-                {shouldShowResults && <QueryResult query={query} chartType={displayType} ref={victoryRef} maxItems={maxChartItems} />}
-                {/* {shouldShowResults && displayType === "table" && <QueryResultTable input={query} />}
-      {shouldShowResults && displayType === "barchart" && <QueryResultBarchart input={query} />}
-      {shouldShowResults && displayType === "piechart" && <QueryResultPiechart input={query} />} */}
+                {shouldShowResults && <QueryResult query={queryObject.query} chartType={displayType} ref={victoryRef} maxItems={maxChartItems} />}
 
             </div>
             <div className="row">
@@ -346,7 +374,7 @@ function maxChartItemsChanged(evt)
                                     </pre> */}
                                     <p style={{ margin: '0 0 0px', textAlign: 'right' }}>
                                         <span style={{ float: 'left' }}>Query:</span>
-                                        <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{exampleQueryTitle}</span>
+                                        <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{queryObject.title}</span>
                                     </p>
                                     <textarea
                                         style={{ width: '100%', fontFamily: "'Courier New', Courier, monospace" }}
@@ -354,7 +382,7 @@ function maxChartItemsChanged(evt)
                                         name="query"
                                         placeholder="Write your SPARQ query or select an example..."
                                         onChange={handleQueryChange}
-                                        value={query}
+                                        value={queryObject.query}
                                     />
 
 

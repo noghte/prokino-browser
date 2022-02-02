@@ -6,6 +6,7 @@ import {
     Card, Button, CardImg, CardTitle, CardText, CardColumns,
     CardSubtitle, CardBody, CardHeader, Collapse, Container
 } from 'reactstrap';
+import { navigate } from 'gatsby-link';
 
 export default function ExampleQueries(props) {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -47,7 +48,8 @@ export default function ExampleQueries(props) {
 
     const viewQuery = (q) => {
         // console.log(q);
-        props.onSelect(q);
+       // props.onSelect(q);
+        navigate(`/queries/?id=${q.id}`)
         // router.push({
         //   pathname: '/queries',
         //   query: { query: q }
