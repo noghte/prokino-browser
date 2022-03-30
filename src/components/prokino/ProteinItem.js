@@ -695,7 +695,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                             <Card.Header onClick={() => setIsOpenPathways(!isOpenPathways)}
                                 style={{ cursor: 'pointer' }}
                                 aria-controls="pathways"
-                                style={{ cursor: 'pointer' }}
                                 aria-expanded={isOpenPathways}>
                                 <h5 className="details-title">
                                     Pathways
@@ -747,7 +746,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                             <Card.Header onClick={() => setIsOpenGeneExpressions(!isOpenGeneExpressions)}
                                 style={{ cursor: 'pointer' }}
                                 aria-controls="geneexpressions"
-                                style={{ cursor: 'pointer' }}
                                 aria-expanded={isOpenGeneExpressions}>
                                 <h5 className="details-title">
                                     Gene Expressions
@@ -777,7 +775,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                             <Card.Header onClick={() => setIsOpenLigandActivities(!isOpenLigandActivities)}
                                 style={{ cursor: 'pointer' }}
                                 aria-controls="ligandactivities"
-                                style={{ cursor: 'pointer' }}
                                 aria-expanded={isOpenLigandActivities}>
                                 <h5 className="details-title">
                                     Ligand Activities
