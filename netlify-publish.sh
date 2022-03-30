@@ -1,2 +1,2 @@
 gatsby build --log-pages
-netlify deploy
+netlify deploy #https://prokino.netlify.app

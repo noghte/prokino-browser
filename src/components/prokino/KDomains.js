@@ -7,7 +7,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { navigate } from 'gatsby';
 import TreeItem from '@mui/lab/TreeItem';
 import { CLASSIFICATION_ENDPOINT } from './Endpoints'
-
+import {
+  Alert
+} from 'reactstrap';
 const mapToRename = new Map([
   ["name", "id"],
 ]);
@@ -38,7 +40,7 @@ function refit_keys(o) {
     }
     //   ? nodes.subnodes.map((node) => renderTree(node.label != undefined ? node: { "id": node, "name": node }  ))
 
-    
+
     // Set it on the result using the destination key
     build[destKey] = value;
   }
@@ -46,7 +48,6 @@ function refit_keys(o) {
 }
 
 export default function KDomains() {
-  // return ("Not available now");
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function KDomains() {
     res();
   }, []);
   const handleClick = (e, nodeName) => {
+    // if (typeof nodeName !== 'string') return;
     switch (e.detail) {
       case 1:
         console.log("click");
@@ -78,15 +80,22 @@ export default function KDomains() {
     }
   };
 
-  const renderTree = (nodes) => (
-    // const nodeName = nodes.name ?? nodes;
-    // const nodeLabel = nodes.label ?? nodes;
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.label}>
+  function renderTree(nodes) {
+    const isLeaf = typeof nodes === 'string';
+    const nodeId = nodes.id ?? nodes;
+    const nodeLabel = nodes.label ?? nodes;
+    if (isLeaf)
+      return <TreeItem key={nodeId}
+        nodeId={nodeId}
+        label={nodeLabel}
+        onClick={(e) => handleClick(e, nodes)}>
+      </TreeItem>
+    return <TreeItem key={nodeId} nodeId={nodeId} label={nodeLabel}>
       {Array.isArray(nodes.subnodes)
         ? nodes.subnodes.map((node) => renderTree(node))
         : ""}
     </TreeItem>
-  );
+  }
 
   // onClick={(e)=>handleClick(e,nodeName)}
   // function renderTree(nodes){
@@ -101,14 +110,25 @@ export default function KDomains() {
   if (!data)
     return "Loading ..."
   return (
-    <TreeView
-      aria-label="rich object"
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpanded={['prokino:ProteinKinaseDomain']}
-      defaultExpandIcon={<ChevronRightIcon />}
-      expanded={["prokino:ProteinKinaseDomain"]}
-      sx={{ flexGrow: 1, overflowY: 'auto' }}>
-      {renderTree(data)}
-    </TreeView>
+    <>
+      <h3>Kinome Tree</h3>
+      <div>
+  <Alert
+    color="primary"
+    dismissible
+  >
+Click on the families to expand. <br /> Double-click on the domains to navigate to the corresponding domain details page.  </Alert>
+</div>
+
+      <TreeView
+        aria-label="rich object"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpanded={['prokino:ProteinKinaseDomain']}
+        defaultExpandIcon={<ChevronRightIcon />}
+        defaultExpanded={["prokino:ProteinKinaseDomain"]}
+        sx={{ flexGrow: 1, overflowY: 'auto' }}>
+        {renderTree(data)}
+      </TreeView>
+    </>
   );
 }
