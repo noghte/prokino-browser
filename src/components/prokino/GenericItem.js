@@ -45,6 +45,7 @@ export default function GenericItem({ entityClass, localName, datatypeProperties
                                         <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
                                             <div>
                                                 {showList(value)}
+                                                
                                             </div>
                                         </div>
                                     </div>

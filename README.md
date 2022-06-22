@@ -10,14 +10,43 @@ The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, wh
 
 *Available to download from: https://prokino.uga.edu/downloads*
 
+## Run & Publish
 
-### Dev
+- Prerequisites:
+    - node version `14.17.6`
+    - `sudo npm install -g gatsby netlify-cli`
 
-Building the project:
+### Running on Local Machine
 
-1. Install node version `14.x`:
 1. Go to the project directory and run: `npm install`
 1. `npm run develop`
+
+NOTE: If there was an error, you can hard reset by running `rm -rf node_modules`.
+
+### Preparing a version to upload on prokino.uga.edu
+
+Run `local-pulish.sh` to produce `new-public.zip`:
+    - `./local-pulish.sh`
+
+You can extract the zip file on the server's website directory.
+
+
+### Publishing on Netlify
+
+- Prerequisites:
+    - On netlify.com, create a new website. 
+    - When asked for GitHub address, set it to the https://github.com/prokino/nb-gatsby
+    - Set Build command to: `gatsby build`
+    - Set Publish directory to: `public/`
+    - Set the following Environment variables:
+        - HOST_NAME=netlify
+        - NODE_ENV=production
+        - NODE_OPTIONS=--max_old_space_size= 4096
+    - Follow instructions to enable netlify cli from the [official documentation ](https://docs.netlify.com/cli/get-started/#authentication)
+
+- Steps
+    - `./local-pulish.sh`,
+    - `./netlify-publish.sh`
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 

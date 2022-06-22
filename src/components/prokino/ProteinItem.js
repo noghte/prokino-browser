@@ -37,7 +37,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [sequenceData, setSequenceData] = useState(null);
 
     const [isOpenProtein, setIsOpenProtein] = React.useState(true);
-    const [isOpenFeaturedSubstitutions, setIsOpenFeaturedSubstitutions] = React.useState(false);
+    const [isOpenFeaturedMutations, setIsOpenFeaturedMutations] = React.useState(false);
     const [isOpenPathways, setIsOpenPathways] = React.useState(false);
     const [isOpenGeneExpressions, setIsOpenGeneExpressions] = React.useState(false);
     const [isOpenLigandActivities, setIsOpenLigandActivities] = React.useState(false);
@@ -528,16 +528,16 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                             </Collapse>
                         </Card>
                         <Card>
-                            <Card.Header onClick={() => setIsOpenFeaturedSubstitutions(!isOpenFeaturedSubstitutions)}
+                            <Card.Header onClick={() => setIsOpenFeaturedMutations(!isOpenFeaturedMutations)}
                                 style={{ cursor: 'pointer' }}
                                 aria-controls="featured_substitutions"
-                                aria-expanded={isOpenFeaturedSubstitutions}>
+                                aria-expanded={isOpenFeaturedMutations}>
                                 <h5 className="details-title">
-                                    Featured Substitutions
+                                    Featured Mutations
                                 </h5>
                             </Card.Header>
 
-                            <Collapse in={isOpenFeaturedSubstitutions}>
+                            <Collapse in={isOpenFeaturedMutations}>
                                 <Card.Body>
                                     <div className="favth-clearfix" id="featured_substitutions">
                                         <fieldset className="fieldset-details">

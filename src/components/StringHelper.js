@@ -1,5 +1,7 @@
 import { func } from "prop-types";
 import ReactHtmlParser from 'react-html-parser'; 
+import React from "react"
+import PairLinks from './PairwiseLinkList'
 
 
 let mapping = require(`../../static/LabelMappings.json`).mapping;
@@ -14,6 +16,9 @@ export function showList(items, property = "", seperator = `<br />`) {
 
    const result =  property === "" ? items.join(seperator) : items.map(a => a[property]).join(seperator);
    return ReactHtmlParser(result);
+
+   // const linkedResult = <PairLinks values={result.split(seperator)} /> //result.split(seperator).map(a=> `aa-${a}`).join(seperator)
+   // return linkedResult;
 }
 
 
