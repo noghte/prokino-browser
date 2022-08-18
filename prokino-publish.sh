@@ -18,6 +18,6 @@ else
     zip -r $OUT_ZIP_FILE public/* -x public/cif/\*
 fi
 
-scp nb-public.zip  $USER_NAME@$SERVER_ADDRESS:~/
+scp $OUT_ZIP_FILE $USER_NAME@$SERVER_ADDRESS:~/
 echo Done! Now, SSH and run the update script.
 ssh $USER_NAME@$SERVER_ADDRESS

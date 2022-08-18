@@ -120,7 +120,9 @@ function Queries(props) {
 
     function handleQueryChange(event) {
         setShouldShowResults(false);
-        setQueryObject(event.target.value)
+        var q = {...queryObject}
+        q.query = event.target.value;
+        setQueryObject(q)
     }
     function exampleQuerySelected(evt) {
         setShouldShowResults(false);
