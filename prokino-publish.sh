@@ -1,10 +1,11 @@
 #!/bin/bash
 
+# IMPORTANT: Make sure you are using the latest version of nodejs 14 which is v14.17.6.
 ## Constants
 USER_NAME= #username on vul...
 SERVER_ADDRESS= #vul...
 OUT_ZIP_FILE=nb-public.zip
-INCLUDE_CIF_FILES=true
+INCLUDE_CIF_FILES=false
 
 rm $OUT_ZIP_FILE # old publish zip file
 

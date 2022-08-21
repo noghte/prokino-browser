@@ -44,11 +44,28 @@ module.exports = {
         fonts: [
           `poppins:300,400,500,600,700`,
           `Lalezar`,
-        ], 
+        ],
         display: 'swap'
       }
     },
-    {resolve: "gatsby-plugin-no-sourcemaps"}
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-3ZLG03GB33", // Google Analytics for https://prokino.netlify.app
+          "G-5BS9V954C3", // Google Analytics for https://prokino.uga.edu
+          // "AW-CONVERSION_ID", // Google Ads / Adwords / AW
+          // "DC-FLOODIGHT_ID", // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
+        ],
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          head: true, // Puts tracking script in the head instead of the body
+
+        },
+      },
+    },
+    { resolve: "gatsby-plugin-no-sourcemaps" }
     // {
     //   resolve: `@lekoarts/gatsby-theme-specimens`,
     //   options: {}
