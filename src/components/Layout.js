@@ -51,6 +51,7 @@ useEffect(()=>{
 
         <Link id="sparql" className="menu-item" to="/queries">SPARQL Queries</Link>
         <Link id="publications" className="menu-item" to="/publications">Publications</Link>
+        <Link id="phosformer" className="menu-item" to="/phosformer">Phosformer Prediction</Link>
         <Link id="about" className="menu-item" to="/about">About</Link>
         <Link id="about" className="menu-item" to="/contact">Contact Us</Link>
       </Menu>

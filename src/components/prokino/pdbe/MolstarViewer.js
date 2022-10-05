@@ -39,8 +39,8 @@ export default function MolstarViewer({ viewerWidth = 900, viewerHeight = 300, u
 
         return  <div style={{ width: viewerWidth, height: viewerHeight, position: 'relative' }}>
         <Helmet>
-            <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.1.0.css" />
-            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.1.0.js"></script>
+            <link rel="stylesheet" type="text/css" href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-1.2.1.css" />
+            <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-1.2.1.js"></script>
         </Helmet>
         {/* <MolstarViewerDisplay viewerWidth={900} viewerHeight={300} cifPath={cifPath} R={R} G={G} B={B} /> */}
           <pdbe-molstar id="pdbeMolstarComponent"

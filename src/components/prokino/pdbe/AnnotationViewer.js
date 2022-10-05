@@ -520,11 +520,11 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             // if (!sequenceMotifs) handleSequenceMotifs();
 
             // //api calls
-            // if (!seqConservationData) callSequenceConservationAPI();
-            // //if (!variationData) callVariationAPI();
-            // if (!ligandBindingSites) callLigandBindingSitesAPI();
-            // if (!interactionInterfaces) callInteractionInterfaces();
-            // if (!annotations) callAnnotationsAPI();
+            if (!seqConservationData) callSequenceConservationAPI();
+            if (!variationData) callVariationAPI();
+            if (!ligandBindingSites) callLigandBindingSitesAPI();
+            if (!interactionInterfaces) callInteractionInterfaces();
+            if (!annotations) callAnnotationsAPI();
             loadCustomData();
             handleFunctionalFeatures();
             handleStructuralMotifs();
@@ -537,6 +537,10 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
             //if (!variationData) callVariationAPI();
             callLigandBindingSitesAPI();
             callInteractionInterfaces();
+            // error 404:
+            // https://www.ebi.ac.uk/pdbe/graph-api/uniprot/protvista/annotations/P00533
+            // new api page:  https://www.ebi.ac.uk/pdbe/graph-api/pdbe_doc/
+
             callAnnotationsAPI();
 
         }
@@ -549,18 +553,21 @@ export default function ({ prokinoSequence, sequenceData, uniprotId, selectedCif
         return <div>Loading ...</div>
     if (!alphafoldPredictions)
         return <p>Loading alpha folds ...</p>
-    if (!seqConservationData)
-        return <p>Fetching conservation data ...</p>
-    // if (!variationData)
-    //     return <p>Fetching variation data ...</p>
+    // if (!seqConservationData)
+    //     return <p>Fetching conservation data ...</p>
+
     if (!ligandBindingSites)
         return <p>Fetching ligand binding sites ...</p>
     if (!interactionInterfaces)
         return <p>Fetching interaction interfaces ...</p>
-    if (!annotations)
-        return <p>Fetching annotations ...</p>
+    // if (!annotations)
+    //     return <p>Fetching annotations ...</p>
     if (!customData)
         return <p>Loading...</p>;
+
+    // not needed:
+    // if (!variationData)
+    //     return <p>Fetching variation data ...</p>
 
     if (alphafoldPredictions && alphafoldPredictions !== "NA")
         customData.tracks = customData.tracks.concat(alphafoldPredictions.tracks);

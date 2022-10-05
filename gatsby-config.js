@@ -55,6 +55,7 @@ module.exports = {
         trackingIds: [
           "G-3ZLG03GB33", // Google Analytics for https://prokino.netlify.app
           "G-5BS9V954C3", // Google Analytics for https://prokino.uga.edu
+          //"", // Google Analytics for https://vulcan.cs.uga.edu
           // "AW-CONVERSION_ID", // Google Ads / Adwords / AW
           // "DC-FLOODIGHT_ID", // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
         ],
