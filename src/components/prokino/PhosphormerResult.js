@@ -6,14 +6,14 @@ function cleanQuery(query) {
 }
 // http://97.81.92.208:2500/predict?kinase=abc12345678&substrate=abcdef
 export default function PhosformerResult(props) {
-    const PHOS_ENDPOINT = `http://97.81.92.208:2500/predict`;
+    const PHOS_ENDPOINT = `http://155.138.225.113:5007/api`;
     const [phosformerData, setPhosformerData] = useState(null);
     const kinase = cleanQuery(props.kinase);
-    const substrate = cleanQuery(props.substrate);
+    const peptide = cleanQuery(props.peptide);
 
     useEffect(() => {
         const res = async () => {
-            let url = `${PHOS_ENDPOINT}?kinase=${kinase}&substrate=${substrate}`;
+            let url = `${PHOS_ENDPOINT}/predict_one/kinase=${kinase}&peptide=${peptide}`;
             try {
                 const result = await axios.get(url);
                 console.log("res=",result)
@@ -23,7 +23,7 @@ export default function PhosformerResult(props) {
             }
         }
         res();
-    }, []);
+    }, [kinase,peptide]);
 
     if (!phosformerData)
         return <p>Calculating the prediction ...</p>

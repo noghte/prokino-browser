@@ -1,10 +1,12 @@
 import Layout from '../components/Layout';
 import React, { useState } from 'react';
 import PhosformerResult from '../components/prokino/PhosphormerResult';
+// import KinaseTree from '../components/prokino/KinaseTree';
+
 import { Button } from 'reactstrap';
 export default function Phosformer() {
   const [kinase, setKinase] = useState("");
-  const [substrate, setSubstrate] = useState("");
+  const [peptide, setPeptide] = useState("");
   const [shouldShowResults, setShouldShowResults] = useState(false);
 
   function executeQuery(event) {
@@ -14,12 +16,12 @@ export default function Phosformer() {
     //     alert('No query entered.');
     //     return;
     // }
-    setShouldShowResults(kinase.length > 0 && substrate.length > 0);
+    setShouldShowResults(kinase.length > 0 && peptide.length == 11);
   }
-  function substrateChanged(evt) {
+  function peptideChanged(evt) {
     const s = evt.target.value;
-    setSubstrate(s);
-    console.log("substrate=", s)
+    setPeptide(s);
+    console.log("peptide=", s)
   }
   function kinaseChanged(evt) {
     const s = evt.target.value;
@@ -31,30 +33,30 @@ export default function Phosformer() {
       <h3 className="display-5">Phosformer Prediction</h3>
       <div className="col">
         <p>
-          Kinase: <br />
-          <input
+          Kinase sequence: <br />
+          <textarea
+            rows="6"
+            colss="50"
             style={{ width: '30rem' }}
             name="query"
             placeholder="Kinase string..."
             onChange={kinaseChanged}
-            // value={kinase}
+          // value={kinase}
           />
         </p>
-        <p>
-          Substrate: <br />
-          <input
+
+        Peptide sequence: <br />
+        <input
             style={{ width: '30rem' }}
             name="query"
-            placeholder="Substrate string..."
-            onChange={substrateChanged}
-            // value={substrate}
+            placeholder="Peptide sequence..."
+            onChange={peptideChanged}
+          // value={peptide}
           />
-        </p>
-        <br />
-        <span> Example: </span>
-        kinase: YTNLSYIGEGAYGMVCSAYDNVNKVRVAIKKISPFEHQTYCQRTLREIKILLRFRHENIIGINDIIRAPTIEQMKDVYIVQDLMETDLYKLLKTQHLSNDHICYFLYQILRGLKYIHSANVLHRDLKPSNLLLNTTCDLKICDFGLARVADPDHDHTGFLTEYVATRWYRAPEIMLNSKGYTKSIDIWSVGCILAEMLSNRPIFPGKHYLDQLNHILGILGSPSQEDLNCIINLKARNYLLSLPHKNKVPWNRLFPNADSKALDLLDKMLTFNPHKRIEVEQALAHPYL
-        <br /> 
-        substrate: TEYVATRWYRA
+        {/* <KinaseTree /> */}
+    <hr />
+
+
       </div>
     </div>
     <div className="row">
@@ -66,7 +68,28 @@ export default function Phosformer() {
     </div>
     <div className="row">
       <div className="col">
-        {shouldShowResults && <PhosformerResult kinase={kinase} substrate={substrate} />}
+      <p>
+      <br />
+        <span style={{ fontWeight: 'bold' }}> Kinase sequence example:</span>
+        <pre>
+          <div style={{ whiteSpace: "pre-wrap", fontStyle: "italic" }}>YTNLSYIGEGAYGMVCSAYDNVNKVRVAIKKISPFEHQTYCQRTLREIKILLRFRHENIIGINDIIRAPTIEQMKDVYIVQDLMETDLYKLLKTQHLSNDHICYFLYQILRGLKYIHSANVLHRDLKPSNLLLNTTCDLKICDFGLARVADPDHDHTGFLTEYVATRWYRAPEIMLNSKGYTKSIDIWSVGCILAEMLSNRPIFPGKHYLDQLNHILGILGSPSQEDLNCIINLKARNYLLSLPHKNKVPWNRLFPNADSKALDLLDKMLTFNPHKRIEVEQALAHPYL</div>
+        </pre>
+        <br />
+        <span style={{ fontWeight: 'bold' }}> Peptide sequence example:</span>
+        <pre>
+          <div style={{ whiteSpace: "pre-wrap", fontStyle: "italic" }}>LLKLASPELER</div>
+        </pre>
+        <small>        Peptide sequence has a length of 11, the center character should be either S, T, or Y
+            other characters should be based on a list. </small>
+
+        </p>
+
+ 
+      </div>
+    </div>
+    <div className="row">
+      <div className="col">
+        {shouldShowResults && <PhosformerResult kinase={kinase} peptide={peptide} />}
       </div>
     </div>
   </Layout>)

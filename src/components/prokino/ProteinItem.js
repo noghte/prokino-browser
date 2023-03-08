@@ -44,7 +44,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [isOpenReferences, setIsOpenReferences] = React.useState(false);
     const [selectedCif, setSelectedCif] = React.useState(cifFileNames && cifFileNames.length > 0 ? `/cif/${cifFileNames[0]["relativeDirectory"]}/${cifFileNames[0]["name"]}.cif` : "");
     const [cifUniprotId, setCifUniprotId] = useState(null);
-    const [classifications, setClassifications] = useState(null);
+    const [classifications, setClassifications] = useState("NA");
     const [classificationTree, setClassificationTree] = useState([]);
     const [geneExpressionQuery, setGeneExpressionQuery] = useState(null);
    
@@ -193,10 +193,26 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     //   }
 
 
+    // useEffect(() => {
+    //     setClassifications({
+    //         "label": "ProteinKinaseDomain",
+    //         "name": "prokino:ProteinKinaseDomain",
+    //         "subnodes": [{
+    //             "label": "TKgroup",
+    //             "name": "prokino:TKgroup",
+    //             "subnodes": [{
+    //                 "label": "EGFRfamily",
+    //                 "name": "prokino:EGFRfamily"
+    //             }]
+    //         }]
+    //     })
+    //   }, []);
+      
 
     //classifications
     useEffect(() => {
         let url = `${PROTEIN_ENDPOINT}/${localName}/ktbranch`;
+        console.log(url); // https://vulcan.cs.uga.edu/prokinosrv/protein/prokino:Human_EGFR/ktbranch
         const res = async () => {
             try {
                 const result = await axios.get(url);
@@ -291,7 +307,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
             <link name="ebifonts" order="1" rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.2/fonts.css" type="text/css" media="all" />
         </AppendHead>
         <div id="fav-container" className="fav-container">
-            {/* remove if do not need margins  */}
             <div className="favth-container">
                 <div className="favth-row">
                     <div className="favth-col-xs-12">
@@ -425,22 +440,11 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                             <div className="favth-clearfix">
                                                 <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Classification</div>
                                                 <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
-                                                    {/* {classificationTree.lengh > 0 && renderClassifications(classificationTree)} */}
                                                     {classificationTree.map(function (c, idx) {
                                                         return <a style={{ paddingRight: '0.4rem' }} className="prokino-link" href="#" key={`link-${c}-${idx}`}>
                                                             {c}
                                                         </a>
                                                     })}
-
-                                                    {/* <TreeView
-                                                    aria-label="file system navigator"
-                                                    defaultCollapseIcon={<ExpandMoreIcon />}
-                                                    defaultExpandIcon={<ChevronRightIcon />}
-                                                    expanded={["1","2","10"]}
-                                                    sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
-                                                  
-                                                </TreeView> */}
-
                                                 </div>
                                             </div>
                                         </div>
@@ -755,8 +759,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                 <Card.Body>
                                     <div className="favth-clearfix" id="geneexpressions">
                                         <fieldset className="fieldset-details">
-                                            {/* <legend>Gene Expressions</legend> */}
-
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <Delayed waitBeforeShow={1000}>
@@ -784,8 +786,6 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                 <Card.Body>
                                     <div className="favth-clearfix" id="ligandactivities">
                                         <fieldset className="fieldset-details">
-                                            {/* <legend>Ligand Activities</legend> */}
-
                                             <div className="fieldset-pair-container">
                                                 <div className="favth-clearfix">
                                                     <Delayed waitBeforeShow={1}>
@@ -865,9 +865,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">PubMed preview</div>
                                                     <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
-                                                        {/* <div>
-                                                            Preview
-                                            </div> */}
+                           
                                                     </div>
                                                 </div>
                                             </div>

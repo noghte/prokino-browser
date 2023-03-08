@@ -22,7 +22,7 @@ The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, wh
 
 NOTE: If there was an error, you can hard reset by running:
     - `rm -rf node_modules`.
-    - `npm install react-html-parser --legacy-peer-deps`
+    - `npm install react-html-parser @material-ui/core@4.12.4 --legacy-peer-deps`
 
 ### Preparing a version to upload on prokino.uga.edu
 
@@ -51,5 +51,26 @@ You can extract the zip file on the server's website directory.
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-### Licence
+## Development
+
+### Maintaining the code
+
+The code is written in React.js and Gatsby.js. It uses npm as a package manager. The version numbers of the packages are specified in the `package.json` file. Each package has its own version number as `x.y.z` where `x` is the major version, `y` is the minor version, and `z` is the patch version.
+
+To update npm packages, it is suggested to follow the steps below:
+
+1. Install the npm-check-update package:  `npm install -g npm-check-updates`
+1. Run `ncu -u -t patch` to update the packages to the latest patch version.
+1. If still needed, run `ncu -u -t minor` to update the packages to the latest minor version.
+1. If still needed, run `ncu -u -t major` to update the packages to the latest major version.
+1. If still needed, run `ncu -u` to update the packages to the latest version, then run `npm install`.
+
+**NOTES:** 
+1. Updating packages to the latest version may cause errors.
+2. After each of the steps above, run `npm install` to install the updated packages.
+3. If there is an error, you can hard reset by running:
+    - `rm -rf node_modules`.
+    - `npm install react-html-parser @material-ui/core@4.12.4 --legacy-peer-deps`
+
+## Licence
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
