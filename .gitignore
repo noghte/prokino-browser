@@ -68,7 +68,7 @@ yarn-error.log
 # Yarn Integrity file
 .yarn-integrity
 
-update-prokino*.sh
+update-*.sh
 *.zip
 .vscode/*
 # Local Netlify folder

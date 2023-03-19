@@ -13,16 +13,17 @@ The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, wh
 ## Run & Publish
 
 - Prerequisites:
-    - node version `14.17.6`
+    - node version `18.12.1`
     - `sudo npm install -g gatsby netlify-cli`
 ### Running on Local Machine
 
 1. Go to the project directory and run: `npm install`
+    1. To install legacy peer dependencies, run: `npm config set legacy-peer-deps true`
+    1. `npm install react-html-parser @material-ui/core@4.12.4 --legacy-peer-deps`
 1. `npm run develop`
 
-NOTE: If there was an error, you can hard reset by running:
+NOTE: If there was an error, you can hard reset by deleting the `node_modules` directory and running the above commands again.
     - `rm -rf node_modules`.
-    - `npm install react-html-parser @material-ui/core@4.12.4 --legacy-peer-deps`
 
 ### Preparing a version to upload on prokino.uga.edu
 
