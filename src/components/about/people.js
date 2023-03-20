@@ -114,8 +114,8 @@ export default function AboutPeople() {
                     <div className="card border-0 shadow" style={{ width: '200px' }}>
                         <img src={withPrefix("/ui/people/LiangChinHuang.jpg")} className="card-img-top" alt="Liang-Chin Huang" />
                         <div className="card-body text-center">
-                            <h6 className="card-title mb-0">Dr. Liang-Chin Huang</h6>
-                            <div className="card-text text-black-50">Research Assistant <br /> BioInformatics</div>
+                            <h6 className="card-title mb-0">Dr. Liang-Chin Huang (IOB)</h6>
+                            <div className="card-text text-black-50">Senior Data Scientist<br />Melax Tech</div>
                         </div>
                     </div>
                 </div>
@@ -123,8 +123,8 @@ export default function AboutPeople() {
                     <div className="card border-0 shadow" style={{ width: '200px' }}>
                         <img src={withPrefix("/ui/people/AbbasKeshavarzi.jpg")} className="card-img-top" alt="Abbas Keshavarzi" />
                         <div className="card-body text-center">
-                            <h6 className="card-title mb-0">Dr. Abbas Keshavarzi</h6>
-                            <div className="card-text text-black-50">Research Assistant<br /> Computer Science</div>
+                            <h6 className="card-title mb-0">Dr. Abbas Keshavarzi (CS)</h6>
+                            <div className="card-text text-black-50">ML Software Engineer<br /> Google</div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ export default function AboutPeople() {
                     <div className="card border-0 shadow" style={{ width: '200px' }}>
                         <img src={withPrefix("/ui/people/AnnieKwon.jpg")} className="card-img-top" alt="Annie Kwon" />
                         <div className="card-body text-center">
-                            <h6 className="card-title mb-0">Dr.Annie Kwon (IoB)</h6>
+                            <h6 className="card-title mb-0">Dr. Annie Kwon (IoB)</h6>
                             <div className="card-text text-black-50">Postdoctoral Scholar
                                 <br />UCSF</div>
                         </div>
@@ -176,8 +176,8 @@ export default function AboutPeople() {
                         <img src={withPrefix("/ui/people/ReshmiDe.jpg")} className="card-img-top" alt="Reshmi De" />
                         <div className="card-body text-center">
                             <h6 className="card-title mb-0">Reshmi De (CS)</h6>
-                            <div className="card-text text-black-50">Assistant Vice
-                                President<br />Citibank, Canada</div>
+                            <div className="card-text text-black-50">
+                                Senior Software Engineer<br />Morgan Stanley</div>
                         </div>
                     </div>
                 </div>
