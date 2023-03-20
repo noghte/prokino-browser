@@ -5,28 +5,25 @@ export default function AboutOntology() {
         <table width="620" border="0" cellpadding="0" cellspacing="0">
             <tbody><tr>
                 <td width="615">
-                    <span style={{ fontWeight: 'bold' }}> Current version: 62 </span> <br />
-                    Date: 2021-09-15
+                    <span style={{ fontWeight: 'bold' }}> Current version: 65 </span> <br />
+                    Date: 2023-03-16
                     <p>
-                        You can use this ontology browser to quickly query, navigate, and explore the knowledge graph including the sequence, structure, function, disease, pathway, and ligand information on kinases.
-                        The conceptual representation of such diverse information in one place
-                        enables not only rapid discovery of significant information related to
-                        a specific protein kinase, but also enables  large scale integrative
-                        analysis of the protein kinase family.
-                        The conceptual representation of such diverse information in one place
-                        enables not only rapid discovery of significant information related to
-                        a specific protein kinase, but also enables  large scale integrative
-                        analysis of the protein kinase family.</p>
-                    <p>
-                        ProKinO is a collaborative effort between the Evolutionary Systems
+		    <br/>
+  			Protein Kinase Ontology (ProKinO) is a collaborative effort between the Evolutionary Systems
                         Biology Group Lab of Dr. Natarajan Kannan at the Biochemistry and Molecular
-                        Biology Department and Dr. Krys J. Kochut's lab at the Computer Science Department,
-                        both at University of Georgia, Athens, USA.  Gurinder Gosal, Computer Science,
-                        UGA, created the software system to automatically populate ProKinO from the
-                        selected data sources.  The population system has
-                        been enhanced by Shima Dastgheib, Computer Science, UGA and Daniel McSkimming,
-                        IOB, UGA.  Currently, the population system is maintained and enhanced by
-                        Abbas Keshavarzi, Computer Science, UGA.</p>
+                        Biology Department and Dr. Krys J. Kochut's lab at the School of Computing,
+                        both at University of Georgia, Athens, USA.  Gurinder Gosal, formerly Computer Science,
+                        UGA, created the initial version of the software system to automatically populate 
+			ProKinO from the selected data sources (see Data sources, below).  The population system has
+                        been subsequently enhanced by Dr. Shima Dastgheib, formerly Computer Science, UGA, 
+                        Dr. Daniel McSkimming, formerly IOB, UGA, and Dr. Abbas Keshavarzi, formerly Computer Science, UGA,
+			and several other current and former lab members (see People, below).</p>
+                    <p>
+                        The conceptual representation of such diverse information in one place
+                        enables not only rapid discovery of significant information related to
+                        a specific protein kinase, but also enables large scale integrative
+                        analysis of the protein kinase family.  An outline of the data organization in ProKinO is shown
+			using a UML class diagram (see Schema, below).</p>
                     <p>Publications:</p>
                     <p>McSkimming, D.I., Dastgheib, S., Talevich, E., Narayanan, A., Katiyar, S.,
                         Taylor, S.S., Kochut, K.J., Kannan, N., 2015,

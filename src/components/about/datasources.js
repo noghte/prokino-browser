@@ -18,15 +18,15 @@ export default function AboutDataSources() {
                                                         </tr>
                                                             <tr>
                                                                 <td align="left">COSMIC</td>
-                                                                <td align="left">94</td>
+                                                                <td align="left">97</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left">Reactome</td>
-                                                                <td align="left">77</td>
+                                                                <td align="left">83</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left">UniProt</td>
-                                                                <td align="left">2021_03</td>
+								<td align="left">2023_01</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left">KinBase</td>
@@ -41,13 +41,17 @@ export default function AboutDataSources() {
                                                                 <td align="left">December, 2015</td>
                                                             </tr>
                                                             <tr>
+                                                                <td align="left">Ligands data</td>
+                                                                <td align="left">September, 2021</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td align="left">Sub-domains</td>
                                                                 <td align="left">July, 2021</td>
                                                             </tr>
                                                         </tbody></table>
                                                     <p>
                                                         <strong>Disease Data </strong>
-                                                        <Link to="http://www.sanger.ac.uk/genetics/CGP/cosmic/">COSMIC</Link>
+                                                        <Link to="http://www.sanger.ac.uk/genetics/CGP/cosmic/">COSMIC </Link>
                                                         (Catalogue of Somatic Mutations in Cancer) database
                                                         `		  is used as the source of information regarding kinase cancer mutations. In
                                                         addition to mutations, other information such as, the primary sites,
