@@ -47,8 +47,8 @@ export default function AboutPeople() {
                     <div className="card border-0 shadow" style={{ width: '200px' }}>
                         <img src={withPrefix("/ui/people/SaberSoleymani.jpg")} className="card-img-top" alt="Saber Soleymani" />
                         <div className="card-body text-center">
-                            <h6 className="card-title mb-0">Saber Soleymani</h6>
-                            <div className="card-text text-black-50">Research Assistant<br /> Computer Science</div>
+                            <h6 className="card-title mb-0">Dr. Saber Soleymani (CS)</h6>
+                            <div className="card-text text-black-50">Visiting Assistant Prof.<br /> Georgia State University</div>
                         </div>
                     </div>
                 </div>
@@ -188,6 +188,21 @@ export default function AboutPeople() {
                         <div className="card-body text-center">
                             <h6 className="card-title mb-0">Anish Narayanan, M.D. (IoB)</h6>
                             <div className="card-text text-black-50">Residency<br />UTHSC-San Antonio</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div className="row" style={{ flexDirection: 'row', flexWrap: 'wrap', width: '100%', marginTop: '2rem' }}>
+
+		<div className="col">
+                    <div className="card border-0 shadow" style={{ width: '200px' }}>
+                        <img src={withPrefix("/ui/people/NoPhoto.jpg")} className="card-img-top" alt="Bhargabi Chakrabarti" />
+                        <div className="card-body text-center">
+                            <h6 className="card-title mb-0">Bhargabi Chakrabarti (CS)</h6>
+                            <div className="card-text text-black-50">Ph.D. Student,
+                                ECE<br />George Mason Univ.</div>
                         </div>
                     </div>
                 </div>
