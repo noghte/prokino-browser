@@ -21,16 +21,16 @@ export default function About() {
             <div>
             <div class="title col-12 col-md-12">
 
-            <h4 class="display-5">About Ontology</h4>
+            <h4 class="display-6">Protein Kinase Ontology</h4>
             <AboutOntology />
 
-            <h4 class="display-5" style={{marginTop:'2rem'}}>Data Sources</h4>
+            <h4 class="display-6" style={{marginTop:'2rem'}}>Data Sources</h4>
             <AboutDataSources />
 
-            <h4 class="display-5" style={{marginTop:'2rem'}}>Schema</h4>
+            <h4 class="display-6" style={{marginTop:'2rem'}}>ProKinO Schema</h4>
             <AboutSchema />
 
-            <h4 class="display-5">About Browser</h4>
+            <h4 class="display-6">ProKinO Browser</h4>
             <AboutBrowser />
 
             <AboutPeople style={{marginTop:'2rem'}} />
