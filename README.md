@@ -28,7 +28,7 @@ NOTE: If there was an error, you can hard reset by deleting the `node_modules` d
 ### Preparing a version to upload on prokino.uga.edu
 
 Run `local-pulish.sh` to produce `new-public.zip`:
-    - `./local-pulish.sh`
+    - `./local-publish.sh`
 
 You can extract the zip file on the server's website directory.
 
