@@ -49,6 +49,7 @@ export default function AboutDataSources() {
                                                                 <td align="left">July, 2021</td>
                                                             </tr>
                                                         </tbody></table>
+						    <br/>
                                                     <p>
                                                         <strong>Disease Data </strong>
                                                         <Link to="http://www.sanger.ac.uk/genetics/CGP/cosmic/">COSMIC </Link>

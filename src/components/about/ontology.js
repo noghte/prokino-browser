@@ -12,7 +12,7 @@ export default function AboutOntology() {
   			Protein Kinase Ontology (ProKinO) is a collaborative effort between
                         the Evolutionary Systems Biology Group Lab of Dr. Natarajan Kannan at the Biochemistry and Molecular
                         Biology Department and Dr. Krys J. Kochut's lab at the School of Computing,
-                        both at University of Georgia, Athens, USA.  Dr. Gurinder Gosal, formerly a student in Computer Science,
+                        both at the University of Georgia, Athens, USA.  Dr. Gurinder Gosal, formerly a student in Computer Science,
                         UGA, created an initial version of the software system to automatically populate 
 			ProKinO from the selected data sources (see Data sources, below).  The population system has
                         been subsequently enhanced by our students Dr. Shima Dastgheib, formerly Computer Science, UGA, 
