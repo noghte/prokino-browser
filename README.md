@@ -10,16 +10,21 @@ The Protein Kinase Ontology (ProKinO), is a protein kinase-specific ontology, wh
 
 *Available to download from: https://prokino.uga.edu/downloads*
 
-## Run & Publish
+## Running on Local Machine
 
-- Prerequisites:
-    - node version `18.12.1`
-    - `sudo npm install -g gatsby netlify-cli`
-### Running on Local Machine
 
-1. Go to the project directory and run: `npm install`
-    1. To install legacy peer dependencies, run: `npm config set legacy-peer-deps true`
+1. Run `node -v` to check the version of node. If the version is not 18.12.1, you can install it using the following commands:
+    > Using `nvm` you can run `nvm install 18.12.1` to install the preferred version.
+    > To select the version, run `nvm use 18.12.1`.
+1. Global packages:
+    - `sudo npm install -g gatsby-cli@5.2.0`
+
+1. In the project directory and run: `npm install`
+    For the first time, you may get errors related to peer dependencies. To fix this, run the following command, then run `npm install` again:
+    1. `npm config set legacy-peer-deps true`
     1. `npm install react-html-parser @material-ui/core@4.12.4 --legacy-peer-deps`
+    1. `npm audit fix` (It is likely that you will get errors related to npm permissions. To fix this, run the suggested command that is shown on your terminal. Alternatively, you can run `sudo chown -R $USER ~/.npm` and try again.)
+
 1. `npm run develop`
 
 NOTE: If there was an error, you can hard reset by deleting the `node_modules` directory and running the above commands again.

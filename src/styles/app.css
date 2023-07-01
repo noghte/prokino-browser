@@ -624,5 +624,16 @@ bottom: 0;
     margin-right: 0;
     margin-left: 0;
   }
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
- 
+.pin-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 101;
+}

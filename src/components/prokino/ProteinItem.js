@@ -20,6 +20,7 @@ import AppendHead from 'react-append-head';
 import { TABLE } from '../sparql/Constants';
 import QueryResultInline from '../sparql/QueryResultInline';
 import Delayed from '../Delayed';
+import PushPinIcon from '@mui/icons-material/PushPin';
 // import {registerWebComponents} from 'protvista-prokino';
 // import '../../styles/icon-lib.css'
 // import '../../styles/sprite.css'
@@ -34,6 +35,8 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     // console.log("incomingObjectProperties", incomingObjectProperties);
     // console.log("uniprot from proteinitem", uniprotId);
     // console.log("sequence", sequenceData);
+    const [isStructureSticky, setStructureSticky] = useState(false);
+
     const [sequenceData, setSequenceData] = useState(null);
 
     const [isOpenProtein, setIsOpenProtein] = React.useState(true);
@@ -47,14 +50,14 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     const [classifications, setClassifications] = useState("NA");
     const [classificationTree, setClassificationTree] = useState([]);
     const [geneExpressionQuery, setGeneExpressionQuery] = useState(null);
-   
+
 
     const [ligandQuery, setLigandQuery] = useState(null);
-  
+
     const primaryName = datatypeProperties["prokino:hasPrimaryName"].length > 0 ? datatypeProperties["prokino:hasPrimaryName"][0] : "";
     useEffect(() => {
         if (primaryName)
-        setGeneExpressionQuery(`select
+            setGeneExpressionQuery(`select
         (str(?sample_name) as ?Sample)
         (str(?histology) as ?Histology)
         (str(?histsubtype) as ?Subtype)
@@ -78,10 +81,10 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
         ?sample prokino:hasHistologySubType ?histsubtype .
      }
      order by desc(?Zscore)`);
-        
+
     }, [primaryName]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (primaryName)
             setLigandQuery(`SELECT DISTINCT
         STR(?protein_name) AS ?Protein_Name
@@ -103,8 +106,8 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     
         filter (( str(?protein_name) = '${primaryName}'))
     }`)
-        
-    },[primaryName]);
+
+    }, [primaryName]);
 
     //todo: remove prokino:ProteinKinaseDomain and remove the prefix
     const flatten = function (data) {
@@ -129,6 +132,10 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
         }
         recurse(data, "");
         return result;
+    }
+
+    const toggleSticky = () => {
+        setStructureSticky(!isStructureSticky);
     }
 
     let ligandMappings = null;
@@ -207,7 +214,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
     //         }]
     //     })
     //   }, []);
-      
+
 
     //classifications
     useEffect(() => {
@@ -486,14 +493,27 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
 
 
 
-                                        <div className="fieldset-pair-container">
+                                        <div className={`fieldset-pair-container ${isStructureSticky ? 'sticky' : ''}`}>
                                             <div className="favth-clearfix">
                                                 <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">Structure</div>
                                                 <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field" style={{ maxHeight: "unset" }}>
-                                                    <div>
+                                                    <div style={{ position: "relative" }}>
                                                         <CifOptions options={cifFileNames} onChange={handleCifChange} />
-                                                        {selectedCif && <MolstarViewer viewerWidth={900} viewerHeight={300} uniprotId={uniprotId} cifPath={selectedCif} />}
+                                                        {selectedCif &&
+                                                            <MolstarViewer viewerWidth={880} viewerHeight={300} uniprotId={uniprotId} cifPath={selectedCif} />
 
+                                                        }
+
+                                                        {selectedCif && <PushPinIcon
+                                                            style={{
+                                                                position: "absolute",
+                                                                top: "300px",
+                                                                right: "-1rem",
+                                                                cursor: "pointer",
+                                                                transform: isStructureSticky ? "rotate(45deg)" : "none"
+                                                            }}
+                                                            onClick={toggleSticky}
+                                                        />}
                                                     </div>
                                                 </div>
                                             </div>
@@ -865,7 +885,7 @@ export default function ProteinItem({ uniprotId, localName, datatypeProperties, 
                                                 <div className="favth-clearfix">
                                                     <div className="favth-col-lg-2 favth-col-md-2 favth-col-sm-3 favth-col-xs-12 details-label">PubMed preview</div>
                                                     <div className="favth-col-lg-10 favth-col-md-10 favth-col-sm-9 favth-col-xs-12 details-field">
-                           
+
                                                     </div>
                                                 </div>
                                             </div>
